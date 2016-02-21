@@ -52,11 +52,29 @@ describe("Graph", function() {
       graph.addEdge("a", "b");
       graph.removeEdge("a", "b");
       assert.equal(graph.adjacent("a").length, 0);
+    });
 
-      // Should not remove associated nodes when edges are removed.
+    it("Should not remove nodes when edges are removed.", function (){
+      var graph = Graph();
+      graph.addEdge("a", "b");
+      graph.removeEdge("a", "b");
       assert.equal(graph.nodes().length, 2);
       assert(contains(graph.nodes(), "a"));
       assert(contains(graph.nodes(), "b"));
+    });
+
+    it("Should remove outgoing edges when a node is removed.", function (){
+      var graph = Graph();
+      graph.addEdge("a", "b");
+      graph.removeNode("a");
+      assert.equal(graph.adjacent("a").length, 0);
+    });
+
+    it("Should remove incoming edges when a node is removed.", function (){
+      var graph = Graph();
+      graph.addEdge("a", "b");
+      graph.removeNode("b");
+      assert.equal(graph.adjacent("a").length, 0);
     });
 
   });

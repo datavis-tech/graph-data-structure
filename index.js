@@ -6,17 +6,28 @@ module.exports = function Graph(){
   // Values are adjacent node id arrays.
   var edges = {};
 
-  // Adds node u to the graph.
-  // If u was already added, this function does nothing.
-  // If u was not already added, this function sets up an empty adjacency list for u.
-  function addNode(u){
-    edges[u] = adjacent(u);
+  // Adds a node to the graph.
+  // If node was already added, this function does nothing.
+  // If node was not already added, this function sets up an empty adjacency list.
+  function addNode(node){
+    edges[node] = adjacent(node);
   }
 
-  // Removes node u from the graph.
-  function removeNode(u){
-    // TODO remove all incoming and outgoing edges & test
-    delete edges[u];
+  // Removes a node from the graph.
+  // Also removes all of the node's incoming and outgoing edges.
+  function removeNode(node){
+    
+    // Remove incoming edges.
+    Object.keys(edges).forEach(function (u){
+      edges[u].forEach(function (v){
+        if(v === node){
+          removeEdge(u, v);
+        }
+      });
+    });
+
+    // Remove outgoing edges (and signal that the node no longer exists).
+    delete edges[node];
   }
 
   // Gets the list of nodes that have been added to the graph.

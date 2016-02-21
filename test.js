@@ -80,6 +80,7 @@ describe("Graph", function() {
   });
 
   describe("Algorithms", function() {
+
     it("Should compute topological sort.", function (){
       var graph = Graph();
       graph.addEdge("a", "b");
@@ -89,6 +90,31 @@ describe("Graph", function() {
       assert.equal(sorted[0], "b");
       assert.equal(sorted[1], "c");
     });
+
+    it("Should compute topological sort tricky case.", function (){
+
+      var graph = Graph();     //      a
+                               //     / \
+      graph.addEdge("a", "b"); //    b   |
+      graph.addEdge("a", "d"); //    |   d
+      graph.addEdge("b", "c"); //    c   |
+      graph.addEdge("d", "e"); //     \ /
+      graph.addEdge("c", "e"); //      e   
+      
+      var sorted = graph.topologicalSort(["a"]);
+      assert.equal(sorted.length, 4);
+      assert(contains(sorted, "b"));
+      assert(contains(sorted, "c"));
+      assert(contains(sorted, "d"));
+      assert.equal(sorted[sorted.length - 1], "e");
+
+      assert(comesBefore(sorted, "b", "c"));
+      assert(comesBefore(sorted, "b", "e"));
+      assert(comesBefore(sorted, "c", "e"));
+      assert(comesBefore(sorted, "d", "e"));
+
+    });
+
   });
 
   describe("Edge cases and error handling", function() {
@@ -113,4 +139,13 @@ function contains(arr, item){
   return arr.filter(function (d){
     return d === item;
   }).length > 0;
+}
+
+function comesBefore(arr, a, b){
+  var aIndex, bIndex;
+  arr.forEach(function (d, i){
+    if(d === a){ aIndex = i; }
+    if(d === b){ bIndex = i; }
+  });
+  return aIndex < bIndex;
 }

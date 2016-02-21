@@ -8,11 +8,30 @@ module.exports = function Graph(){
 
   // Gets or creates the adjacent node list for node u.
   function adjacent(u){
-    return edges[u] || (edges[u] = []);
+    return edges[u] || [];
   }
 
+  // Adds node u to the graph.
+  // If u was already added, this function does nothing.
+  // If u was not already added, this function sets up an empty adjacency list for u.
+  function addNode(u){
+    edges[u] = adjacent(u);
+  }
+
+  // Adds an edge between nodes u and v.
+  // Implicitly creates the nodes if they were not already added to the graph.
   function addEdge(u, v){
+    addNode(u);
+    addNode(v);
     adjacent(u).push(v);
+  }
+
+  function removeEdge(u, v){
+    if(edges[u]){
+      edges[u] = adjacent(u).filter(function (_v){
+        return _v !== v;
+      });
+    }
   }
 
   // Depth First Search algorithm, inspired by

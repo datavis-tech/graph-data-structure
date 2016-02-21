@@ -6,16 +6,17 @@ module.exports = function Graph(){
   // Values are adjacent node id arrays.
   var edges = {};
 
-  // Gets or creates the adjacent node list for node u.
-  function adjacent(u){
-    return edges[u] || [];
-  }
-
   // Adds node u to the graph.
   // If u was already added, this function does nothing.
   // If u was not already added, this function sets up an empty adjacency list for u.
   function addNode(u){
     edges[u] = adjacent(u);
+  }
+
+  // Removes node u from the graph.
+  function removeNode(u){
+    // TODO remove all incoming and outgoing edges & test
+    delete edges[u];
   }
 
   // Gets the list of nodes that have been added to the graph.
@@ -30,6 +31,12 @@ module.exports = function Graph(){
     return Object.keys(nodeSet);
   }
 
+  // Gets the adjacent node list for node u.
+  // Returns an empty array for unknown nodes.
+  function adjacent(u){
+    return edges[u] || [];
+  }
+
   // Adds an edge between nodes u and v.
   // Implicitly adds the nodes if they were not already added.
   function addEdge(u, v){
@@ -42,11 +49,11 @@ module.exports = function Graph(){
   // Does not remove the nodes.
   // Does nothing if the edge does not exist.
   function removeEdge(u, v){
-    //if(edges[u]){
+    if(edges[u]){
       edges[u] = adjacent(u).filter(function (_v){
         return _v !== v;
       });
-    //}
+    }
   }
 
   // Depth First Search algorithm, inspired by
@@ -81,8 +88,9 @@ module.exports = function Graph(){
   }
   
   return {
-    nodes: nodes,
     addNode: addNode,
+    removeNode: removeNode,
+    nodes: nodes,
     adjacent: adjacent,
     addEdge: addEdge,
     removeEdge: removeEdge,

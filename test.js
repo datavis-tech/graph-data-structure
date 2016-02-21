@@ -19,6 +19,15 @@ describe("Graph", function() {
       assert(contains(graph.nodes(), "b"));
     });
 
+    it("Should remove nodes.", function (){
+      var graph = Graph();
+      graph.addNode("a");
+      graph.addNode("b");
+      graph.removeNode("a");
+      graph.removeNode("b");
+      assert.equal(graph.nodes().length, 0);
+    });
+
     it("Should add edges and query for adjacent nodes.", function (){
       var graph = Graph();
       graph.addNode("a");

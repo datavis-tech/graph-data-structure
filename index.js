@@ -18,20 +18,35 @@ module.exports = function Graph(){
     edges[u] = adjacent(u);
   }
 
+  // Gets the list of nodes that have been added to the graph.
+  function nodes(){
+    var nodeSet = {};
+    Object.keys(edges).forEach(function (u){
+      nodeSet[u] = true;
+      edges[u].forEach(function (v){
+        nodeSet[v] = true;
+      });
+    });
+    return Object.keys(nodeSet);
+  }
+
   // Adds an edge between nodes u and v.
-  // Implicitly creates the nodes if they were not already added to the graph.
+  // Implicitly adds the nodes if they were not already added.
   function addEdge(u, v){
     addNode(u);
     addNode(v);
     adjacent(u).push(v);
   }
 
+  // Removes the edge between nodes u and v.
+  // Does not remove the nodes.
+  // Does nothing if the edge does not exist.
   function removeEdge(u, v){
-    if(edges[u]){
+    //if(edges[u]){
       edges[u] = adjacent(u).filter(function (_v){
         return _v !== v;
       });
-    }
+    //}
   }
 
   // Depth First Search algorithm, inspired by
@@ -66,6 +81,8 @@ module.exports = function Graph(){
   }
   
   return {
+    nodes: nodes,
+    addNode: addNode,
     adjacent: adjacent,
     addEdge: addEdge,
     removeEdge: removeEdge,

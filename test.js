@@ -79,6 +79,17 @@ describe("Graph", function() {
 
   });
 
+  describe("Algorithms", function() {
+    it("Should compute topological sort.", function (){
+      var graph = Graph();
+      graph.addEdge("a", "b");
+      graph.addEdge("b", "c");
+      var sorted = graph.topologicalSort(["a"]);
+      assert.equal(sorted.length, 2);
+      assert.equal(sorted[0], "b");
+      assert.equal(sorted[1], "c");
+    });
+  });
 
   describe("Edge cases and error handling", function() {
 

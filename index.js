@@ -70,7 +70,7 @@ module.exports = function Graph(){
   // Depth First Search algorithm, inspired by
   // Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 604
   // This variant excludes the source nodes from the result.
-  function depthFirstSearch(sourceNodes){
+  function depthFirstSearch(sourceNodes, includeSourceNodes){
 
     var visited = {};
     var nodes = [];
@@ -83,9 +83,13 @@ module.exports = function Graph(){
       }
     }
 
-    sourceNodes.forEach(function (node){
-      adjacent(node).forEach(DFSVisit);
-    });
+    if(includeSourceNodes){
+      sourceNodes.forEach(DFSVisit);
+    } else {
+      sourceNodes.forEach(function (node){
+        adjacent(node).forEach(DFSVisit);
+      });
+    }
 
     return nodes;
   }
@@ -94,8 +98,8 @@ module.exports = function Graph(){
   // such that for each visited edge (u, v), u comes before v in the list.
   // Amazingly, this comes from just reversing the result from depth first search.
   // Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 613
-  function topologicalSort(sourceNodes){
-    return depthFirstSearch(sourceNodes).reverse();
+  function topologicalSort(sourceNodes, includeSourceNodes){
+    return depthFirstSearch(sourceNodes, includeSourceNodes).reverse();
   }
   
   return {

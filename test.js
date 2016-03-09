@@ -115,6 +115,50 @@ describe("Graph", function() {
 
     });
 
+    // This example is from Cormen et al. "Introduction to Algorithms" page 550
+    it("Should compute topological sort relatable case.", function (){
+
+      var graph = Graph();
+
+      // Shoes depend on socks.
+      // Socks need to be put on before shoes.
+      graph.addEdge("socks", "shoes");
+
+      // Shoes depend on pants.
+      // Pants need to be put on before shoes.
+      graph.addEdge("pants", "shoes");
+
+      // Pants depend on underpants.
+      graph.addEdge("underpants", "pants");
+
+      // Belt depends on pants.
+      graph.addEdge("pants", "belt");
+
+      // Belt depends on shirt.
+      graph.addEdge("shirt", "belt");
+
+      // Tie depends on shirt.
+      graph.addEdge("shirt", "tie");
+
+      // Jacket depends on tie.
+      graph.addEdge("tie", "jacket");
+
+      // Jacket depends on belt.
+      graph.addEdge("belt", "jacket");
+
+      var sorted = graph.topologicalSort(graph.nodes(), true);
+
+      assert.equal(sorted.length, 8);
+
+      assert(comesBefore(sorted, "pants", "shoes"));
+      assert(comesBefore(sorted, "underpants", "pants"));
+      assert(comesBefore(sorted, "underpants", "shoes"));
+      assert(comesBefore(sorted, "shirt", "jacket"));
+      assert(comesBefore(sorted, "shirt", "belt"));
+      assert(comesBefore(sorted, "belt", "jacket"));
+
+    });
+
   });
 
   describe("Edge cases and error handling", function() {

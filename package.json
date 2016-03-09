@@ -1,6 +1,6 @@
 {
   "name": "graph-data-structure",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A graph data structure with topological sort.",
   "main": "index.js",
   "scripts": {

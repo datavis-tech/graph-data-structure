@@ -90,15 +90,16 @@ describe("Graph", function() {
       // Socks need to be put on before shoes.
       graph.addEdge("socks", "shoes");
 
-      graph.addEdge("pants", "shoes");
-      graph.addEdge("underpants", "pants");
-      graph.addEdge("pants", "belt");
       graph.addEdge("shirt", "belt");
       graph.addEdge("shirt", "tie");
       graph.addEdge("tie", "jacket");
       graph.addEdge("belt", "jacket");
+      graph.addEdge("pants", "shoes");
+      graph.addEdge("underpants", "pants");
+      graph.addEdge("pants", "belt");
 
       var sorted = graph.topologicalSort();
+      console.log(sorted);
 
       assert(comesBefore(sorted, "pants", "shoes"));
       assert(comesBefore(sorted, "underpants", "pants"));

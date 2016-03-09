@@ -112,7 +112,7 @@ describe("Graph", function() {
       // Jacket depends on belt.
       graph.addEdge("belt", "jacket");
 
-      var sorted = graph.topologicalSort(graph.nodes());
+      var sorted = graph.topologicalSort();
 
       assert.equal(sorted.length, 8);
 

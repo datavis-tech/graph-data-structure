@@ -72,18 +72,22 @@ module.exports = function Graph(){
   // This variant excludes the source nodes from the result.
   function depthFirstSearch(sourceNodes, includeSourceNodes){
 
+    if(!sourceNodes){
+      sourceNodes = nodes();
+    }
+
     if(typeof includeSourceNodes !== "boolean"){
       includeSourceNodes = true;
     }
 
     var visited = {};
-    var nodes = [];
+    var nodeList = [];
 
     function DFSVisit(node){
       if(!visited[node]){
         visited[node] = true;
         adjacent(node).forEach(DFSVisit);
-        nodes.push(node);
+        nodeList.push(node);
       }
     }
 
@@ -95,7 +99,7 @@ module.exports = function Graph(){
       });
     }
 
-    return nodes;
+    return nodeList;
   }
 
   // The topological sort algorithm yields a list of visited nodes

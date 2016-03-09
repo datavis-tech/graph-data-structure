@@ -90,31 +90,15 @@ describe("Graph", function() {
       // Socks need to be put on before shoes.
       graph.addEdge("socks", "shoes");
 
-      // Shoes depend on pants.
-      // Pants need to be put on before shoes.
       graph.addEdge("pants", "shoes");
-
-      // Pants depend on underpants.
       graph.addEdge("underpants", "pants");
-
-      // Belt depends on pants.
       graph.addEdge("pants", "belt");
-
-      // Belt depends on shirt.
       graph.addEdge("shirt", "belt");
-
-      // Tie depends on shirt.
       graph.addEdge("shirt", "tie");
-
-      // Jacket depends on tie.
       graph.addEdge("tie", "jacket");
-
-      // Jacket depends on belt.
       graph.addEdge("belt", "jacket");
 
       var sorted = graph.topologicalSort();
-
-      assert.equal(sorted.length, 8);
 
       assert(comesBefore(sorted, "pants", "shoes"));
       assert(comesBefore(sorted, "underpants", "pants"));
@@ -122,6 +106,8 @@ describe("Graph", function() {
       assert(comesBefore(sorted, "shirt", "jacket"));
       assert(comesBefore(sorted, "shirt", "belt"));
       assert(comesBefore(sorted, "belt", "jacket"));
+
+      assert.equal(sorted.length, 8);
 
     });
 

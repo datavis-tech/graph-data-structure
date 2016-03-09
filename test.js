@@ -99,7 +99,6 @@ describe("Graph", function() {
       graph.addEdge("pants", "belt");
 
       var sorted = graph.topologicalSort();
-      console.log(sorted);
 
       assert(comesBefore(sorted, "pants", "shoes"));
       assert(comesBefore(sorted, "underpants", "pants"));
@@ -144,6 +143,17 @@ describe("Graph", function() {
       assert(comesBefore(sorted, "c", "e"));
       assert(comesBefore(sorted, "d", "e"));
 
+    });
+
+    it("Should exclude source nodes with a cycle.", function (){
+      var graph = Graph();
+      graph.addEdge("a", "b");
+      graph.addEdge("b", "c");
+      graph.addEdge("c", "a");
+      var sorted = graph.topologicalSort(["a"], false);
+      assert.equal(sorted.length, 2);
+      assert.equal(sorted[0], "b");
+      assert.equal(sorted[1], "c");
     });
   });
 

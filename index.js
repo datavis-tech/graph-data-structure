@@ -14,7 +14,7 @@ module.exports = function Graph(){
   }
 
   // Removes a node from the graph.
-  // Also removes all of the node's incoming and outgoing edges.
+  // Also removes incoming and outgoing edges.
   function removeNode(node){
     
     // Remove incoming edges.
@@ -42,13 +42,13 @@ module.exports = function Graph(){
     return Object.keys(nodeSet);
   }
 
-  // Gets the adjacent node list for node u.
+  // Gets the adjacent node list for the given node.
   // Returns an empty array for unknown nodes.
-  function adjacent(u){
-    return edges[u] || [];
+  function adjacent(node){
+    return edges[node] || [];
   }
 
-  // Adds an edge between nodes u and v.
+  // Adds an edge from node u to node v.
   // Implicitly adds the nodes if they were not already added.
   function addEdge(u, v){
     addNode(u);
@@ -56,7 +56,7 @@ module.exports = function Graph(){
     adjacent(u).push(v);
   }
 
-  // Removes the edge between nodes u and v.
+  // Removes the edge from node u to node v.
   // Does not remove the nodes.
   // Does nothing if the edge does not exist.
   function removeEdge(u, v){
@@ -69,7 +69,11 @@ module.exports = function Graph(){
 
   // Depth First Search algorithm, inspired by
   // Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 604
-  // This variant excludes the source nodes from the result.
+  // This variant includes an additional option 
+  // `includeSourceNodes` to specify whether to include or
+  // exclude the source nodes from the result (true by default).
+  // If `sourceNodes` is not specified, all nodes in the graph
+  // are used as source nodes.
   function depthFirstSearch(sourceNodes, includeSourceNodes){
 
     if(!sourceNodes){

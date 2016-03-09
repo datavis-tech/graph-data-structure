@@ -72,6 +72,10 @@ module.exports = function Graph(){
   // This variant excludes the source nodes from the result.
   function depthFirstSearch(sourceNodes, includeSourceNodes){
 
+    if(typeof includeSourceNodes !== "boolean"){
+      includeSourceNodes = true;
+    }
+
     var visited = {};
     var nodes = [];
 

@@ -1,8 +1,6 @@
-# graph-data-structure
+# graph-data-structure [![Build Status](https://travis-ci.org/curran/graph-data-structure.svg?branch=master)](https://travis-ci.org/curran/graph-data-structure)
 
 A graph data structure with topological sort algorithm.
-
-[![Build Status](https://travis-ci.org/curran/graph-data-structure.svg?branch=master)](https://travis-ci.org/curran/graph-data-structure)
 
 [![NPM](https://nodei.co/npm/graph-data-structure.png)](https://nodei.co/npm/graph-data-structure/)
 

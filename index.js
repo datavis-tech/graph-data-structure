@@ -100,6 +100,8 @@ module.exports = function Graph(){
     } else {
       sourceNodes.forEach(function (node){
         visited[node] = true;
+      });
+      sourceNodes.forEach(function (node){
         adjacent(node).forEach(DFSVisit);
       });
     }

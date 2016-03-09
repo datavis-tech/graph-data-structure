@@ -155,6 +155,22 @@ describe("Graph", function() {
       assert.equal(sorted[0], "b");
       assert.equal(sorted[1], "c");
     });
+
+    it("Should exclude source nodes with multiple cycles.", function (){
+      var graph = Graph();
+
+      graph.addEdge("a", "b");
+      graph.addEdge("b", "a");
+
+      graph.addEdge("b", "c");
+      graph.addEdge("c", "b");
+
+      graph.addEdge("a", "c");
+      graph.addEdge("c", "a");
+
+      var sorted = graph.topologicalSort(["a", "b"], false);
+      assert(!contains(sorted, "b"));
+    });
   });
 
   describe("Edge cases and error handling", function() {

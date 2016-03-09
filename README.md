@@ -2,6 +2,10 @@
 
 A graph data structure with topological sort algorithm.
 
+[![Build Status](https://travis-ci.org/curran/graph-data-structure.svg?branch=master)](https://travis-ci.org/curran/graph-data-structure)
+
+[![NPM](https://nodei.co/npm/graph-data-structure.png)](https://nodei.co/npm/graph-data-structure/)
+
 # Usage
 
 Install the library by running

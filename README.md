@@ -130,11 +130,9 @@ Arguments:
 
 <a name="topological-sort" href="#topological-sort">#</a> <i>graph</i>.<b>topologicalSort</b>([<i>sourceNodes</i>][, <i>includeSourceNodes</i>])
 
-Performs [Topological Sort](https://en.wikipedia.org/wiki/Topological_sorting). Returns an array of node identifier strings. The returned array includes nodes in topologically sorted order. This means that for each visited edge (**u** -> **v**), **u** comes before **v** in the topologically sorted order. Amazingly, this comes from simply reversing the result from depth first search.
+Performs [Topological Sort](https://en.wikipedia.org/wiki/Topological_sorting). Returns an array of node identifier strings. The returned array includes nodes in topologically sorted order. This means that for each visited edge (**u** -> **v**), **u** comes before **v** in the topologically sorted order. Amazingly, this comes from simply reversing the result from depth first search. Inspired by by Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 613.
 
-See **[depthFirstSearch](#dfs)** for documentation of the arguments *sourceNodes* and *includeSourceNodes*
-
-The Topological Sort implementation is similar to the pseudocode found in by Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 613.
+See **[depthFirstSearch](#dfs)** for documentation of the arguments *sourceNodes* and *includeSourceNodes*.
 
 <p align="center">
   <a href="https://datavis.tech/">

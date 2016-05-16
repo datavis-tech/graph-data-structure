@@ -119,5 +119,14 @@ The "adjacent node list" is the set of nodes for which there is an incoming edge
 
 ### Graph Algorithms
 
-* `depthFirstSearch(sourceNodes, includeSourceNodes)` Depth First Search algorithm, inspired by Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 604. This variant includes an additional option `includeSourceNodes` to specify whether to include or exclude the source nodes from the result (true by default). If `sourceNodes` is not specified, all nodes in the graph are used as source nodes.
+<a name="dfs" href="#dfs">#</a> <i>graph</i>.<b>depthFirstSearch</b>([<i>sourceNodes</i>][, <i>includeSourceNodes</i>])
+
+Performs [Depth-first Search](https://en.wikipedia.org/wiki/Depth-first_search). Returns an array of node identifier strings. The returned array includes nodes visited by the algorithm in the order in which they were visited.
+
+The optional argument *sourceNodes* is an array of node identifier strings. This specifies the subset of nodes to use as the sources of the depth-first search. If *sourceNodes* is not specified, all nodes in the graph are used as source nodes.
+
+The optional argument *includeSourceNodes* is a boolean specifying whether or not to include the source nodes in the returned array. If *includeSourceNodes* is not specified, it is treated as `true`, meaning source nodes are included in the returned array.
+
+The Depth-first Search implementation is similar to the pseudocode found in Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 604.
+
 * `topologicalSort(sourceNodes, includeSourceNodes)` The topological sort algorithm yields a list of visited nodes such that for each visited edge (u, v), u comes before v in the list. Amazingly, this comes from just reversing the result from depth first search. Inspired by Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 613. This variant includes an additional option `includeSourceNodes` to specify whether to include or exclude the source nodes from the result (true by default). If `sourceNodes` is not specified, all nodes in the graph are used as source nodes.

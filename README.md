@@ -107,7 +107,10 @@ Removes the edge from node *u* to node *v*. The arguments *u* and *v* are string
 
 ### Querying the Graph
 
-* `nodes()` List all nodes in the graph.
+<a name="nodes" href="#nodes">#</a> <i>graph</i>.<b>nodes</b>()
+
+List all nodes in the graph. Returns an array of node identifier strings.
+
 * `adjacent(node)` Gets the adjacent node list for the given node. This is the set of nodes for which there is an incoming edge from the given node.
 
 ### Graph Algorithms

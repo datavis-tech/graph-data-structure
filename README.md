@@ -123,10 +123,10 @@ The "adjacent node list" is the set of nodes for which there is an incoming edge
 
 Performs [Depth-first Search](https://en.wikipedia.org/wiki/Depth-first_search). Returns an array of node identifier strings. The returned array includes nodes visited by the algorithm in the order in which they were visited. Implementation inspired by pseudocode from Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 604.
 
-**Arguments**
+Arguments:
 
- * *sourceNodes* (optional) An array of node identifier strings. This specifies the subset of nodes to use as the sources of the depth-first search. If *sourceNodes* is not specified, all **[nodes](#nodes)** in the graph are used as source nodes.
- * *includeSourceNodes* (optional) A boolean specifying whether or not to include the source nodes in the returned array. If *includeSourceNodes* is not specified, it is treated as `true` (all source nodes are included in the returned array).
+ * *sourceNodes* (optional) - An array of node identifier strings. This specifies the subset of nodes to use as the sources of the depth-first search. If *sourceNodes* is not specified, all **[nodes](#nodes)** in the graph are used as source nodes.
+ * *includeSourceNodes* (optional) - A boolean specifying whether or not to include the source nodes in the returned array. If *includeSourceNodes* is not specified, it is treated as `true` (all source nodes are included in the returned array).
 
 <a name="topological-sort" href="#topological-sort">#</a> <i>graph</i>.<b>topologicalSort</b>([<i>sourceNodes</i>][, <i>includeSourceNodes</i>])
 

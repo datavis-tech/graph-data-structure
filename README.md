@@ -6,13 +6,13 @@ This library provides a minimalist implementation of a directed graph data struc
 
 The primary use case for this library is in implementing [dataflow programming](https://en.wikipedia.org/wiki/Dataflow_programming) or [reactive programming](https://en.wikipedia.org/wiki/Reactive_programming). The topological sorting algorithm exposed here supports modifications useful for computing the order in which functions in a data flow graph should be executed, while leaving out parts of the graph that do not change. Namely, you can specify a set of **source nodes**, and the topologically sorted result only contains the subset of nodes impacted by changes originating at the source nodes.
 
-To create a graph instance, invoke `Graph` as a constructor function.
+To create a graph instance, invoke **[Graph](#graph)** as a constructor function.
 
 ```javascript
 var graph = Graph();
 ```
 
-Add some nodes and edges with `addNode` and `addEdge`.
+Add some nodes and edges with **[addNode](add-node)** and **[addEdge](#add-edge)**.
 
 ```javascript
 graph.addNode("a");
@@ -26,7 +26,7 @@ Nodes are added implicitly when edges are added.
 graph.addEdge("b", "c");
 ```
 
-[Topological sort](https://en.wikipedia.org/wiki/Topological_sorting) can be invoked like this.
+[Topological sorting](https://en.wikipedia.org/wiki/Topological_sorting) can be done by invoking **[topologicalSort](#topological-sort)** like this.
 
 ```
 graph.topologicalSort(); // Returns ["a", "b", "c"]
@@ -77,7 +77,7 @@ var Graph = require("graph-data-structure");
 
 ### Creating a Graph
 
-<a name="constructor" href="#constructor">#</a> <b>Graph</b>()
+<a name="graph" href="#graph">#</a> <b>Graph</b>()
 
 Constructs an instance of the graph data structure.
 

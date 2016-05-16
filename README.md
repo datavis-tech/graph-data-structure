@@ -86,7 +86,10 @@ var graph = Graph();
 
 ### Adding and Removing Nodes
 
-* `addNode(node)` Adds a node to the graph, accepts a string node identifier. If node was already added, this function does nothing.
+<a name="add-node" href="#add-node">#</a> <i>graph</i>.<b>addNode</b>(<i>node</i>)
+
+Adds a node to the graph. The argument *node* is a string identifier that uniquely identifies the node within this graph. If a node with the same identifier was already added to the graph, this function does nothing.
+
 * `removeNode(node)` Removes a node from the graph. Also removes incoming and outgoing edges.
 
 ### Adding and Removing Edges

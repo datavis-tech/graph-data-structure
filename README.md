@@ -6,25 +6,13 @@ This library provides a minimalist implementation of a directed graph data struc
 
 The primary use case for this library is in implementing [dataflow programming](https://en.wikipedia.org/wiki/Dataflow_programming) or [reactive programming](https://en.wikipedia.org/wiki/Reactive_programming). The topological sorting algorithm exposed here supports modifications useful for computing the order in which functions in a data flow graph should be executed, while leaving out parts of the graph that do not change. Namely, you can specify a set of **source nodes**, and the topologically sorted result only contains the subset of nodes impacted by changes originating at the source nodes.
 
-# Usage
-
-If you are using NPM, install the library by running
-
-`npm install graph-data-structure`
-
-Require it in your code like this.
-
-```javascript
-var Graph = require("graph-data-structure");
-```
-
-Create a graph instance.
+To create a graph instance, invoke `Graph` as a constructor function.
 
 ```javascript
 var graph = Graph();
 ```
 
-Add some nodes and edges.
+Add some nodes and edges with `addNode` and `addEdge`.
 
 ```javascript
 graph.addNode("a");
@@ -65,6 +53,18 @@ console.log(graph.topologicalSort()); // prints [ "underpants", "pants", "shirt"
 ```
 
 For more detailed example code that shows more methods, have a look at the [tests](https://github.com/curran/graph-data-structure/blob/master/test.js).
+
+# Installation
+
+If you are using NPM, install the library by running
+
+`npm install graph-data-structure`
+
+Require it in your code like this.
+
+```javascript
+var Graph = require("graph-data-structure");
+```
 
 # API Reference
 

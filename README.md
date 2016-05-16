@@ -56,7 +56,7 @@ For more detailed example code that shows more methods, have a look at the [test
 
 # Installation
 
-If you are using NPM, install the library by running
+This library is distributed only via [NPM](npmjs.com). Install by running
 
 `npm install graph-data-structure`
 

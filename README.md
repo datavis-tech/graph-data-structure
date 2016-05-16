@@ -111,7 +111,11 @@ Removes the edge from node *u* to node *v*. The arguments *u* and *v* are string
 
 List all nodes in the graph. Returns an array of node identifier strings.
 
-* `adjacent(node)` Gets the adjacent node list for the given node. This is the set of nodes for which there is an incoming edge from the given node.
+<a name="adjacent" href="#adjacent">#</a> <i>graph</i>.<b>adjacent</b>(<i>node</i>)
+
+Gets the adjacent node list for the specified node. The argument *node* is a string identifier for a node. Returns an array of node identifier strings.
+
+The "adjacent node list" is the set of nodes for which there is an incoming edge from the given node. In other words, for all edges (**u** -> **v**) where **u** is the specified node, all values for **v** are in the adjacent node list. 
 
 ### Graph Algorithms
 

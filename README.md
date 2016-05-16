@@ -68,10 +68,21 @@ var Graph = require("graph-data-structure");
 
 # API Reference
 
+* [Creating a Graph](#creating-a-graph)
 * [Adding and Removing Nodes](#adding-and-removing-nodes)
 * [Adding and Removing Edges](##adding-and-removing-edges)
 * [Querying the Graph](#querying-the-graph)
 * [Graph Algorithms](#graph-algorithms)
+
+### Creating a Graph
+
+<a name="constructor" href="#constructor">#</a> <b>Graph</b>()
+
+Constructs an instance of the graph data structure.
+
+```javascript
+var graph = Graph();
+```
 
 ### Adding and Removing Nodes
 

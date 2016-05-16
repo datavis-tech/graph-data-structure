@@ -49,7 +49,8 @@ graph.addEdge("pants", "shoes");
 graph.addEdge("underpants", "pants");
 graph.addEdge("pants", "belt");
 
-console.log(graph.topologicalSort()); // prints [ "underpants", "pants", "shirt", "tie", "belt", "jacket", "socks", "shoes" ]
+// prints [ "underpants", "pants", "shirt", "tie", "belt", "jacket", "socks", "shoes" ]
+console.log(graph.topologicalSort());
 ```
 
 For more detailed example code that shows more methods, have a look at the [tests](https://github.com/datavis-tech/graph-data-structure/blob/master/test.js).
@@ -96,7 +97,10 @@ Removes the specified node. The argument *node* is a string identifier for the n
 
 ### Adding and Removing Edges
 
-* `addEdge(u, v)` Adds an edge from node u to node v. Implicitly adds the nodes if they were not already added.
+<a name="add-edge" href="#add-edge">#</a> <i>graph</i>.<b>addEdge</b>(<i>u</i>, <i>v</i>)
+
+Adds an edge from node *u* to node *v*. The arguments *u* and *v* are string identifiers for nodes. This function also adds *u* and *v* as nodes if they were not already added.
+
 * `removeEdge(u, v)` Removes the edge from node u to node v. Does not remove the nodes. Does nothing if the edge does not exist.
 
 ### Querying the Graph

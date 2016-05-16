@@ -12,7 +12,7 @@ To create a graph instance, invoke **[Graph](#graph)** as a constructor function
 var graph = Graph();
 ```
 
-Add some nodes and edges with **[addNode](add-node)** and **[addEdge](#add-edge)**.
+Add some nodes and edges with **[addNode](#add-node)** and **[addEdge](#add-edge)**.
 
 ```javascript
 graph.addNode("a");

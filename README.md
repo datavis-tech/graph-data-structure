@@ -136,3 +136,9 @@ Performs [Topological Sort](https://en.wikipedia.org/wiki/Topological_sorting). 
 See **[depthFirstSearch](#dfs)** for documentation of the arguments *sourceNodes* and *includeSourceNodes*
 
 The Topological Sort implementation is similar to the pseudocode found in by Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 613.
+
+<p align="center">
+  <a href="https://datavis.tech/">
+    <img src="https://cloud.githubusercontent.com/assets/68416/15298394/a7a0a66a-1bbc-11e6-9636-367bed9165fc.png">
+  </a>
+</p>

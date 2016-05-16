@@ -121,13 +121,12 @@ The "adjacent node list" is the set of nodes for which there is an incoming edge
 
 <a name="dfs" href="#dfs">#</a> <i>graph</i>.<b>depthFirstSearch</b>([<i>sourceNodes</i>][, <i>includeSourceNodes</i>])
 
-Performs [Depth-first Search](https://en.wikipedia.org/wiki/Depth-first_search). Returns an array of node identifier strings. The returned array includes nodes visited by the algorithm in the order in which they were visited.
+Performs [Depth-first Search](https://en.wikipedia.org/wiki/Depth-first_search). Returns an array of node identifier strings. The returned array includes nodes visited by the algorithm in the order in which they were visited. Implementation inspired by pseudocode from Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 604.
 
-The optional argument *sourceNodes* is an array of node identifier strings. This specifies the subset of nodes to use as the sources of the depth-first search. If *sourceNodes* is not specified, all nodes in the graph are used as source nodes.
+Arguments:
 
-The optional argument *includeSourceNodes* is a boolean specifying whether or not to include the source nodes in the returned array. If *includeSourceNodes* is not specified, it is treated as `true`, meaning source nodes are included in the returned array.
-
-The Depth-first Search implementation is similar to the pseudocode found in Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 604.
+ * *sourceNodes* (optional) An array of node identifier strings. This specifies the subset of nodes to use as the sources of the depth-first search. If *sourceNodes* is not specified, all **[nodes](#nodes)** in the graph are used as source nodes.
+ * *includeSourceNodes* (optional) is a boolean specifying whether or not to include the source nodes in the returned array. If *includeSourceNodes* is not specified, it is treated as `true` (all source nodes are included in the returned array).
 
 <a name="topological-sort" href="#topological-sort">#</a> <i>graph</i>.<b>topologicalSort</b>([<i>sourceNodes</i>][, <i>includeSourceNodes</i>])
 

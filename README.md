@@ -52,7 +52,7 @@ graph.addEdge("pants", "belt");
 console.log(graph.topologicalSort()); // prints [ "underpants", "pants", "shirt", "tie", "belt", "jacket", "socks", "shoes" ]
 ```
 
-For more detailed example code that shows more methods, have a look at the [tests](https://github.com/curran/graph-data-structure/blob/master/test.js).
+For more detailed example code that shows more methods, have a look at the [tests](https://github.com/datavis-tech/graph-data-structure/blob/master/test.js).
 
 # Installation
 
@@ -88,9 +88,11 @@ var graph = Graph();
 
 <a name="add-node" href="#add-node">#</a> <i>graph</i>.<b>addNode</b>(<i>node</i>)
 
-Adds a node to the graph. The argument *node* is a string identifier that uniquely identifies the node within this graph. If a node with the same identifier was already added to the graph, this function does nothing.
+Adds a node to the graph. The argument *node* is a string identifier that uniquely identifies the node within this graph instance. If a node with the same identifier was already added to the graph, this function does nothing.
 
-* `removeNode(node)` Removes a node from the graph. Also removes incoming and outgoing edges.
+<a name="remove-node" href="#remove-node">#</a> <i>graph</i>.<b>removeNode</b>(<i>node</i>)
+
+Removes the specified node. The argument *node* is a string identifier for the node to remove. This function also removes all edges connected to the specified node, both incoming and outgoing.
 
 ### Adding and Removing Edges
 

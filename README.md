@@ -129,4 +129,10 @@ The optional argument *includeSourceNodes* is a boolean specifying whether or no
 
 The Depth-first Search implementation is similar to the pseudocode found in Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 604.
 
-* `topologicalSort(sourceNodes, includeSourceNodes)` The topological sort algorithm yields a list of visited nodes such that for each visited edge (u, v), u comes before v in the list. Amazingly, this comes from just reversing the result from depth first search. Inspired by Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 613. This variant includes an additional option `includeSourceNodes` to specify whether to include or exclude the source nodes from the result (true by default). If `sourceNodes` is not specified, all nodes in the graph are used as source nodes.
+<a name="topological-sort" href="#topological-sort">#</a> <i>graph</i>.<b>topologicalSort</b>([<i>sourceNodes</i>][, <i>includeSourceNodes</i>])
+
+Performs [Topological Sort](https://en.wikipedia.org/wiki/Topological_sorting). Returns an array of node identifier strings. The returned array includes nodes in topologically sorted order. This means that for each visited edge (**u** -> **v**), **u** comes before **v** in the topologically sorted order. Amazingly, this comes from simply reversing the result from depth first search.
+
+See **[depthFirstSearch](#dfs)** for documentation of the arguments *sourceNodes* and *includeSourceNodes*
+
+The Topological Sort implementation is similar to the pseudocode found in by Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 613.

@@ -101,7 +101,9 @@ Removes the specified node. The argument *node* is a string identifier for the n
 
 Adds an edge from node *u* to node *v*. The arguments *u* and *v* are string identifiers for nodes. This function also adds *u* and *v* as nodes if they were not already added.
 
-* `removeEdge(u, v)` Removes the edge from node u to node v. Does not remove the nodes. Does nothing if the edge does not exist.
+<a name="remove-edge" href="#remove-edge">#</a> <i>graph</i>.<b>removeEdge</b>(<i>u</i>, <i>v</i>)
+
+Removes the edge from node *u* to node *v*. The arguments *u* and *v* are string identifiers for nodes. This function does not remove the nodes *u* and *v*. Does nothing if the edge does not exist.
 
 ### Querying the Graph
 

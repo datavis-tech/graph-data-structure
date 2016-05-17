@@ -117,6 +117,17 @@ Gets the adjacent node list for the specified node. The argument *node* is a str
 
 The "adjacent node list" is the set of nodes for which there is an incoming edge from the given node. In other words, for all edges (**u** -> **v**) where **u** is the specified node, all values for **v** are in the adjacent node list. 
 
+<a name="serialize" href="#serialize">#</a> <i>graph</i>.<b>serialize</b>()
+
+Serializes the graph. Returns an object with the following properties.
+
+ * `nodes` An array of node identifier strings.
+ * `links` An array of edge objects with the following properties.
+   * `source` An integer, the index of the source node (**u**) in the `nodes` array.
+   * `target` An integer, the index of the target node (**v**) in the `nodes` array.
+
+This representation conforms to the convention of graph representation when working with D3.js force layouts.
+
 ### Graph Algorithms
 
 <a name="dfs" href="#dfs">#</a> <i>graph</i>.<b>depthFirstSearch</b>([<i>sourceNodes</i>][, <i>includeSourceNodes</i>])

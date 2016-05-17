@@ -189,6 +189,30 @@ describe("Graph", function() {
     });
 
   });
+
+  describe("Serialization", function() {
+
+    it("Should serialize a graph.", function (){
+      var graph = Graph();
+
+      graph.addEdge("a", "b");
+      graph.addEdge("b", "c");
+
+      var serialized = graph.serialize();
+
+      assert.equal(serialized.nodes.length, 3);
+      assert.equal(serialized.links.length, 2);
+
+      assert.equal(serialized.nodes[0], "a");
+      assert.equal(serialized.nodes[1], "b");
+      assert.equal(serialized.nodes[2], "c");
+
+      assert.equal(serialized.links[0].source, 0);
+      assert.equal(serialized.links[0].target, 1);
+      assert.equal(serialized.links[1].source, 1);
+      assert.equal(serialized.links[1].target, 2);
+    });
+  });
 });
 
 function contains(arr, item){

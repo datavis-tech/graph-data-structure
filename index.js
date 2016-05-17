@@ -116,6 +116,29 @@ module.exports = function Graph(){
   function topologicalSort(sourceNodes, includeSourceNodes){
     return depthFirstSearch(sourceNodes, includeSourceNodes).reverse();
   }
+
+  function serialize(){
+    var serialized = {
+      nodes: nodes(),
+      links: []
+    };
+
+    var indices = {};
+    serialized.nodes.forEach(function (node, i){
+      indices[node] = i;
+    });
+
+    serialized.nodes.forEach(function (u, i){
+      adjacent(u).forEach(function (v){
+        serialized.links.push({
+          source: i,
+          target: indices[v]
+        });
+      });
+    });
+
+    return serialized;
+  }
   
   return {
     addNode: addNode,
@@ -125,6 +148,7 @@ module.exports = function Graph(){
     addEdge: addEdge,
     removeEdge: removeEdge,
     depthFirstSearch: depthFirstSearch,
-    topologicalSort: topologicalSort
+    topologicalSort: topologicalSort,
+    serialize: serialize
   };
 }

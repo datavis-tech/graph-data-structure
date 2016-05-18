@@ -127,7 +127,8 @@ Serializes the graph. Returns an object with the following properties.
 This representation conforms to the convention of graph representation when working with D3.js force layouts. See also [d3.simulation.nodes](https://github.com/d3/d3-force#simulation_nodes) and [d3.forceLinks](https://github.com/d3/d3-force#links).
 
 <a name="deserialize" href="#deserialize">#</a> <i>graph</i>.<b>deserialize</b>(<i>serialized</i>)
-Deserializes the given serialized graph. The argument *serialized* is a graph representation with the structure described in **[serialize](#serialize)**. This function iterates over the serialized graph and adds the nodes and links it represents by invoking **[addNode](#add-node)** and **[addLink](#add-link)**.
+
+Deserializes the given serialized graph. The argument *serialized* is a graph representation with the structure described in **[serialize](#serialize)**. This function iterates over the serialized graph and adds the nodes and links it represents by invoking **[addNode](#add-node)** and **[addEdge](#add-edge)**.
 
 ### Graph Algorithms
 

@@ -1,10 +1,15 @@
 // A graph data structure with depth-first search and topological sort.
-module.exports = function Graph(){
+module.exports = function Graph(serialized){
   
   // The adjacency list of the graph.
   // Keys are node ids.
   // Values are adjacent node id arrays.
   var edges = {};
+
+  // If a serialized graph was passed into the constructor, deserialize it.
+  if(serialized){
+    deserialize(serialized);
+  }
 
   // Adds a node to the graph.
   // If node was already added, this function does nothing.
@@ -117,6 +122,7 @@ module.exports = function Graph(){
     return depthFirstSearch(sourceNodes, includeSourceNodes).reverse();
   }
 
+  // Serializes the graph.
   function serialize(){
     var serialized = {
       nodes: nodes(),
@@ -140,6 +146,7 @@ module.exports = function Graph(){
     return serialized;
   }
 
+  // Deserializes the given serialized graph.
   function deserialize(serialized){
     serialized.nodes.forEach(addNode);
     serialized.links.forEach(function (link){

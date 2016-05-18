@@ -252,6 +252,44 @@ describe("Graph", function() {
       assert.equal(reserialized.links[1].target, 2);
 
     });
+
+    it("Should deserialize a graph passed to constructor.", function (){
+      
+      var serialized = {
+        "nodes": [
+          "a",
+          "b",
+          "c"
+        ],
+        "links": [
+          {
+            "source": 0,
+            "target": 1
+          },
+          {
+            "source": 1,
+            "target": 2
+          }
+        ]
+      };
+
+      var graph = Graph(serialized);
+
+      var reserialized = graph.serialize();
+
+      assert.equal(reserialized.nodes.length, 3);
+      assert.equal(reserialized.links.length, 2);
+
+      assert.equal(reserialized.nodes[0], "a");
+      assert.equal(reserialized.nodes[1], "b");
+      assert.equal(reserialized.nodes[2], "c");
+
+      assert.equal(reserialized.links[0].source, 0);
+      assert.equal(reserialized.links[0].target, 1);
+      assert.equal(reserialized.links[1].source, 1);
+      assert.equal(reserialized.links[1].target, 2);
+
+    });
   });
 });
 

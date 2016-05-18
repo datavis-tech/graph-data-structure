@@ -139,6 +139,15 @@ module.exports = function Graph(){
 
     return serialized;
   }
+
+  function deserialize(serialized){
+    serialized.nodes.forEach(addNode);
+    serialized.links.forEach(function (link){
+      var u = serialized.nodes[link.source];
+      var v = serialized.nodes[link.target];
+      addEdge(u, v);
+    });
+  }
   
   return {
     addNode: addNode,
@@ -149,6 +158,7 @@ module.exports = function Graph(){
     removeEdge: removeEdge,
     depthFirstSearch: depthFirstSearch,
     topologicalSort: topologicalSort,
-    serialize: serialize
+    serialize: serialize,
+    deserialize: deserialize
   };
 }

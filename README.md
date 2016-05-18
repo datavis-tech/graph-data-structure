@@ -1,6 +1,9 @@
 # graph-data-structure 
 
-A [graph data structure](https://en.wikipedia.org/wiki/Graph_(abstract_data_type)) with [topological sort](https://en.wikipedia.org/wiki/Topological_sorting). [![NPM](https://nodei.co/npm/graph-data-structure.png?mini=true)](https://nodei.co/npm/graph-data-structure/) [![Build Status](https://travis-ci.org/datavis-tech/graph-data-structure.svg?branch=master)](https://travis-ci.org/curran/graph-data-structure) 
+A [graph data structure](https://en.wikipedia.org/wiki/Graph_(abstract_data_type)) with [topological sort](https://en.wikipedia.org/wiki/Topological_sorting).
+
+[![NPM](https://nodei.co/npm/graph-data-structure.png)](https://npmjs.org/package/graph-data-structure)
+[![NPM](https://nodei.co/npm-dl/graph-data-structure.png?months=3)](https://npmjs.org/package/graph-data-structure) [![Build Status](https://travis-ci.org/datavis-tech/graph-data-structure.svg?branch=master)](https://travis-ci.org/curran/reactive-property)
 
 This library provides a minimalist implementation of a directed graph data structure. Nodes are represented by unique strings. Internally, an [adjacency list](https://en.wikipedia.org/wiki/Adjacency_list) is used to represent nodes and edges.
 

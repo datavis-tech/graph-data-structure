@@ -139,13 +139,13 @@ var serialized = graph.serialize();
 The following will be the value of `serialized`.
 
 ```json
- {
-    "nodes": ["a", "b", "c"],
-    "links": [
-      { "source": 0, "target": 1 },
-      { "source": 1, "target": 2 }
-    ]
-  }
+{
+  "nodes": ["a", "b", "c"],
+  "links": [
+    { "source": 0, "target": 1 },
+    { "source": 1, "target": 2 }
+  ]
+}
 ```
 
 This representation conforms to the convention of graph representation when working with D3.js force layouts. See also [d3.simulation.nodes](https://github.com/d3/d3-force#simulation_nodes) and [d3.forceLinks](https://github.com/d3/d3-force#links).

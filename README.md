@@ -71,7 +71,7 @@ var Graph = require("graph-data-structure");
 
 * [Creating a Graph](#creating-a-graph)
 * [Adding and Removing Nodes](#adding-and-removing-nodes)
-* [Adding and Removing Edges](##adding-and-removing-edges)
+* [Adding and Removing Edges](#adding-and-removing-edges)
 * [Querying the Graph](#querying-the-graph)
 * [Graph Algorithms](#graph-algorithms)
 

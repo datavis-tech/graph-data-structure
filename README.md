@@ -124,34 +124,23 @@ Serializes the graph. Returns an object with the following properties.
    * `source` An integer, the index of the source node (**u**) in the `nodes` array.
    * `target` An integer, the index of the target node (**v**) in the `nodes` array.
 
-Here's an example of a graph being serialized.
+Here's example code for serializing a graph.
 
 ```javascript
 var graph = Graph();
 graph.addEdge("a", "b");
 graph.addEdge("b", "c");
 var serialized = graph.serialize();
-console.log(JSON.stringify(serialized, null, 2));
 ```
 
-The following JSON will be printed:
+The following will be the value of `serialized`.
 
 ```json
  {
-    "nodes": [
-      "a",
-      "b",
-      "c"
-    ],
+    "nodes": ["a", "b", "c"],
     "links": [
-      {
-        "source": 0,
-        "target": 1
-      },
-      {
-        "source": 1,
-        "target": 2
-      }
+      { "source": 0, "target": 1 },
+      { "source": 1, "target": 2 }
     ]
   }
 ```

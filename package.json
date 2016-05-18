@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/curran/graph-data-structure.git"
+    "url": "git+https://github.com/datavis-tech/graph-data-structure.git"
   },
   "keywords": [
     "graph",
@@ -19,9 +19,9 @@
   "author": "Curran Kelleher",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/curran/graph-data-structure/issues"
+    "url": "https://github.com/datavis-tech/graph-data-structure/issues"
   },
-  "homepage": "https://github.com/curran/graph-data-structure#readme",
+  "homepage": "https://github.com/datavis-tech/graph-data-structure#readme",
   "devDependencies": {
     "mocha": "^2.4.5"
   }

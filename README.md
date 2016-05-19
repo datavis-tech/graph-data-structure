@@ -41,6 +41,8 @@ graph.topologicalSort(); // Returns ["a", "b", "c"]
 
 Here's an example of topological sort with getting dressed (from Cormen et al. "Introduction to Algorithms" page 550).
 
+![screen shot 2016-05-19 at 12 56 45 pm](https://cloud.githubusercontent.com/assets/68416/15385742/36f76410-1dc1-11e6-9fac-a8e41379c795.png)
+
 ```javascript
 var graph = Graph();
 

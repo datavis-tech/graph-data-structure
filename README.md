@@ -1,7 +1,7 @@
 # graph-data-structure 
 
 A [graph data structure](https://en.wikipedia.org/wiki/Graph_(abstract_data_type)) with [topological sort](https://en.wikipedia.org/wiki/Topological_sorting).
-
+th
 [![NPM](https://nodei.co/npm/graph-data-structure.png)](https://npmjs.org/package/graph-data-structure)
 [![NPM](https://nodei.co/npm-dl/graph-data-structure.png?months=3)](https://npmjs.org/package/graph-data-structure) [![Build Status](https://travis-ci.org/datavis-tech/graph-data-structure.svg?branch=master)](https://travis-ci.org/curran/reactive-property)
 
@@ -29,9 +29,7 @@ Nodes are added implicitly when edges are added.
 graph.addEdge("b", "c");
 ```
 
-Now we have the following graph.
-
-![screen shot 2016-05-19 at 12 49 39 pm](https://cloud.githubusercontent.com/assets/68416/15385597/44a10522-1dc0-11e6-9054-2150f851db46.png)
+Now we have the following graph. <img src="https://cloud.githubusercontent.com/assets/68416/15385597/44a10522-1dc0-11e6-9054-2150f851db46.png">
 
 [Topological sorting](https://en.wikipedia.org/wiki/Topological_sorting) can be done by invoking **[topologicalSort](#topological-sort)** like this.
 

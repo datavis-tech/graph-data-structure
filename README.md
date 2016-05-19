@@ -29,6 +29,10 @@ Nodes are added implicitly when edges are added.
 graph.addEdge("b", "c");
 ```
 
+Now we have the following graph.
+
+![screen shot 2016-05-19 at 12 49 39 pm](https://cloud.githubusercontent.com/assets/68416/15385597/44a10522-1dc0-11e6-9054-2150f851db46.png)
+
 [Topological sorting](https://en.wikipedia.org/wiki/Topological_sorting) can be done by invoking **[topologicalSort](#topological-sort)** like this.
 
 ```

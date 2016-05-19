@@ -64,7 +64,7 @@ console.log(graph.topologicalSort());
 
 For more detailed example code that shows more methods, have a look at the [tests](https://github.com/datavis-tech/graph-data-structure/blob/master/test.js).
 
-[![Build Status](https://travis-ci.org/datavis-tech/graph-data-structure.svg?branch=master)](https://travis-ci.org/curran/reactive-property)
+[![Build Status](https://travis-ci.org/datavis-tech/graph-data-structure.svg?branch=master)](https://travis-ci.org/datavis-tech/graph-data-structure)
 
 # Installation
 

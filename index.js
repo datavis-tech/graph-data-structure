@@ -77,6 +77,7 @@ module.exports = function Graph(serialized){
     addNode(u);
     addNode(v);
     adjacent(u).push(v);
+    return graph;
   }
 
   // Removes the edge from node u to node v.

@@ -63,6 +63,12 @@ describe("Graph", function() {
       assert(contains(graph.nodes(), "b"));
     });
 
+    it("Should chain addEdge.", function (){
+      var graph = Graph().addEdge("a", "b");
+      assert.equal(graph.adjacent("a").length, 1);
+      assert.equal(graph.adjacent("a")[0], "b");
+    });
+
     it("Should remove edges.", function (){
       var graph = Graph();
       graph.addEdge("a", "b");

@@ -145,20 +145,16 @@ module.exports = function Graph(serialized){
   // Serializes the graph.
   function serialize(){
     var serialized = {
-      nodes: nodes(),
+      nodes: nodes().map(function (id){ return { id: id }; }),
       links: []
     };
 
-    var indices = {};
-    serialized.nodes.forEach(function (node, i){
-      indices[node] = i;
-    });
-
-    serialized.nodes.forEach(function (u, i){
+    serialized.nodes.forEach(function (node){
+      var u = node.id;
       adjacent(u).forEach(function (v){
         serialized.links.push({
-          source: i,
-          target: indices[v]
+          source: u,
+          target: v
         });
       });
     });

@@ -19,6 +19,13 @@ describe("Graph", function() {
       assert(contains(graph.nodes(), "b"));
     });
 
+    it("Should chain addNode.", function (){
+      var graph = Graph().addNode("a").addNode("b");
+      assert.equal(graph.nodes().length, 2);
+      assert(contains(graph.nodes(), "a"));
+      assert(contains(graph.nodes(), "b"));
+    });
+
     it("Should remove nodes.", function (){
       var graph = Graph();
       graph.addNode("a");

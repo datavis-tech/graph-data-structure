@@ -1,5 +1,20 @@
 // A graph data structure with depth-first search and topological sort.
 module.exports = function Graph(serialized){
+
+  // The returned graph instance.
+  var graph = {
+    addNode: addNode,
+    removeNode: removeNode,
+    nodes: nodes,
+    adjacent: adjacent,
+    addEdge: addEdge,
+    removeEdge: removeEdge,
+    depthFirstSearch: depthFirstSearch,
+    topologicalSort: topologicalSort,
+    serialize: serialize,
+    deserialize: deserialize
+  };
+
   
   // The adjacency list of the graph.
   // Keys are node ids.
@@ -16,6 +31,7 @@ module.exports = function Graph(serialized){
   // If node was not already added, this function sets up an empty adjacency list.
   function addNode(node){
     edges[node] = adjacent(node);
+    return graph;
   }
 
   // Removes a node from the graph.
@@ -156,16 +172,5 @@ module.exports = function Graph(serialized){
     });
   }
   
-  return {
-    addNode: addNode,
-    removeNode: removeNode,
-    nodes: nodes,
-    adjacent: adjacent,
-    addEdge: addEdge,
-    removeEdge: removeEdge,
-    depthFirstSearch: depthFirstSearch,
-    topologicalSort: topologicalSort,
-    serialize: serialize,
-    deserialize: deserialize
-  };
+  return graph;
 }

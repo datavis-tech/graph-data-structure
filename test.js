@@ -76,6 +76,13 @@ describe("Graph", function() {
       assert.equal(graph.adjacent("a").length, 0);
     });
 
+    it("Should chain removeEdge.", function (){
+      var graph = Graph()
+        .addEdge("a", "b")
+        .removeEdge("a", "b");
+      assert.equal(graph.adjacent("a").length, 0);
+    });
+
     it("Should not remove nodes when edges are removed.", function (){
       var graph = Graph();
       graph.addEdge("a", "b");

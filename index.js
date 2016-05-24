@@ -89,6 +89,7 @@ module.exports = function Graph(serialized){
         return _v !== v;
       });
     }
+    return graph;
   }
 
   // Depth First Search algorithm, inspired by

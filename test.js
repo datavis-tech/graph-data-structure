@@ -177,10 +177,10 @@ describe("Graph", function() {
     });
 
     it("Should exclude source nodes with a cycle.", function (){
-      var graph = Graph();
-      graph.addEdge("a", "b");
-      graph.addEdge("b", "c");
-      graph.addEdge("c", "a");
+      var graph = Graph()
+        .addEdge("a", "b")
+        .addEdge("b", "c")
+        .addEdge("c", "a");
       var sorted = graph.topologicalSort(["a"], false);
       assert.equal(sorted.length, 2);
       assert.equal(sorted[0], "b");
@@ -188,16 +188,16 @@ describe("Graph", function() {
     });
 
     it("Should exclude source nodes with multiple cycles.", function (){
-      var graph = Graph();
+      var graph = Graph()
 
-      graph.addEdge("a", "b");
-      graph.addEdge("b", "a");
+        .addEdge("a", "b")
+        .addEdge("b", "a")
 
-      graph.addEdge("b", "c");
-      graph.addEdge("c", "b");
+        .addEdge("b", "c")
+        .addEdge("c", "b")
 
-      graph.addEdge("a", "c");
-      graph.addEdge("c", "a");
+        .addEdge("a", "c")
+        .addEdge("c", "a");
 
       var sorted = graph.topologicalSort(["a", "b"], false);
       assert(!contains(sorted, "b"));
@@ -224,10 +224,9 @@ describe("Graph", function() {
   describe("Serialization", function() {
 
     it("Should serialize a graph.", function (){
-      var graph = Graph();
-
-      graph.addEdge("a", "b");
-      graph.addEdge("b", "c");
+      var graph = Graph()
+        .addEdge("a", "b")
+        .addEdge("b", "c");
 
       var serialized = graph.serialize();
 

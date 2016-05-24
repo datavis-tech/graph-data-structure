@@ -126,10 +126,10 @@ The "adjacent node list" is the set of nodes for which there is an incoming edge
 
 Serializes the graph. Returns an object with the following properties.
 
- * `nodes` An array of node identifier strings.
- * `links` An array of edge objects with the following properties.
-   * `source` An integer, the index of the source node (**u**) in the `nodes` array.
-   * `target` An integer, the index of the target node (**v**) in the `nodes` array.
+ * `nodes` An array of objects, each with an `id` property whose value is a node identifier string.
+ * `links` An array of objects representing edges, each with the following properties.
+   * `source` The node identifier string of the source node (**u**).
+   * `target` The node identifier string of the target node (**v**).
 
 Here's example code for serializing a graph.
 
@@ -144,10 +144,14 @@ The following will be the value of `serialized`.
 
 ```json
 {
-  "nodes": ["a", "b", "c"],
+  "nodes": [
+    { "id": "a" },
+    { "id": "b" },
+    { "id": "c" }
+  ],
   "links": [
-    { "source": 0, "target": 1 },
-    { "source": 1, "target": 2 }
+    { "source": "a", "target": "b" },
+    { "source": "b", "target": "c" }
   ]
 }
 ```
@@ -156,7 +160,7 @@ This representation conforms to the convention of graph representation when work
 
 <a name="deserialize" href="#deserialize">#</a> <i>graph</i>.<b>deserialize</b>(<i>serialized</i>)
 
-Deserializes the given serialized graph. Returns *graph* to support method chaining. The argument *serialized* is a graph representation with the structure described in **[serialize](#serialize)**. This function iterates over the serialized graph and adds the nodes and links it represents by invoking **[addNode](#add-node)** and **[addEdge](#add-edge)**.
+Deserializes the given serialized graph. Returns *graph* to support method chaining. The argument *serialized* is a graph representation with the structure described in **[serialize](#serialize)**. This function iterates over the serialized graph and adds the nodes and links it represents by invoking **[addNode](#add-node)** and **[addEdge](#add-edge)**. The output from **[serialize](#serialize)** can be used as the input to **deserialize**.
 
 ### Graph Algorithms
 

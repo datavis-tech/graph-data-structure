@@ -138,8 +138,6 @@ describe("Graph", function() {
 
       assert.equal(sorted.length, 8);
 
-      //console.log(JSON.stringify(graph.serialize()));
-
     });
 
     it("Should compute topological sort, excluding source nodes.", function (){

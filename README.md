@@ -44,19 +44,15 @@ Here's an example of topological sort with getting dressed (from Cormen et al. "
 </p>
 
 ```javascript
-var graph = Graph();
-
-// Shoes depend on socks.
-// Socks need to be put on before shoes.
-graph.addEdge("socks", "shoes");
-
-graph.addEdge("shirt", "belt");
-graph.addEdge("shirt", "tie");
-graph.addEdge("tie", "jacket");
-graph.addEdge("belt", "jacket");
-graph.addEdge("pants", "shoes");
-graph.addEdge("underpants", "pants");
-graph.addEdge("pants", "belt");
+var graph = Graph()
+  .addEdge("socks", "shoes")
+  .addEdge("shirt", "belt")
+  .addEdge("shirt", "tie")
+  .addEdge("tie", "jacket")
+  .addEdge("belt", "jacket")
+  .addEdge("pants", "shoes")
+  .addEdge("underpants", "pants")
+  .addEdge("pants", "belt");
 
 // prints [ "underpants", "pants", "shirt", "tie", "belt", "jacket", "socks", "shoes" ]
 console.log(graph.topologicalSort());
@@ -98,21 +94,21 @@ The optional argument *serialized* is a serialized graph that may have been gene
 
 <a name="add-node" href="#add-node">#</a> <i>graph</i>.<b>addNode</b>(<i>node</i>)
 
-Adds a node to the graph. The argument *node* is a string identifier that uniquely identifies the node within this graph instance. If a node with the same identifier was already added to the graph, this function does nothing.
+Adds a node to the graph. Returns *graph* to support method chaining. The argument *node* is a string identifier that uniquely identifies the node within this graph instance. If a node with the same identifier was already added to the graph, this function does nothing.
 
 <a name="remove-node" href="#remove-node">#</a> <i>graph</i>.<b>removeNode</b>(<i>node</i>)
 
-Removes the specified node. The argument *node* is a string identifier for the node to remove. This function also removes all edges connected to the specified node, both incoming and outgoing.
+Removes the specified node. Returns *graph* to support method chaining. The argument *node* is a string identifier for the node to remove. This function also removes all edges connected to the specified node, both incoming and outgoing.
 
 ### Adding and Removing Edges
 
 <a name="add-edge" href="#add-edge">#</a> <i>graph</i>.<b>addEdge</b>(<i>u</i>, <i>v</i>)
 
-Adds an edge from node *u* to node *v*. The arguments *u* and *v* are string identifiers for nodes. This function also adds *u* and *v* as nodes if they were not already added.
+Adds an edge from node *u* to node *v*. Returns *graph* to support method chaining. The arguments *u* and *v* are string identifiers for nodes. This function also adds *u* and *v* as nodes if they were not already added.
 
 <a name="remove-edge" href="#remove-edge">#</a> <i>graph</i>.<b>removeEdge</b>(<i>u</i>, <i>v</i>)
 
-Removes the edge from node *u* to node *v*. The arguments *u* and *v* are string identifiers for nodes. This function does not remove the nodes *u* and *v*. Does nothing if the edge does not exist.
+Removes the edge from node *u* to node *v*. Returns *graph* to support method chaining. The arguments *u* and *v* are string identifiers for nodes. This function does not remove the nodes *u* and *v*. Does nothing if the edge does not exist.
 
 ### Querying the Graph
 
@@ -160,7 +156,7 @@ This representation conforms to the convention of graph representation when work
 
 <a name="deserialize" href="#deserialize">#</a> <i>graph</i>.<b>deserialize</b>(<i>serialized</i>)
 
-Deserializes the given serialized graph. The argument *serialized* is a graph representation with the structure described in **[serialize](#serialize)**. This function iterates over the serialized graph and adds the nodes and links it represents by invoking **[addNode](#add-node)** and **[addEdge](#add-edge)**.
+Deserializes the given serialized graph. Returns *graph* to support method chaining. The argument *serialized* is a graph representation with the structure described in **[serialize](#serialize)**. This function iterates over the serialized graph and adds the nodes and links it represents by invoking **[addNode](#add-node)** and **[addEdge](#add-edge)**.
 
 ### Graph Algorithms
 

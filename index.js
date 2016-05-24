@@ -174,6 +174,7 @@ module.exports = function Graph(serialized){
       var v = serialized.nodes[link.target];
       addEdge(u, v);
     });
+    return graph;
   }
   
   return graph;

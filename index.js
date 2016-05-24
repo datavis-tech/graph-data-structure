@@ -145,16 +145,18 @@ module.exports = function Graph(serialized){
   // Serializes the graph.
   function serialize(){
     var serialized = {
-      nodes: nodes().map(function (id){ return { id: id }; }),
+      nodes: nodes().map(function (id){
+        return { id: id };
+      }),
       links: []
     };
 
     serialized.nodes.forEach(function (node){
-      var u = node.id;
-      adjacent(u).forEach(function (v){
+      var source = node.id;
+      adjacent(source).forEach(function (target){
         serialized.links.push({
-          source: u,
-          target: v
+          source: source,
+          target: target
         });
       });
     });
@@ -164,12 +166,8 @@ module.exports = function Graph(serialized){
 
   // Deserializes the given serialized graph.
   function deserialize(serialized){
-    serialized.nodes.forEach(addNode);
-    serialized.links.forEach(function (link){
-      var u = serialized.nodes[link.source];
-      var v = serialized.nodes[link.target];
-      addEdge(u, v);
-    });
+    serialized.nodes.forEach(function (node){ addNode(node.id); });
+    serialized.links.forEach(function (link){ addEdge(link.source, link.target); });
     return graph;
   }
   

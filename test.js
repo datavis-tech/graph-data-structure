@@ -35,6 +35,15 @@ describe("Graph", function() {
       assert.equal(graph.nodes().length, 0);
     });
 
+    it("Should chain removeNode.", function (){
+      var graph = Graph()
+        .addNode("a")
+        .addNode("b")
+        .removeNode("a")
+        .removeNode("b");
+      assert.equal(graph.nodes().length, 0);
+    });
+
     it("Should add edges and query for adjacent nodes.", function (){
       var graph = Graph();
       graph.addNode("a");

@@ -49,6 +49,8 @@ module.exports = function Graph(serialized){
 
     // Remove outgoing edges (and signal that the node no longer exists).
     delete edges[node];
+
+    return graph;
   }
 
   // Gets the list of nodes that have been added to the graph.

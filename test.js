@@ -6,12 +6,16 @@ var assert = require("assert");
 // var Graph = require("graph-data-structure");
 var Graph = require("./index.js");
 
-var output = require("graph-diagrams")({
+var outputGraph = require("graph-diagrams")({
 
   // If true, writes graph files to ../graph-diagrams for visualization.
   outputGraphs: true,
   project: "graph-data-structure"
 });
+
+function output(graph, name){
+  outputGraph(graph.serialize(), name);
+}
 
 describe("Graph", function() {
 

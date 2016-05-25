@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/datavis-tech/graph-data-structure#readme",
   "devDependencies": {
-    "graph-diagrams": "^0.4.0",
-    "mocha": "^2.4.5"
+    "graph-diagrams": "^0.5.0",
+    "mocha": "^2.5.3"
   }
 }

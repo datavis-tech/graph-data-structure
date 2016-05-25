@@ -6,18 +6,12 @@ var assert = require("assert");
 // var Graph = require("graph-data-structure");
 var Graph = require("./index.js");
 
-var fs = require("fs");
+var output = require("graph-diagrams")({
 
-// If set to true, graphs for test cases are output to
-// ../graph-diagrams for visualization
-var outputGraphs = false;
-function output(graph, name){
-  if(outputGraphs){
-    var filename = "../graph-diagrams/public/graphs/graph-data-structure_" + name + ".json";
-    var data = JSON.stringify(graph.serialize(), null, 2);
-    fs.writeFile(filename, data);
-  }
-}
+  // If true, writes graph files to ../graph-diagrams for visualization.
+  outputGraphs: true,
+  project: "graph-data-structure"
+});
 
 describe("Graph", function() {
 

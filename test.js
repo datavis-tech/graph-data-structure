@@ -6,6 +6,19 @@ var assert = require("assert");
 // var Graph = require("graph-data-structure");
 var Graph = require("./index.js");
 
+var fs = require("fs");
+
+// If set to true, graphs for test cases are output to
+// ../graph-diagrams for visualization
+var outputGraphs = false;
+function output(graph, name){
+  if(outputGraphs){
+    var filename = "../graph-diagrams/public/graphs/graph-data-structure_" + name + ".json";
+    var data = JSON.stringify(graph.serialize(), null, 2);
+    fs.writeFile(filename, data);
+  }
+}
+
 describe("Graph", function() {
 
   describe("Data structure", function() {
@@ -17,6 +30,7 @@ describe("Graph", function() {
       assert.equal(graph.nodes().length, 2);
       assert(contains(graph.nodes(), "a"));
       assert(contains(graph.nodes(), "b"));
+      output(graph, "ab-nodes");
     });
 
     it("Should chain addNode.", function (){
@@ -51,6 +65,7 @@ describe("Graph", function() {
       graph.addEdge("a", "b");
       assert.equal(graph.adjacent("a").length, 1);
       assert.equal(graph.adjacent("a")[0], "b");
+      output(graph, "ab");
     });
 
     it("Should implicitly add nodes when edges are added.", function (){
@@ -138,6 +153,7 @@ describe("Graph", function() {
 
       assert.equal(sorted.length, 8);
 
+      output(graph, "getting-dressed");
     });
 
     it("Should compute topological sort, excluding source nodes.", function (){
@@ -148,6 +164,7 @@ describe("Graph", function() {
       assert.equal(sorted.length, 2);
       assert.equal(sorted[0], "b");
       assert.equal(sorted[1], "c");
+      output(graph, "abc");
     });
 
     it("Should compute topological sort tricky case.", function (){
@@ -172,6 +189,7 @@ describe("Graph", function() {
       assert(comesBefore(sorted, "c", "e"));
       assert(comesBefore(sorted, "d", "e"));
 
+      output(graph, "tricky-case");
     });
 
     it("Should exclude source nodes with a cycle.", function (){
@@ -183,6 +201,8 @@ describe("Graph", function() {
       assert.equal(sorted.length, 2);
       assert.equal(sorted[0], "b");
       assert.equal(sorted[1], "c");
+
+      output(graph, "cycle");
     });
 
     it("Should exclude source nodes with multiple cycles.", function (){
@@ -199,6 +219,8 @@ describe("Graph", function() {
 
       var sorted = graph.topologicalSort(["a", "b"], false);
       assert(!contains(sorted, "b"));
+
+      output(graph, "cycles");
     });
   });
 

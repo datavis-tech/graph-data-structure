@@ -80,6 +80,7 @@ var Graph = require("graph-data-structure");
 * [Adding and Removing Nodes](#adding-and-removing-nodes)
 * [Adding and Removing Edges](#adding-and-removing-edges)
 * [Querying the Graph](#querying-the-graph)
+* [Serialization](#serialization)
 * [Graph Algorithms](#graph-algorithms)
 
 ### Creating a Graph
@@ -121,6 +122,16 @@ List all nodes in the graph. Returns an array of node identifier strings.
 Gets the adjacent node list for the specified node. The argument *node* is a string identifier for a node. Returns an array of node identifier strings.
 
 The "adjacent node list" is the set of nodes for which there is an incoming edge from the given node. In other words, for all edges (**u** -> **v**) where **u** is the specified node, all values for **v** are in the adjacent node list. 
+
+<a name="indegree" href="#indegree">#</a> <i>graph</i>.<b>indegree</b>(<i>node</i>)
+
+Computes the [indegree](https://en.wikipedia.org/wiki/Directed_graph#Indegree_and_outdegree) (number of incoming edges) for the specified *node*.
+
+<a name="outdegree" href="#outdegree">#</a> <i>graph</i>.<b>outdegree</b>(<i>node</i>)
+
+Computes the [outdegree](https://en.wikipedia.org/wiki/Directed_graph#Indegree_and_outdegree) (number of outgoing edges) for the specified *node*.
+
+### Serialization
 
 <a name="serialize" href="#serialize">#</a> <i>graph</i>.<b>serialize</b>()
 

@@ -115,6 +115,26 @@ describe("Graph", function() {
       assert.equal(graph.adjacent("a").length, 0);
     });
 
+    it("Should compute indegree.", function (){
+      var graph = Graph();
+      graph.addEdge("a", "b");
+      assert.equal(graph.indegree("a"), 0);
+      assert.equal(graph.indegree("b"), 1);
+
+      graph.addEdge("c", "b");
+      assert.equal(graph.indegree("b"), 2);
+    });
+
+    it("Should compute outdegree.", function (){
+      var graph = Graph();
+      graph.addEdge("a", "b");
+      assert.equal(graph.outdegree("a"), 1);
+      assert.equal(graph.outdegree("b"), 0);
+
+      graph.addEdge("a", "c");
+      assert.equal(graph.outdegree("a"), 2);
+    });
+
   });
 
   describe("Algorithms", function() {
@@ -231,6 +251,16 @@ describe("Graph", function() {
         var graph = Graph();
         graph.removeEdge("a", "b");
       });
+    });
+
+    it("Should return indegree of 0 for unknown nodes.", function (){
+      var graph = Graph();
+      assert.equal(graph.indegree("z"), 0);
+    });
+
+    it("Should return outdegree of 0 for unknown nodes.", function (){
+      var graph = Graph();
+      assert.equal(graph.outdegree("z"), 0);
     });
 
   });

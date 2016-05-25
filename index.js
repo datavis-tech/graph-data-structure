@@ -9,13 +9,14 @@ module.exports = function Graph(serialized){
     adjacent: adjacent,
     addEdge: addEdge,
     removeEdge: removeEdge,
+    indegree: indegree,
+    outdegree: outdegree,
     depthFirstSearch: depthFirstSearch,
     topologicalSort: topologicalSort,
     serialize: serialize,
     deserialize: deserialize
   };
 
-  
   // The adjacency list of the graph.
   // Keys are node ids.
   // Values are adjacent node id arrays.
@@ -90,6 +91,26 @@ module.exports = function Graph(serialized){
       });
     }
     return graph;
+  }
+
+  // Computes the indegree for the given node.
+  // Not very efficient, costs O(E) where E = number of edges.
+  function indegree(node){
+    var degree = 0;
+    function check(v){
+      if(v === node){
+        degree++;
+      }
+    }
+    Object.keys(edges).forEach(function (u){
+      edges[u].forEach(check);
+    });
+    return degree;
+  }
+
+  // Computes the outdegree for the given node.
+  function outdegree(node){
+    return node in edges ? edges[node].length : 0;
   }
 
   // Depth First Search algorithm, inspired by

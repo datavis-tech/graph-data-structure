@@ -9,7 +9,7 @@ var Graph = require("./index.js");
 var outputGraph = require("graph-diagrams")({
 
   // If true, writes graph files to ../graph-diagrams for visualization.
-  outputGraphs: true,
+  outputGraphs: false,
   project: "graph-data-structure"
 });
 

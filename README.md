@@ -4,6 +4,7 @@ A [graph data structure](https://en.wikipedia.org/wiki/Graph_(abstract_data_type
 
 [![NPM](https://nodei.co/npm/graph-data-structure.png)](https://npmjs.org/package/graph-data-structure)
 [![NPM](https://nodei.co/npm-dl/graph-data-structure.png?months=3)](https://npmjs.org/package/graph-data-structure)
+[![Build Status](https://travis-ci.org/datavis-tech/graph-data-structure.svg?branch=master)](https://travis-ci.org/datavis-tech/graph-data-structure)
 
 This library provides a minimalist implementation of a directed graph data structure. Nodes are represented by unique strings. Internally, an [adjacency list](https://en.wikipedia.org/wiki/Adjacency_list) is used to represent nodes and edges.
 
@@ -85,8 +86,6 @@ console.log(graph.topologicalSort());
 ```
 
 For more detailed example code that shows more methods, have a look at the [tests](https://github.com/datavis-tech/graph-data-structure/blob/master/test.js).
-
-[![Build Status](https://travis-ci.org/datavis-tech/graph-data-structure.svg?branch=master)](https://travis-ci.org/datavis-tech/graph-data-structure)
 
 ## API Reference
 

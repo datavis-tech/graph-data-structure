@@ -9,6 +9,30 @@ This library provides a minimalist implementation of a directed graph data struc
 
 The primary use case for this library is in implementing [dataflow programming](https://en.wikipedia.org/wiki/Dataflow_programming) or [reactive programming](https://en.wikipedia.org/wiki/Reactive_programming). The key algorithm necessary for these is topological sorting, to get an ordering of nodes such that for each edge (**u** -> **v**), **u** comes before **v** in the sorted order. The topological sorting algorithm exposed here has modifications useful for computing the order in which functions in a data flow graph should be executed, namely specifying source nodes for propagation and specifying to exclude the source nodes themselves from the result.
 
+**Table of Contents**
+
+ * [Installing](#installing)
+ * [Examples](#examples)
+   * [ABC](#abc)
+   * [Getting Dressed](#getting-dressed)
+ * [API Reference](#api-reference)
+
+## Installing
+
+This library is distributed only via [NPM](npmjs.com). Install by running
+
+`npm install graph-data-structure`
+
+Require it in your code like this.
+
+```javascript
+var Graph = require("graph-data-structure");
+```
+
+## Examples
+
+### ABC
+
 To create a graph instance, invoke **[Graph](#graph)** as a constructor function.
 
 ```javascript
@@ -37,6 +61,8 @@ Now we have the following graph. <img src="https://cloud.githubusercontent.com/a
 graph.topologicalSort(); // Returns ["a", "b", "c"]
 ```
 
+### Getting Dressed
+
 Here's an example of topological sort with getting dressed (from Cormen et al. "Introduction to Algorithms" page 550).
 
 <p align="center">
@@ -62,19 +88,7 @@ For more detailed example code that shows more methods, have a look at the [test
 
 [![Build Status](https://travis-ci.org/datavis-tech/graph-data-structure.svg?branch=master)](https://travis-ci.org/datavis-tech/graph-data-structure)
 
-# Installation
-
-This library is distributed only via [NPM](npmjs.com). Install by running
-
-`npm install graph-data-structure`
-
-Require it in your code like this.
-
-```javascript
-var Graph = require("graph-data-structure");
-```
-
-# API Reference
+## API Reference
 
 * [Creating a Graph](#creating-a-graph)
 * [Adding and Removing Nodes](#adding-and-removing-nodes)

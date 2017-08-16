@@ -24,6 +24,6 @@
   "homepage": "https://github.com/datavis-tech/graph-data-structure#readme",
   "devDependencies": {
     "graph-diagrams": "^0.5.0",
-    "mocha": "^2.5.3"
+    "mocha": "^3.5.0"
   }
 }

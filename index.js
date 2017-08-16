@@ -9,6 +9,8 @@ module.exports = function Graph(serialized){
     adjacent: adjacent,
     addEdge: addEdge,
     removeEdge: removeEdge,
+    setEdgeWeight: setEdgeWeight,
+    getEdgeWeight: getEdgeWeight,
     indegree: indegree,
     outdegree: outdegree,
     depthFirstSearch: depthFirstSearch,
@@ -21,6 +23,11 @@ module.exports = function Graph(serialized){
   // Keys are node ids.
   // Values are adjacent node id arrays.
   var edges = {};
+
+  // The weights of edges.
+  // Keys are string encodings of edges.
+  // Values are weights (numbers).
+  var edgeWeights = {};
 
   // If a serialized graph was passed into the constructor, deserialize it.
   if(serialized){
@@ -72,16 +79,21 @@ module.exports = function Graph(serialized){
     return edges[node] || [];
   }
 
+  // Computes a string encoding of an edge,
+  // for use as a key in an object.
   function encodeEdge(u, v){
     return u + "|" + v;
   }
 
+  // Sets the weight of the given edge.
   function setEdgeWeight(u, v, weight){
-    weights[encodeEdge(u, v)] = weight;
+    edgeWeights[encodeEdge(u, v)] = weight;
   }
 
+  // Gets the weight of the given edge.
+  // Returns 1 if no weight was previously set.
   function getEdgeWeight(u, v){
-    var weight = weights[encodeEdge(u, v)];
+    var weight = edgeWeights[encodeEdge(u, v)];
     return weight === undefined ? 1 : weight;
   }
 

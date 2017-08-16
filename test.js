@@ -311,6 +311,13 @@ describe("Graph", function() {
       checkSerialized(graph.serialize());
     });
   });
+
+  describe("Edge Weights", function() {
+    it("Should set and get an edge weight.", function (){
+      var graph = Graph().addEdge("a", "b", 5);
+      assert.equal(graph.getEdgeWeight("a", "b"), 5);
+    });
+  });
 });
 
 function contains(arr, item){

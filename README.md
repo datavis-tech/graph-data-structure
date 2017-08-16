@@ -116,13 +116,25 @@ Removes the specified node. Returns *graph* to support method chaining. The argu
 
 ### Adding and Removing Edges
 
-<a name="add-edge" href="#add-edge">#</a> <i>graph</i>.<b>addEdge</b>(<i>u</i>, <i>v</i>)
+<a name="add-edge" href="#add-edge">#</a> <i>graph</i>.<b>addEdge</b>(<i>u</i>, <i>v</i>[,<i>weight</i>])
 
 Adds an edge from node *u* to node *v*. Returns *graph* to support method chaining. The arguments *u* and *v* are string identifiers for nodes. This function also adds *u* and *v* as nodes if they were not already added.
+
+The last argument *weight* (optional) specifies the weight of this edge.
 
 <a name="remove-edge" href="#remove-edge">#</a> <i>graph</i>.<b>removeEdge</b>(<i>u</i>, <i>v</i>)
 
 Removes the edge from node *u* to node *v*. Returns *graph* to support method chaining. The arguments *u* and *v* are string identifiers for nodes. This function does not remove the nodes *u* and *v*. Does nothing if the edge does not exist.
+
+### Working with Edge Weights
+
+<a name="set-edge-weight" href="#set-edge-weight">#</a> <i>graph</i>.<b>setEdgeWeight</b>(<i>u</i>, <i>v</i>, <i>weight</i>)
+
+Sets the *weight* (a number) of the edge from node *u* to node *v*.
+
+<a name="get-edge-weight" href="#get-edge-weight">#</a> <i>graph</i>.<b>getEdgeWeight</b>(<i>u</i>, <i>v</i>, <i>weight</i>)
+
+Gets the *weight* of the edge from node *u* to node *v*. If no weight was previously set on this edge, then the value 1 is returned.
 
 ### Querying the Graph
 

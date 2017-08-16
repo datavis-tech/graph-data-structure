@@ -88,6 +88,7 @@ module.exports = function Graph(serialized){
   // Sets the weight of the given edge.
   function setEdgeWeight(u, v, weight){
     edgeWeights[encodeEdge(u, v)] = weight;
+    return graph;
   }
 
   // Gets the weight of the given edge.

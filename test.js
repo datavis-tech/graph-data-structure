@@ -313,10 +313,24 @@ describe("Graph", function() {
   });
 
   describe("Edge Weights", function() {
+
     it("Should set and get an edge weight.", function (){
       var graph = Graph().addEdge("a", "b", 5);
       assert.equal(graph.getEdgeWeight("a", "b"), 5);
     });
+
+    it("Should set edge weight via setEdgeWeight.", function (){
+      var graph = Graph()
+        .addEdge("a", "b")
+        .setEdgeWeight("a", "b", 5);
+      assert.equal(graph.getEdgeWeight("a", "b"), 5);
+    });
+
+    it("Should return weight of 1 if no weight set.", function (){
+      var graph = Graph().addEdge("a", "b");
+      assert.equal(graph.getEdgeWeight("a", "b"), 1);
+    });
+
   });
 });
 

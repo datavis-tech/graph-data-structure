@@ -72,12 +72,29 @@ module.exports = function Graph(serialized){
     return edges[node] || [];
   }
 
+  function encodeEdge(u, v){
+    return u + "|" + v;
+  }
+
+  function setWeight(u, v, weight){
+    weights[encodeEdge(u, v)] = weight;
+  }
+
+  function getWeight(u, v){
+    return weights[encodeEdge(u, v)];
+  }
+
   // Adds an edge from node u to node v.
   // Implicitly adds the nodes if they were not already added.
-  function addEdge(u, v){
+  function addEdge(u, v, weight){
     addNode(u);
     addNode(v);
     adjacent(u).push(v);
+
+    if (weight !== undefined) {
+      setWeight(u, v, weight);
+    }
+
     return graph;
   }
 

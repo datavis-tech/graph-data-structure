@@ -332,6 +332,37 @@ describe("Graph", function() {
     });
 
   });
+
+  describe("Dijkstra's Shortest Path Algorithm", function (){
+
+    it("Should compute shortest path on a single edge.", function (){
+      var graph = Graph().addEdge("a", "b");
+      assert.deepEqual(graph.shortestPath("a", "b"), ["a", "b"]);
+    });
+
+    it("Should compute shortest path on two edges.", function (){
+      var graph = Graph()
+        .addEdge("a", "b")
+        .addEdge("b", "c");
+      assert.deepEqual(graph.shortestPath("a", "c"), ["a", "b", "c"]);
+    });
+
+    it("Should compute shortest path on example from Cormen text (p. 659).", function (){
+      var graph = Graph()
+        .addEdge("s", "t", 10)
+        .addEdge("s", "y", 5)
+        .addEdge("t", "y", 2)
+        .addEdge("y", "t", 3)
+        .addEdge("t", "x", 1)
+        .addEdge("y", "x", 9)
+        .addEdge("y", "z", 2)
+        .addEdge("x", "z", 4)
+        .addEdge("z", "x", 6);
+      assert.deepEqual(graph.shortestPath("s", "z"), ["s", "y", "z"]);
+      assert.deepEqual(graph.shortestPath("s", "x"), ["s", "y", "x"]);
+    });
+
+  });
 });
 
 function contains(arr, item){

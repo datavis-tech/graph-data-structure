@@ -359,7 +359,7 @@ describe("Graph", function() {
         .addEdge("x", "z", 4)
         .addEdge("z", "x", 6);
       assert.deepEqual(graph.shortestPath("s", "z"), ["s", "y", "z"]);
-      assert.deepEqual(graph.shortestPath("s", "x"), ["s", "y", "x"]);
+      assert.deepEqual(graph.shortestPath("s", "x"), ["s", "y", "t", "x"]);
     });
 
   });

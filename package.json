@@ -3,7 +3,6 @@
   "version": "1.2.0",
   "description": "A graph data structure with topological sort.",
   "main": "index.js",
-  "browser": "graph-data-structure.js",
   "scripts": {
     "test": "mocha",
     "prepublishOnly": "browserify index.js -s GraphDataStructure -o graph-data-structure.js"

@@ -220,3 +220,7 @@ See **[depthFirstSearch](#dfs)** for documentation of the arguments *sourceNodes
     <img src="https://cloud.githubusercontent.com/assets/68416/15298394/a7a0a66a-1bbc-11e6-9636-367bed9165fc.png">
   </a>
 </p>
+
+<a name="shortest-path" href="#shortest-path">#</a> <i>graph</i>.<b>shortestPath</b>(<i>sourceNode</i>, <i>destinationNode</i>)
+
+Performs [Dijkstras Algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm). Returns an array of node identifier strings. The returned array includes the nodes of the shortest path from source to destination node. Inspired by by Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 658.

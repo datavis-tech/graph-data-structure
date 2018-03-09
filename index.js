@@ -15,6 +15,7 @@ module.exports = function Graph(serialized){
     outdegree: outdegree,
     depthFirstSearch: depthFirstSearch,
     topologicalSort: topologicalSort,
+    shortestPath: shortestPath,
     serialize: serialize,
     deserialize: deserialize
   };
@@ -192,6 +193,91 @@ module.exports = function Graph(serialized){
   // Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 613
   function topologicalSort(sourceNodes, includeSourceNodes){
     return depthFirstSearch(sourceNodes, includeSourceNodes).reverse();
+  }
+
+  // Dijkstra's Shortest Path Algorithm.
+  // Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 658
+  // Variable and function names correspond to names in the book.
+  function shortestPath(source, destination){
+
+    // Upper bounds for shortest path weights from source.
+    var d = {};
+
+    // Predecessors.
+    var p = {};
+
+    // Poor man's priority queue, keyed on d.
+    var q = {};
+
+    function initializeSingleSource(){
+      nodes().forEach(function (node){
+        d[node] = Infinity;
+      });
+      d[source] = 0;
+    }
+
+    // Adds entries in q for all nodes.
+    function initializePriorityQueue(){
+      nodes().forEach(function (node){
+        q[node] = true;
+      });
+    }
+
+    // Returns true if q is empty.
+    function priorityQueueEmpty(){
+      return Object.keys(q).length === 0;
+    }
+
+    // Linear search to extract (find and remove) min from q.
+    function extractMin(){
+      var min = Infinity;
+      var minNode;
+      Object.keys(q).forEach(function(node){
+        if (d[node] < min) {
+          min = d[node];
+          minNode = node;
+        }
+      });
+      delete q[minNode];
+      return minNode;
+    }
+
+    function relax(u, v){
+      var w = getEdgeWeight(u, v);
+      if (d[v] > d[u] + w) {
+        d[v] = d[u] + w;
+        p[v] = u;
+      }
+    }
+
+    function dijkstra(){
+      initializeSingleSource();
+      initializePriorityQueue();
+      while(!priorityQueueEmpty()){
+        var u = extractMin();
+        adjacent(u).forEach(function (v){
+          relax(u, v);
+        });
+      }
+    }
+
+    // Assembles the shortest path by traversing the
+    // predecessor subgraph from destination to source.
+    function path(){
+      var nodeList = [];
+      var node = destination;
+      while(p[node]){
+        nodeList.push(node);
+        node = p[node];
+      }
+      nodeList.push(source);
+      nodeList.reverse();
+      return nodeList;
+    }
+
+    dijkstra();
+
+    return path();
   }
 
   // Serializes the graph.

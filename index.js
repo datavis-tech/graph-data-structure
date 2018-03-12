@@ -245,7 +245,9 @@ module.exports = function Graph(serialized){
         }
       });
       if (minNode === undefined) {
-        throw new Error("No path exists.");
+        // If we reach here, there's a disconnected subgraph, and we're done.
+        q = {};
+        return null;
       }
       delete q[minNode];
       return minNode;
@@ -279,7 +281,10 @@ module.exports = function Graph(serialized){
         nodeList.push(node);
         node = p[node];
       }
-      nodeList.push(source);
+      if (node !== source) {
+        throw new Error("No path found");
+      }
+      nodeList.push(node);
       nodeList.reverse();
       return nodeList;
     }

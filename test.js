@@ -378,6 +378,14 @@ describe("Graph", function() {
         .addEdge("d", "e");
       assert.throws(() => graph.shortestPath("a", "e"), /No path/);
     });
+
+    it("Should be robust to disconnected subgraphs.", function (){
+      var graph = Graph()
+        .addEdge("a", "b")
+        .addEdge("b", "c")
+        .addEdge("d", "e");
+      assert.deepEqual(graph.shortestPath("a", "c"), ["a", "b", "c"]);
+    });
   });
 });
 

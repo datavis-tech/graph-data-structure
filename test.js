@@ -362,6 +362,22 @@ describe("Graph", function() {
       assert.deepEqual(graph.shortestPath("s", "x"), ["s", "y", "t", "x"]);
     });
 
+    it("Should throw error if source node not in graph.", function (){
+      var graph = Graph().addEdge("b", "c");
+      assert.throws(() => graph.shortestPath("a", "c"), /Source node/);
+    });
+
+    it("Should throw error if dest node not in graph.", function (){
+      var graph = Graph().addEdge("b", "c");
+      assert.throws(() => graph.shortestPath("b", "g"), /Destination node/);
+    });
+
+    it("Should throw error if no path exists.", function (){
+      var graph = Graph()
+        .addEdge("a", "b")
+        .addEdge("d", "e");
+      assert.throws(() => graph.shortestPath("a", "e"), /No path/);
+    });
   });
 });
 

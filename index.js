@@ -213,6 +213,12 @@ module.exports = function Graph(serialized){
       nodes().forEach(function (node){
         d[node] = Infinity;
       });
+      if (d[source] !== Infinity) {
+        throw new Error("Source node is not in the graph");
+      }
+      if (d[destination] !== Infinity) {
+        throw new Error("Destination node is not in the graph");
+      }
       d[source] = 0;
     }
 
@@ -238,6 +244,9 @@ module.exports = function Graph(serialized){
           minNode = node;
         }
       });
+      if (minNode === undefined) {
+        throw new Error("No path exists.");
+      }
       delete q[minNode];
       return minNode;
     }

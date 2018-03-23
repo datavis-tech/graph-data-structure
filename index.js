@@ -276,9 +276,11 @@ module.exports = function Graph(serialized){
     // predecessor subgraph from destination to source.
     function path(){
       var nodeList = [];
+      var weight = 0;
       var node = destination;
       while(p[node]){
         nodeList.push(node);
+        weight += getEdgeWeight(p[node], node);
         node = p[node];
       }
       if (node !== source) {
@@ -286,6 +288,7 @@ module.exports = function Graph(serialized){
       }
       nodeList.push(node);
       nodeList.reverse();
+      nodeList.weight = weight;
       return nodeList;
     }
 

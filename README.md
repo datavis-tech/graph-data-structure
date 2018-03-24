@@ -217,7 +217,7 @@ See **[depthFirstSearch](#dfs)** for documentation of the arguments *sourceNodes
 
 <a name="shortest-path" href="#shortest-path">#</a> <i>graph</i>.<b>shortestPath</b>(<i>sourceNode</i>, <i>destinationNode</i>)
 
-Performs [Dijkstras Algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm). Returns an array of node identifier strings. The returned array includes the nodes of the shortest path from source to destination node. Inspired by by Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 658.
+Performs [Dijkstras Algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm). Returns an array of node identifier strings. The returned array includes the nodes of the shortest path from source to destination node. The returned array also contains a `weight` property, which is the total weight over all edges in the path. Inspired by by Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 658.
 
 <p align="center">
   <a href="https://datavis.tech/">

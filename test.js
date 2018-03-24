@@ -17,6 +17,11 @@ function output(graph, name){
   outputGraph(graph.serialize(), name);
 }
 
+function withWeight(nodeList, weight){
+  nodeList.weight = weight;
+  return nodeList;
+}
+
 describe("Graph", function() {
 
   describe("Data structure", function() {
@@ -337,14 +342,14 @@ describe("Graph", function() {
 
     it("Should compute shortest path on a single edge.", function (){
       var graph = Graph().addEdge("a", "b");
-      assert.deepEqual(graph.shortestPath("a", "b"), ["a", "b"]);
+      assert.deepEqual(graph.shortestPath("a", "b"), withWeight(["a", "b"], 1));
     });
 
     it("Should compute shortest path on two edges.", function (){
       var graph = Graph()
         .addEdge("a", "b")
         .addEdge("b", "c");
-      assert.deepEqual(graph.shortestPath("a", "c"), ["a", "b", "c"]);
+      assert.deepEqual(graph.shortestPath("a", "c"), withWeight(["a", "b", "c"], 2));
     });
 
     it("Should compute shortest path on example from Cormen text (p. 659).", function (){
@@ -358,8 +363,9 @@ describe("Graph", function() {
         .addEdge("y", "z", 2)
         .addEdge("x", "z", 4)
         .addEdge("z", "x", 6);
-      assert.deepEqual(graph.shortestPath("s", "z"), ["s", "y", "z"]);
-      assert.deepEqual(graph.shortestPath("s", "x"), ["s", "y", "t", "x"]);
+
+      assert.deepEqual(graph.shortestPath("s", "z"), withWeight(["s", "y", "z"], 5 + 2));
+      assert.deepEqual(graph.shortestPath("s", "x"), withWeight(["s", "y", "t", "x"], 5 + 3 + 1));
     });
 
     it("Should throw error if source node not in graph.", function (){
@@ -384,7 +390,7 @@ describe("Graph", function() {
         .addEdge("a", "b")
         .addEdge("b", "c")
         .addEdge("d", "e");
-      assert.deepEqual(graph.shortestPath("a", "c"), ["a", "b", "c"]);
+      assert.deepEqual(graph.shortestPath("a", "c"), withWeight(["a", "b", "c"], 2));
     });
   });
 });

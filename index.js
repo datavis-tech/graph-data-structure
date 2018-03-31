@@ -311,7 +311,8 @@ module.exports = function Graph(serialized){
       adjacent(source).forEach(function (target){
         serialized.links.push({
           source: source,
-          target: target
+          target: target,
+          weight: getEdgeWeight(source, target)
         });
       });
     });
@@ -322,7 +323,7 @@ module.exports = function Graph(serialized){
   // Deserializes the given serialized graph.
   function deserialize(serialized){
     serialized.nodes.forEach(function (node){ addNode(node.id); });
-    serialized.links.forEach(function (link){ addEdge(link.source, link.target); });
+    serialized.links.forEach(function (link){ addEdge(link.source, link.target, link.weight); });
     return graph;
   }
   

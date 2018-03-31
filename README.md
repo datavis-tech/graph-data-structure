@@ -166,6 +166,7 @@ Serializes the graph. Returns an object with the following properties.
  * `links` An array of objects representing edges, each with the following properties.
    * `source` The node identifier string of the source node (**u**).
    * `target` The node identifier string of the target node (**v**).
+   * `weight` The weight of the edge between the source and target nodes.
 
 Here's example code for serializing a graph.
 
@@ -186,8 +187,8 @@ The following will be the value of `serialized`.
     { "id": "c" }
   ],
   "links": [
-    { "source": "a", "target": "b" },
-    { "source": "b", "target": "c" }
+    { "source": "a", "target": "b", "weight": 1 },
+    { "source": "b", "target": "c", "weight": 1 }
   ]
 }
 ```

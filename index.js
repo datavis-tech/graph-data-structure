@@ -14,6 +14,7 @@ module.exports = function Graph(serialized){
     indegree: indegree,
     outdegree: outdegree,
     depthFirstSearch: depthFirstSearch,
+    lowestCommonAncestors: lowestCommonAncestors,
     topologicalSort: topologicalSort,
     shortestPath: shortestPath,
     serialize: serialize,
@@ -46,7 +47,7 @@ module.exports = function Graph(serialized){
   // Removes a node from the graph.
   // Also removes incoming and outgoing edges.
   function removeNode(node){
-    
+
     // Remove incoming edges.
     Object.keys(edges).forEach(function (u){
       edges[u].forEach(function (v){
@@ -147,7 +148,7 @@ module.exports = function Graph(serialized){
 
   // Depth First Search algorithm, inspired by
   // Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 604
-  // This variant includes an additional option 
+  // This variant includes an additional option
   // `includeSourceNodes` to specify whether to include or
   // exclude the source nodes from the result (true by default).
   // If `sourceNodes` is not specified, all nodes in the graph
@@ -185,6 +186,50 @@ module.exports = function Graph(serialized){
     }
 
     return nodeList;
+  }
+
+  // Least Common Ancestors
+  // Inspired by https://github.com/relaxedws/lca/blob/master/src/LowestCommonAncestor.php code
+  // but uses depth search instead of breadth. Also uses some optimizations
+  function lowestCommonAncestors(node1, node2){
+
+    var node1Ancestors = [];
+    var lcas = [];
+
+    function CA1Visit(visited, node){
+      if(!visited[node]){
+        visited[node] = true;
+        node1Ancestors.push(node);
+        if (node == node2) {
+          lcas.push(node);
+          return false; // found - shortcut
+        }
+        return adjacent(node).every(node => {
+          return CA1Visit(visited, node);
+        });
+      } else {
+        return true;
+      }
+    }
+
+    function CA2Visit(visited, node){
+      if(!visited[node]){
+        visited[node] = true;
+        if (node1Ancestors.indexOf(node) >= 0) {
+          lcas.push(node);
+        } else if (lcas.length == 0) {
+          adjacent(node).forEach(node => {
+            CA2Visit(visited, node);
+          });
+        }
+      }
+    }
+
+    if (CA1Visit({}, node1)) { // No shortcut worked
+      CA2Visit({}, node2);
+    }
+
+    return lcas;
   }
 
   // The topological sort algorithm yields a list of visited nodes
@@ -326,6 +371,6 @@ module.exports = function Graph(serialized){
     serialized.links.forEach(function (link){ addEdge(link.source, link.target, link.weight); });
     return graph;
   }
-  
+
   return graph;
 }

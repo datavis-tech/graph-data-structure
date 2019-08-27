@@ -210,6 +210,15 @@ Arguments:
  * *sourceNodes* (optional) - An array of node identifier strings. This specifies the subset of nodes to use as the sources of the depth-first search. If *sourceNodes* is not specified, all **[nodes](#nodes)** in the graph are used as source nodes.
  * *includeSourceNodes* (optional) - A boolean specifying whether or not to include the source nodes in the returned array. If *includeSourceNodes* is not specified, it is treated as `true` (all source nodes are included in the returned array).
 
+<a name="lca" href="#lca">#</a> <i>graph</i>.<b>lowestCommonAncestors</b>([<i>node1</i>][, <i>node2</i>])
+
+Performs search of [Lowest common ancestors](https://en.wikipedia.org/wiki/Lowest_common_ancestor). Returns an array of node identifier strings.
+
+Arguments:
+
+ * *node1* (required) - First node.
+ * *node2* (required) - Second node.
+
 <a name="topological-sort" href="#topological-sort">#</a> <i>graph</i>.<b>topologicalSort</b>([<i>sourceNodes</i>][, <i>includeSourceNodes</i>])
 
 Performs [Topological Sort](https://en.wikipedia.org/wiki/Topological_sorting). Returns an array of node identifier strings. The returned array includes nodes in topologically sorted order. This means that for each visited edge (**u** -> **v**), **u** comes before **v** in the topologically sorted order. Amazingly, this comes from simply reversing the result from depth first search. Inspired by by Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 613.

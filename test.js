@@ -198,8 +198,8 @@ describe("Graph", function() {
       graph.addEdge("a", "d"); //    |   d
       graph.addEdge("b", "c"); //    c   |
       graph.addEdge("d", "e"); //     \ /
-      graph.addEdge("c", "e"); //      e   
-      
+      graph.addEdge("c", "e"); //      e
+
       var sorted = graph.topologicalSort(["a"], false);
       assert.equal(sorted.length, 4);
       assert(contains(sorted, "b"));
@@ -244,6 +244,24 @@ describe("Graph", function() {
       assert(!contains(sorted, "b"));
 
       output(graph, "cycles");
+    });
+
+    it("Should compute lowest common ancestors.", function (){
+      var graph = Graph()
+
+        .addEdge("a", "b")
+        .addEdge("b", "d")
+        .addEdge("c", "d")
+        .addEdge("b", "e")
+        .addEdge("c", "e")
+        .addEdge("d", "g")
+        .addEdge("e", "g")
+        .addNode("f");
+
+      assert.deepStrictEqual(graph.lowestCommonAncestors("a", "a"), ["a"]);
+      assert.deepStrictEqual(graph.lowestCommonAncestors("a", "b"), ["b"]);
+      assert.deepStrictEqual(graph.lowestCommonAncestors("a", "c"), ["d", "e"]);
+      assert.deepStrictEqual(graph.lowestCommonAncestors("a", "f"), []);
     });
   });
 

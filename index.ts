@@ -396,4 +396,4 @@ function Graph(serialized?: Serialized) {
     // The returned graph instance.
     return graph;
 }
-module.exports =  Graph;
+export = Graph;

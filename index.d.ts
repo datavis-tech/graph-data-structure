@@ -1,6 +1,5 @@
 declare type NodeId = string;
 declare type EdgeWeight = number;
-declare type EncodedEdge = string;
 interface Serialized {
     nodes: {
         id: NodeId;
@@ -31,4 +30,4 @@ declare function Graph(serialized?: Serialized): {
     serialize: () => Serialized;
     deserialize: (serialized: Serialized) => any;
 };
-//# sourceMappingURL=index.d.ts.map
+export = Graph;

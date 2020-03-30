@@ -9,7 +9,8 @@
     "scripts": {
         "build": "tsc",
         "test": "npm run build && mocha",
-        "prepublishOnly": "browserify index.js -s GraphDataStructure -o graph-data-structure.js"
+        "browserify": "browserify index.js -s GraphDataStructure -o graph-data-structure.js",
+        "prepublishOnly": "npm run build && npm run browserify"
     },
     "repository": {
         "type": "git",

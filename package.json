@@ -1,34 +1,37 @@
 {
-  "name": "graph-data-structure",
-  "version": "1.9.0",
-  "description": "A graph data structure with topological sort.",
-  "main": "index.js",
-  "files": [
-    "graph-data-structure.js"
-  ],
-  "scripts": {
-    "test": "mocha",
-    "prepublishOnly": "browserify index.js -s GraphDataStructure -o graph-data-structure.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/datavis-tech/graph-data-structure.git"
-  },
-  "keywords": [
-    "graph",
-    "data",
-    "structures",
-    "algorithms"
-  ],
-  "author": "Curran Kelleher",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/datavis-tech/graph-data-structure/issues"
-  },
-  "homepage": "https://github.com/datavis-tech/graph-data-structure#readme",
-  "devDependencies": {
-    "browserify": "^16.5.0",
-    "graph-diagrams": "^0.5.0",
-    "mocha": "^6.2.0"
-  }
+    "name": "graph-data-structure",
+    "version": "1.9.0",
+    "description": "A graph data structure with topological sort.",
+    "main": "index.js",
+    "files": [
+        "graph-data-structure.js"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "test": "npm run build && mocha",
+        "prepublishOnly": "browserify index.js -s GraphDataStructure -o graph-data-structure.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/datavis-tech/graph-data-structure.git"
+    },
+    "keywords": [
+        "graph",
+        "data",
+        "structures",
+        "algorithms"
+    ],
+    "author": "Curran Kelleher",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/datavis-tech/graph-data-structure/issues"
+    },
+    "homepage": "https://github.com/datavis-tech/graph-data-structure#readme",
+    "devDependencies": {
+        "@types/node": "^13.9.5",
+        "browserify": "^16.5.0",
+        "graph-diagrams": "^0.5.0",
+        "mocha": "^6.2.0",
+        "typescript": "^3.8.3"
+    }
 }

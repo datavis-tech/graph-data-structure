@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "allowJs": false,
+        "declaration": true,
+        "esModuleInterop": true,
+        "module": "CommonJS",
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "strict": true,
+        "target": "ES5",
+        "strictFunctionTypes": true,
+        "strictNullChecks": true,
+        "downlevelIteration": true,
+        "isolatedModules": true
+    },
+    "file": ["index.ts"],
+    "exclude": ["node_modules", "*.d.ts"]
+}

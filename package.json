@@ -4,7 +4,8 @@
     "description": "A graph data structure with topological sort.",
     "main": "index.js",
     "files": [
-        "graph-data-structure.js"
+        "graph-data-structure.js",
+        "index.d.ts"
     ],
     "scripts": {
         "build": "tsc",

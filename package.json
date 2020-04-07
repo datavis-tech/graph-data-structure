@@ -1,41 +1,41 @@
 {
-    "name": "graph-data-structure",
-    "version": "1.12.0",
-    "description": "A graph data structure with topological sort.",
-    "main": "index.js",
-    "files": [
-        "graph-data-structure.js",
-        "index.d.ts"
-    ],
-    "scripts": {
-        "build": "tsc",
-        "test": "npm run build && mocha",
-        "browserify": "browserify index.js -s GraphDataStructure -o graph-data-structure.js",
-        "prepublishOnly": "npm run build && npm run browserify",
-        "prettier": "prettier --single-quote --write './**/*.js' './**/*.ts'"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/datavis-tech/graph-data-structure.git"
-    },
-    "keywords": [
-        "graph",
-        "data",
-        "structures",
-        "algorithms"
-    ],
-    "author": "Curran Kelleher",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/datavis-tech/graph-data-structure/issues"
-    },
-    "homepage": "https://github.com/datavis-tech/graph-data-structure#readme",
-    "devDependencies": {
-        "@types/node": "^13.11.0",
-        "browserify": "^16.5.1",
-        "graph-diagrams": "^0.5.0",
-        "mocha": "^7.1.1",
-        "prettier": "^2.0.4",
-        "typescript": "^3.8.3"
-    }
+  "name": "graph-data-structure",
+  "version": "1.12.0",
+  "description": "A graph data structure with topological sort.",
+  "main": "index.js",
+  "files": [
+    "graph-data-structure.js",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && mocha",
+    "browserify": "browserify index.js -s GraphDataStructure -o graph-data-structure.js",
+    "prepublishOnly": "npm run build && npm run browserify",
+    "prettier": "prettier --single-quote --write './**/*.js' './**/*.ts' './**/*.json'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/datavis-tech/graph-data-structure.git"
+  },
+  "keywords": [
+    "graph",
+    "data",
+    "structures",
+    "algorithms"
+  ],
+  "author": "Curran Kelleher",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/datavis-tech/graph-data-structure/issues"
+  },
+  "homepage": "https://github.com/datavis-tech/graph-data-structure#readme",
+  "devDependencies": {
+    "@types/node": "^13.11.0",
+    "browserify": "^16.5.1",
+    "graph-diagrams": "^0.5.0",
+    "mocha": "^7.1.1",
+    "prettier": "^2.0.4",
+    "typescript": "^3.8.3"
+  }
 }

@@ -111,7 +111,7 @@ function Graph(serialized?: Serialized) {
 
     // Adds an edge from node u to node v.
     // Implicitly adds the nodes if they were not already added.
-    function addEdge(u: NodeId, v: NodeId, weight: EdgeWeight) {
+    function addEdge(u: NodeId, v: NodeId, weight?: EdgeWeight) {
         addNode(u);
         addNode(v);
         adjacent(u).push(v);

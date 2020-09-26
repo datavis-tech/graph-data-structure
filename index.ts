@@ -32,12 +32,12 @@ function Graph(serialized?: Serialized) {
     // The adjacency list of the graph.
     // Keys are node ids.
     // Values are adjacent node id arrays.
-    var edges: Record<NodeId, NodeId[]> = {};
+    const edges: Record<NodeId, NodeId[]> = {};
 
     // The weights of edges.
     // Keys are string encodings of edges.
     // Values are weights (numbers).
-    var edgeWeights: Record<EncodedEdge, EdgeWeight> = {};
+    const edgeWeights: Record<EncodedEdge, EdgeWeight> = {};
 
     // If a serialized graph was passed into the constructor, deserialize it.
     if (serialized) {
@@ -138,7 +138,7 @@ function Graph(serialized?: Serialized) {
     // Computes the indegree for the given node.
     // Not very efficient, costs O(E) where E = number of edges.
     function indegree(node: NodeId) {
-        var degree = 0;
+        let degree = 0;
         function check(v: NodeId) {
             if (v === node) {
                 degree++;
@@ -157,9 +157,8 @@ function Graph(serialized?: Serialized) {
 
     // Depth First Search algorithm, inspired by
     // Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 604
-    // This variant includes an additional option
-    // `includeSourceNodes` to specify whether to include or
-    // exclude the source nodes from the result (true by default).
+    // The additional option `includeSourceNodes` specifies whether to
+    // include or exclude the source nodes from the result (true by default).
     // If `sourceNodes` is not specified, all nodes in the graph
     // are used as source nodes.
     function depthFirstSearch(
@@ -174,8 +173,8 @@ function Graph(serialized?: Serialized) {
             includeSourceNodes = true;
         }
 
-        var visited: Record<NodeId, boolean> = {};
-        var nodeList: NodeId[] = [];
+        const visited: Record<NodeId, boolean> = {};
+        const nodeList: NodeId[] = [];
 
         function DFSVisit(node: NodeId) {
             if (!visited[node]) {
@@ -203,8 +202,8 @@ function Graph(serialized?: Serialized) {
     // Inspired by https://github.com/relaxedws/lca/blob/master/src/LowestCommonAncestor.php code
     // but uses depth search instead of breadth. Also uses some optimizations
     function lowestCommonAncestors(node1: NodeId, node2: NodeId) {
-        var node1Ancestors: NodeId[] = [];
-        var lcas: NodeId[] = [];
+        const node1Ancestors: NodeId[] = [];
+        const lcas: NodeId[] = [];
 
         function CA1Visit(
             visited: Record<NodeId, boolean>,
@@ -297,8 +296,8 @@ function Graph(serialized?: Serialized) {
 
         // Linear search to extract (find and remove) min from q.
         function extractMin(): NodeId | null {
-            var min = Infinity;
-            var minNode;
+            let min = Infinity;
+            let minNode;
             Object.keys(q).forEach(function(node) {
                 if (d[node] < min) {
                     min = d[node];
@@ -315,7 +314,7 @@ function Graph(serialized?: Serialized) {
         }
 
         function relax(u: NodeId, v: NodeId) {
-            var w = getEdgeWeight(u, v);
+            const w = getEdgeWeight(u, v);
             if (d[v] > d[u] + w) {
                 d[v] = d[u] + w;
                 p[v] = u;
@@ -326,7 +325,7 @@ function Graph(serialized?: Serialized) {
             initializeSingleSource();
             initializePriorityQueue();
             while (!priorityQueueEmpty()) {
-                var u = extractMin();
+                const u = extractMin();
                 if (u === null) return;
                 adjacent(u).forEach(function(v) {
                     relax(u as string, v);
@@ -337,9 +336,9 @@ function Graph(serialized?: Serialized) {
         // Assembles the shortest path by traversing the
         // predecessor subgraph from destination to source.
         function path() {
-            var nodeList: NodeId[] & { weight?: EdgeWeight } = [];
-            var weight = 0;
-            var node = destination;
+            const nodeList: NodeId[] & { weight?: EdgeWeight } = [];
+            let weight = 0;
+            let node = destination;
             while (p[node]) {
                 nodeList.push(node);
                 weight += getEdgeWeight(p[node], node);
@@ -361,7 +360,7 @@ function Graph(serialized?: Serialized) {
 
     // Serializes the graph.
     function serialize() {
-        var serialized: Serialized = {
+        const serialized: Serialized = {
             nodes: nodes().map(function(id) {
                 return { id: id };
             }),
@@ -369,7 +368,7 @@ function Graph(serialized?: Serialized) {
         };
 
         serialized.nodes.forEach(function(node) {
-            var source = node.id;
+            const source = node.id;
             adjacent(source).forEach(function(target) {
                 serialized.links.push({
                     source: source,

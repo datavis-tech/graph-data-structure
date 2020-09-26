@@ -11,20 +11,20 @@ interface Serialized {
     }[];
 }
 declare function Graph(serialized?: Serialized): {
-    addNode: (node: string) => any;
-    removeNode: (node: string) => any;
-    nodes: () => string[];
-    adjacent: (node: string) => string[];
-    addEdge: (u: string, v: string, weight: number) => any;
-    removeEdge: (u: string, v: string) => any;
-    setEdgeWeight: (u: string, v: string, weight: number) => any;
-    getEdgeWeight: (u: string, v: string) => number;
-    indegree: (node: string) => number;
-    outdegree: (node: string) => number;
+    addNode: (node: NodeId) => any;
+    removeNode: (node: NodeId) => any;
+    nodes: () => NodeId[];
+    adjacent: (node: NodeId) => NodeId[];
+    addEdge: (u: NodeId, v: NodeId, weight?: number | undefined) => any;
+    removeEdge: (u: NodeId, v: NodeId) => any;
+    setEdgeWeight: (u: NodeId, v: NodeId, weight: EdgeWeight) => any;
+    getEdgeWeight: (u: NodeId, v: NodeId) => EdgeWeight;
+    indegree: (node: NodeId) => number;
+    outdegree: (node: NodeId) => number;
     depthFirstSearch: (sourceNodes?: string[] | undefined, includeSourceNodes?: boolean) => string[];
-    lowestCommonAncestors: (node1: string, node2: string) => string[];
-    topologicalSort: (sourceNodes: string[], includeSourceNodes?: boolean) => string[];
-    shortestPath: (source: string, destination: string) => string[] & {
+    lowestCommonAncestors: (node1: NodeId, node2: NodeId) => string[];
+    topologicalSort: (sourceNodes: NodeId[], includeSourceNodes?: boolean) => string[];
+    shortestPath: (source: NodeId, destination: NodeId) => string[] & {
         weight?: number | undefined;
     };
     serialize: () => Serialized;

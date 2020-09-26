@@ -129,9 +129,8 @@ function Graph(serialized) {
     }
     // Depth First Search algorithm, inspired by
     // Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 604
-    // This variant includes an additional option
-    // `includeSourceNodes` to specify whether to include or
-    // exclude the source nodes from the result (true by default).
+    // The additional option `includeSourceNodes` specifies whether to
+    // include or exclude the source nodes from the result (true by default).
     // If `sourceNodes` is not specified, all nodes in the graph
     // are used as source nodes.
     function depthFirstSearch(sourceNodes, includeSourceNodes) {
@@ -273,13 +272,18 @@ function Graph(serialized) {
         function dijkstra() {
             initializeSingleSource();
             initializePriorityQueue();
-            while (!priorityQueueEmpty()) {
+            var _loop_1 = function () {
                 var u = extractMin();
                 if (u === null)
-                    return;
+                    return { value: void 0 };
                 adjacent(u).forEach(function (v) {
                     relax(u, v);
                 });
+            };
+            while (!priorityQueueEmpty()) {
+                var state_1 = _loop_1();
+                if (typeof state_1 === "object")
+                    return state_1.value;
             }
         }
         // Assembles the shortest path by traversing the

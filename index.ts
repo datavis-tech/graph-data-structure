@@ -7,6 +7,13 @@ interface Serialized {
     links: { source: NodeId; target: NodeId; weight: EdgeWeight }[];
 }
 
+class CycleError extends Error {
+    constructor(message: string) {
+        super(message);
+        Object.setPrototypeOf(this, CycleError.prototype);
+    }
+}
+
 // A graph data structure with depth-first search and topological sort.
 function Graph(serialized?: Serialized) {
     // Returned graph instance
@@ -22,6 +29,7 @@ function Graph(serialized?: Serialized) {
         indegree,
         outdegree,
         depthFirstSearch,
+        hasCycle,
         lowestCommonAncestors,
         topologicalSort,
         shortestPath,
@@ -163,7 +171,8 @@ function Graph(serialized?: Serialized) {
     // are used as source nodes.
     function depthFirstSearch(
         sourceNodes?: NodeId[],
-        includeSourceNodes: boolean = true
+        includeSourceNodes: boolean = true,
+        errorOnCycle: boolean = false,
     ) {
         if (!sourceNodes) {
             sourceNodes = nodes();
@@ -174,12 +183,18 @@ function Graph(serialized?: Serialized) {
         }
 
         const visited: Record<NodeId, boolean> = {};
+        const visiting: Record<NodeId, boolean> = {};
         const nodeList: NodeId[] = [];
 
         function DFSVisit(node: NodeId) {
+            if (visiting[node] && errorOnCycle) {
+                throw new CycleError("Cycle found");
+            }
             if (!visited[node]) {
                 visited[node] = true;
+                visiting[node] = true;  // temporary flag while visiting
                 adjacent(node).forEach(DFSVisit);
+                visiting[node] = false;
                 nodeList.push(node);
             }
         }
@@ -196,6 +211,23 @@ function Graph(serialized?: Serialized) {
         }
 
         return nodeList;
+    }
+
+    // Returns true if the graph has one or more cycles and false otherwise
+    function hasCycle(): boolean {
+        try {
+            depthFirstSearch(undefined, true, true);
+            // No error thrown -> no cycles
+            return false;
+        }
+        catch (error) {
+            if (error instanceof CycleError) {
+                return true;
+            }
+            else {
+                throw error;
+            }
+        }
     }
 
     // Least Common Ancestors
@@ -253,7 +285,7 @@ function Graph(serialized?: Serialized) {
         sourceNodes: NodeId[],
         includeSourceNodes: boolean = true
     ) {
-        return depthFirstSearch(sourceNodes, includeSourceNodes).reverse();
+        return depthFirstSearch(sourceNodes, includeSourceNodes, true).reverse();
     }
 
     // Dijkstra's Shortest Path Algorithm.

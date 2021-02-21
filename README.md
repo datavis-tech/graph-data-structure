@@ -201,7 +201,7 @@ Deserializes the given serialized graph. Returns *graph* to support method chain
 
 ### Graph Algorithms
 
-<a name="dfs" href="#dfs">#</a> <i>graph</i>.<b>depthFirstSearch</b>([<i>sourceNodes</i>][, <i>includeSourceNodes</i>])
+<a name="dfs" href="#dfs">#</a> <i>graph</i>.<b>depthFirstSearch</b>([<i>sourceNodes</i>][, <i>includeSourceNodes</i>][, <i>errorOnCycle</i>])
 
 Performs [Depth-first Search](https://en.wikipedia.org/wiki/Depth-first_search). Returns an array of node identifier strings. The returned array includes nodes visited by the algorithm in the order in which they were visited. Implementation inspired by pseudocode from Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 604.
 
@@ -209,6 +209,12 @@ Arguments:
 
  * *sourceNodes* (optional) - An array of node identifier strings. This specifies the subset of nodes to use as the sources of the depth-first search. If *sourceNodes* is not specified, all **[nodes](#nodes)** in the graph are used as source nodes.
  * *includeSourceNodes* (optional) - A boolean specifying whether or not to include the source nodes in the returned array. If *includeSourceNodes* is not specified, it is treated as `true` (all source nodes are included in the returned array).
+ * *errorOnCycle* (optional) - A boolean indicating that a `CycleError` should be thrown whenever a cycle is first encountered.
+
+
+<a name="has-cycle" href="#has-cycle">#</a> <i>graph</i>.<b>hasCycle</b>()
+
+Checks if the graph has any cycles. Returns `true` if it does and `false` otherwise.
 
 <a name="lca" href="#lca">#</a> <i>graph</i>.<b>lowestCommonAncestors</b>([<i>node1</i>][, <i>node2</i>])
 
@@ -224,6 +230,8 @@ Arguments:
 Performs [Topological Sort](https://en.wikipedia.org/wiki/Topological_sorting). Returns an array of node identifier strings. The returned array includes nodes in topologically sorted order. This means that for each visited edge (**u** -> **v**), **u** comes before **v** in the topologically sorted order. Amazingly, this comes from simply reversing the result from depth first search. Inspired by by Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 613.
 
 See **[depthFirstSearch](#dfs)** for documentation of the arguments *sourceNodes* and *includeSourceNodes*.
+
+Note: this function raises a `CycleError` when the input is not a DAG.
 
 <a name="shortest-path" href="#shortest-path">#</a> <i>graph</i>.<b>shortestPath</b>(<i>sourceNode</i>, <i>destinationNode</i>)
 

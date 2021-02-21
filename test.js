@@ -148,6 +148,34 @@ describe("Graph", function() {
 
   describe("Algorithms", function() {
 
+    it("Should detect cycle.", function() {
+      var graph = Graph();
+      graph.addEdge("a", "b");
+      graph.addEdge("b", "a");
+      assert(graph.hasCycle());
+    });
+
+    it("Should detect cycle (long).", function() {
+      var graph = Graph();
+      graph.addEdge("a", "b");
+      graph.addEdge("b", "c");
+      graph.addEdge("c", "d");
+      graph.addEdge("d", "a");
+      assert(graph.hasCycle());
+    });
+
+    it("Should detect cycle (loop).", function() {
+      var graph = Graph();
+      graph.addEdge("a", "a");
+      assert(graph.hasCycle());
+    });
+
+    it("Should not detect cycle.", function() {
+      var graph = Graph();
+      graph.addEdge("a", "b");
+      assert(!graph.hasCycle());
+    });
+
     // This example is from Cormen et al. "Introduction to Algorithms" page 550
     it("Should compute topological sort.", function (){
 
@@ -244,6 +272,13 @@ describe("Graph", function() {
       assert(!contains(sorted, "b"));
 
       output(graph, "cycles");
+    });
+
+    it("Should error on non-DAG topological sort", function() {
+      var graph = Graph();
+      graph.addEdge("a", "b");
+      graph.addEdge("b", "a");
+      assert.throws(graph.topologicalSort);
     });
 
     it("Should compute lowest common ancestors.", function (){

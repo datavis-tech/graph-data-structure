@@ -17,6 +17,7 @@ declare function Graph(serialized?: Serialized): {
     adjacent: (node: NodeId) => NodeId[];
     addEdge: (u: NodeId, v: NodeId, weight?: number | undefined) => any;
     removeEdge: (u: NodeId, v: NodeId) => any;
+    hasEdge: (u: NodeId, v: NodeId) => boolean;
     setEdgeWeight: (u: NodeId, v: NodeId, weight: EdgeWeight) => any;
     getEdgeWeight: (u: NodeId, v: NodeId) => EdgeWeight;
     indegree: (node: NodeId) => number;

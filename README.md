@@ -2,10 +2,6 @@
 
 A [graph data structure](https://en.wikipedia.org/wiki/Graph_(abstract_data_type)) with [topological sort](https://en.wikipedia.org/wiki/Topological_sorting).
 
-[![NPM](https://nodei.co/npm/graph-data-structure.png)](https://npmjs.org/package/graph-data-structure)
-[![NPM](https://nodei.co/npm-dl/graph-data-structure.png?months=3)](https://npmjs.org/package/graph-data-structure)
-[![Build Status](https://travis-ci.org/datavis-tech/graph-data-structure.svg?branch=master)](https://travis-ci.org/datavis-tech/graph-data-structure)
-
 This library provides a minimalist implementation of a directed graph data structure. Nodes are represented by unique strings. Internally, an [adjacency list](https://en.wikipedia.org/wiki/Adjacency_list) is used to represent nodes and edges.
 
 The primary use case for this library is in implementing [dataflow programming](https://en.wikipedia.org/wiki/Dataflow_programming) or [reactive programming](https://en.wikipedia.org/wiki/Reactive_programming). The key algorithm necessary for these is topological sorting, to get an ordering of nodes such that for each edge (**u** -> **v**), **u** comes before **v** in the sorted order. The topological sorting algorithm exposed here has modifications useful for computing the order in which functions in a data flow graph should be executed, namely specifying source nodes for propagation and specifying to exclude the source nodes themselves from the result.

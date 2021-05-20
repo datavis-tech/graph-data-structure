@@ -209,7 +209,7 @@ Arguments:
 
  * *sourceNodes* (optional) - An array of node identifier strings. This specifies the subset of nodes to use as the sources of the depth-first search. If *sourceNodes* is not specified, all **[nodes](#nodes)** in the graph are used as source nodes.
  * *includeSourceNodes* (optional) - A boolean specifying whether or not to include the source nodes in the returned array. If *includeSourceNodes* is not specified, it is treated as `true` (all source nodes are included in the returned array).
- * *errorOnCycle* (optional) - A boolean indicating that a `CycleError` should be thrown whenever a cycle is first encountered.
+ * *errorOnCycle* (optional) - A boolean indicating that a `CycleError` should be thrown whenever a cycle is first encountered. Defaults to `false`.
 
 
 <a name="has-cycle" href="#has-cycle">#</a> <i>graph</i>.<b>hasCycle</b>()
@@ -242,4 +242,3 @@ Performs [Dijkstras Algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algori
     <img src="https://cloud.githubusercontent.com/assets/68416/15298394/a7a0a66a-1bbc-11e6-9636-367bed9165fc.png">
   </a>
 </p>
-

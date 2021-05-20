@@ -126,6 +126,10 @@ The last argument *weight* (optional) specifies the weight of this edge.
 
 Removes the edge from node *u* to node *v*. Returns *graph* to support method chaining. The arguments *u* and *v* are string identifiers for nodes. This function does not remove the nodes *u* and *v*. Does nothing if the edge does not exist.
 
+<a name="has-edge" href="#has-edge">#</a> <i>graph</i>.<b>hasEdge</b>(<i>u</i>, <i>v</i>)
+
+Returns `true` if there exists an edge from node *u* to node *v*. Returns `false` otherwise.
+
 ### Working with Edge Weights
 
 <a name="set-edge-weight" href="#set-edge-weight">#</a> <i>graph</i>.<b>setEdgeWeight</b>(<i>u</i>, <i>v</i>, <i>weight</i>)

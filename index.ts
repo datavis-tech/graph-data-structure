@@ -24,6 +24,7 @@ function Graph(serialized?: Serialized) {
         adjacent,
         addEdge,
         removeEdge,
+        hasEdge,
         setEdgeWeight,
         getEdgeWeight,
         indegree,
@@ -141,6 +142,19 @@ function Graph(serialized?: Serialized) {
             });
         }
         return graph;
+    }
+
+    // Returns true if there is an edge from node u to node v.
+    function hasEdge(u: NodeId, v: NodeId) {
+        let has = false;
+        if (edges[u]) {
+            adjacent(u).forEach(function(_v) {
+                if(_v === v){
+                    has = true;
+                }
+            });
+        }
+        return has;
     }
 
     // Computes the indegree for the given node.

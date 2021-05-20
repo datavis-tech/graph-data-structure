@@ -446,6 +446,15 @@ describe("Graph", function() {
       assert.deepEqual(graph.shortestPath("a", "c"), withWeight(["a", "b", "c"], 2));
     });
   });
+
+  describe("hadEdge", function (){
+    it("Should compute hasEdge.", function (){
+      var graph = Graph().addEdge("a", "b");
+      assert.equal(graph.hasEdge("a", "b"), true);
+      assert.equal(graph.hasEdge("b", "a"), false);
+      assert.equal(graph.hasEdge("c", "a"), false);
+    });
+  })
 });
 
 function contains(arr, item){

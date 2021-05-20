@@ -1,4 +1,26 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var CycleError = /** @class */ (function (_super) {
+    __extends(CycleError, _super);
+    function CycleError(message) {
+        var _this = _super.call(this, message) || this;
+        Object.setPrototypeOf(_this, CycleError.prototype);
+        return _this;
+    }
+    return CycleError;
+}(Error));
 // A graph data structure with depth-first search and topological sort.
 function Graph(serialized) {
     // Returned graph instance
@@ -14,6 +36,7 @@ function Graph(serialized) {
         indegree: indegree,
         outdegree: outdegree,
         depthFirstSearch: depthFirstSearch,
+        hasCycle: hasCycle,
         lowestCommonAncestors: lowestCommonAncestors,
         topologicalSort: topologicalSort,
         shortestPath: shortestPath,
@@ -133,8 +156,9 @@ function Graph(serialized) {
     // include or exclude the source nodes from the result (true by default).
     // If `sourceNodes` is not specified, all nodes in the graph
     // are used as source nodes.
-    function depthFirstSearch(sourceNodes, includeSourceNodes) {
+    function depthFirstSearch(sourceNodes, includeSourceNodes, errorOnCycle) {
         if (includeSourceNodes === void 0) { includeSourceNodes = true; }
+        if (errorOnCycle === void 0) { errorOnCycle = false; }
         if (!sourceNodes) {
             sourceNodes = nodes();
         }
@@ -142,11 +166,17 @@ function Graph(serialized) {
             includeSourceNodes = true;
         }
         var visited = {};
+        var visiting = {};
         var nodeList = [];
         function DFSVisit(node) {
+            if (visiting[node] && errorOnCycle) {
+                throw new CycleError("Cycle found");
+            }
             if (!visited[node]) {
                 visited[node] = true;
+                visiting[node] = true; // temporary flag while visiting
                 adjacent(node).forEach(DFSVisit);
+                visiting[node] = false;
                 nodeList.push(node);
             }
         }
@@ -162,6 +192,22 @@ function Graph(serialized) {
             });
         }
         return nodeList;
+    }
+    // Returns true if the graph has one or more cycles and false otherwise
+    function hasCycle() {
+        try {
+            depthFirstSearch(undefined, true, true);
+            // No error thrown -> no cycles
+            return false;
+        }
+        catch (error) {
+            if (error instanceof CycleError) {
+                return true;
+            }
+            else {
+                throw error;
+            }
+        }
     }
     // Least Common Ancestors
     // Inspired by https://github.com/relaxedws/lca/blob/master/src/LowestCommonAncestor.php code
@@ -210,7 +256,7 @@ function Graph(serialized) {
     // Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 613
     function topologicalSort(sourceNodes, includeSourceNodes) {
         if (includeSourceNodes === void 0) { includeSourceNodes = true; }
-        return depthFirstSearch(sourceNodes, includeSourceNodes).reverse();
+        return depthFirstSearch(sourceNodes, includeSourceNodes, true).reverse();
     }
     // Dijkstra's Shortest Path Algorithm.
     // Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 658

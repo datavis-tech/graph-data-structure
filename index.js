@@ -1,59 +1,41 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var CycleError = /** @class */ (function (_super) {
-    __extends(CycleError, _super);
-    function CycleError(message) {
-        var _this = _super.call(this, message) || this;
-        Object.setPrototypeOf(_this, CycleError.prototype);
-        return _this;
+class CycleError extends Error {
+    constructor(message) {
+        super(message);
+        Object.setPrototypeOf(this, CycleError.prototype);
     }
-    return CycleError;
-}(Error));
+}
 // A graph data structure with depth-first search and topological sort.
 function Graph(serialized) {
     // Returned graph instance
-    var graph = {
-        addNode: addNode,
-        removeNode: removeNode,
-        nodes: nodes,
-        adjacent: adjacent,
-        addEdge: addEdge,
-        removeEdge: removeEdge,
-        hasEdge: hasEdge,
-        setEdgeWeight: setEdgeWeight,
-        getEdgeWeight: getEdgeWeight,
-        indegree: indegree,
-        outdegree: outdegree,
-        depthFirstSearch: depthFirstSearch,
-        hasCycle: hasCycle,
-        lowestCommonAncestors: lowestCommonAncestors,
-        topologicalSort: topologicalSort,
-        shortestPath: shortestPath,
-        serialize: serialize,
-        deserialize: deserialize
+    const graph = {
+        addNode,
+        removeNode,
+        nodes,
+        adjacent,
+        addEdge,
+        removeEdge,
+        hasEdge,
+        setEdgeWeight,
+        getEdgeWeight,
+        indegree,
+        outdegree,
+        depthFirstSearch,
+        hasCycle,
+        lowestCommonAncestors,
+        topologicalSort,
+        shortestPath,
+        serialize,
+        deserialize
     };
     // The adjacency list of the graph.
     // Keys are node ids.
     // Values are adjacent node id arrays.
-    var edges = {};
+    const edges = {};
     // The weights of edges.
     // Keys are string encodings of edges.
     // Values are weights (numbers).
-    var edgeWeights = {};
+    const edgeWeights = {};
     // If a serialized graph was passed into the constructor, deserialize it.
     if (serialized) {
         deserialize(serialized);
@@ -83,7 +65,7 @@ function Graph(serialized) {
     // Gets the list of nodes that have been added to the graph.
     function nodes() {
         // TODO: Better implementation with set data structure
-        var nodeSet = {};
+        const nodeSet = {};
         Object.keys(edges).forEach(function (u) {
             nodeSet[u] = true;
             edges[u].forEach(function (v) {
@@ -110,7 +92,7 @@ function Graph(serialized) {
     // Gets the weight of the given edge.
     // Returns 1 if no weight was previously set.
     function getEdgeWeight(u, v) {
-        var weight = edgeWeights[encodeEdge(u, v)];
+        const weight = edgeWeights[encodeEdge(u, v)];
         return weight === undefined ? 1 : weight;
     }
     // Adds an edge from node u to node v.
@@ -142,7 +124,7 @@ function Graph(serialized) {
     // Computes the indegree for the given node.
     // Not very efficient, costs O(E) where E = number of edges.
     function indegree(node) {
-        var degree = 0;
+        let degree = 0;
         function check(v) {
             if (v === node) {
                 degree++;
@@ -163,18 +145,16 @@ function Graph(serialized) {
     // include or exclude the source nodes from the result (true by default).
     // If `sourceNodes` is not specified, all nodes in the graph
     // are used as source nodes.
-    function depthFirstSearch(sourceNodes, includeSourceNodes, errorOnCycle) {
-        if (includeSourceNodes === void 0) { includeSourceNodes = true; }
-        if (errorOnCycle === void 0) { errorOnCycle = false; }
+    function depthFirstSearch(sourceNodes, includeSourceNodes = true, errorOnCycle = false) {
         if (!sourceNodes) {
             sourceNodes = nodes();
         }
         if (typeof includeSourceNodes !== "boolean") {
             includeSourceNodes = true;
         }
-        var visited = {};
-        var visiting = {};
-        var nodeList = [];
+        const visited = {};
+        const visiting = {};
+        const nodeList = [];
         function DFSVisit(node) {
             if (visiting[node] && errorOnCycle) {
                 throw new CycleError("Cycle found");
@@ -220,8 +200,8 @@ function Graph(serialized) {
     // Inspired by https://github.com/relaxedws/lca/blob/master/src/LowestCommonAncestor.php code
     // but uses depth search instead of breadth. Also uses some optimizations
     function lowestCommonAncestors(node1, node2) {
-        var node1Ancestors = [];
-        var lcas = [];
+        const node1Ancestors = [];
+        const lcas = [];
         function CA1Visit(visited, node) {
             if (!visited[node]) {
                 visited[node] = true;
@@ -230,7 +210,7 @@ function Graph(serialized) {
                     lcas.push(node);
                     return false; // found - shortcut
                 }
-                return adjacent(node).every(function (node) {
+                return adjacent(node).every(node => {
                     return CA1Visit(visited, node);
                 });
             }
@@ -245,7 +225,7 @@ function Graph(serialized) {
                     lcas.push(node);
                 }
                 else if (lcas.length == 0) {
-                    adjacent(node).forEach(function (node) {
+                    adjacent(node).forEach(node => {
                         CA2Visit(visited, node);
                     });
                 }
@@ -261,8 +241,7 @@ function Graph(serialized) {
     // such that for each visited edge (u, v), u comes before v in the list.
     // Amazingly, this comes from just reversing the result from depth first search.
     // Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 613
-    function topologicalSort(sourceNodes, includeSourceNodes) {
-        if (includeSourceNodes === void 0) { includeSourceNodes = true; }
+    function topologicalSort(sourceNodes, includeSourceNodes = true) {
         return depthFirstSearch(sourceNodes, includeSourceNodes, true).reverse();
     }
     // Dijkstra's Shortest Path Algorithm.
@@ -270,11 +249,11 @@ function Graph(serialized) {
     // Variable and function names correspond to names in the book.
     function shortestPath(source, destination) {
         // Upper bounds for shortest path weights from source.
-        var d = {};
+        const d = {};
         // Predecessors.
-        var p = {};
+        const p = {};
         // Poor man's priority queue, keyed on d.
-        var q = {};
+        let q = {};
         function initializeSingleSource() {
             nodes().forEach(function (node) {
                 d[node] = Infinity;
@@ -299,8 +278,8 @@ function Graph(serialized) {
         }
         // Linear search to extract (find and remove) min from q.
         function extractMin() {
-            var min = Infinity;
-            var minNode;
+            let min = Infinity;
+            let minNode;
             Object.keys(q).forEach(function (node) {
                 if (d[node] < min) {
                     min = d[node];
@@ -316,7 +295,7 @@ function Graph(serialized) {
             return minNode;
         }
         function relax(u, v) {
-            var w = getEdgeWeight(u, v);
+            const w = getEdgeWeight(u, v);
             if (d[v] > d[u] + w) {
                 d[v] = d[u] + w;
                 p[v] = u;
@@ -325,26 +304,21 @@ function Graph(serialized) {
         function dijkstra() {
             initializeSingleSource();
             initializePriorityQueue();
-            var _loop_1 = function () {
-                var u = extractMin();
+            while (!priorityQueueEmpty()) {
+                const u = extractMin();
                 if (u === null)
-                    return { value: void 0 };
+                    return;
                 adjacent(u).forEach(function (v) {
                     relax(u, v);
                 });
-            };
-            while (!priorityQueueEmpty()) {
-                var state_1 = _loop_1();
-                if (typeof state_1 === "object")
-                    return state_1.value;
             }
         }
         // Assembles the shortest path by traversing the
         // predecessor subgraph from destination to source.
         function path() {
-            var nodeList = [];
-            var weight = 0;
-            var node = destination;
+            const nodeList = [];
+            let weight = 0;
+            let node = destination;
             while (p[node]) {
                 nodeList.push(node);
                 weight += getEdgeWeight(p[node], node);
@@ -363,14 +337,14 @@ function Graph(serialized) {
     }
     // Serializes the graph.
     function serialize() {
-        var serialized = {
+        const serialized = {
             nodes: nodes().map(function (id) {
                 return { id: id };
             }),
             links: []
         };
         serialized.nodes.forEach(function (node) {
-            var source = node.id;
+            const source = node.id;
             adjacent(source).forEach(function (target) {
                 serialized.links.push({
                     source: source,

@@ -288,7 +288,7 @@ function Graph(serialized?: Serialized) {
     // Amazingly, this comes from just reversing the result from depth first search.
     // Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 613
     function topologicalSort(
-        sourceNodes: NodeId[],
+        sourceNodes?: NodeId[],
         includeSourceNodes: boolean = true
     ) {
         return depthFirstSearch(sourceNodes, includeSourceNodes, true).reverse();

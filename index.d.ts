@@ -25,7 +25,7 @@ declare function Graph(serialized?: Serialized): {
     depthFirstSearch: (sourceNodes?: string[] | undefined, includeSourceNodes?: boolean, errorOnCycle?: boolean) => string[];
     hasCycle: () => boolean;
     lowestCommonAncestors: (node1: NodeId, node2: NodeId) => string[];
-    topologicalSort: (sourceNodes: NodeId[], includeSourceNodes?: boolean) => string[];
+    topologicalSort: (sourceNodes?: string[] | undefined, includeSourceNodes?: boolean) => string[];
     shortestPath: (source: NodeId, destination: NodeId) => string[] & {
         weight?: number | undefined;
     };

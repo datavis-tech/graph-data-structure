@@ -8,7 +8,7 @@
         "noImplicitReturns": true,
         "noImplicitThis": true,
         "strict": true,
-        "target": "ES5",
+        "target": "ES2016",
         "strictFunctionTypes": true,
         "strictNullChecks": true,
         "downlevelIteration": true,

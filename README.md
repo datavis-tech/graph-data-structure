@@ -146,7 +146,7 @@ List all nodes in the graph. Returns an array of node identifier strings.
 
 Gets the adjacent node list for the specified node. The argument *node* is a string identifier for a node. Returns an array of node identifier strings.
 
-The "adjacent node list" is the set of nodes for which there is an incoming edge from the given node. In other words, for all edges (**u** -> **v**) where **u** is the specified node, all values for **v** are in the adjacent node list. 
+The "adjacent node list" is the Array of nodes for which there is an incoming edge from the given node. In other words, for all edges (**u** -> **v**) where **u** is the specified node, all values for **v** are in the adjacent node list. 
 
 <a name="indegree" href="#indegree">#</a> <i>graph</i>.<b>indegree</b>(<i>node</i>)
 

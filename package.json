@@ -21,7 +21,19 @@
     "test": "npm run build -f modern && mocha",
     "prepublishOnly": "npm run format && npm run build",
     "lint": "prettier --write .",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "release": "release-it"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "${version}"
+    },
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": false
+    }
   },
   "repository": {
     "type": "git",
@@ -44,6 +56,7 @@
     "graph-diagrams": "0.5.0",
     "mocha": "10.2.0",
     "prettier": "2.8.1",
+    "release-it": "15.6.0",
     "typescript": "4.9.4"
   },
   "dependencies": {

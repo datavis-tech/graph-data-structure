@@ -19,7 +19,7 @@
   "scripts": {
     "build": "rm -rf dist && microbundle src/index.ts",
     "test": "npm run build -f modern && mocha",
-    "prepublishOnly": "npm run format && npm run build",
+    "prepublishOnly": "npm run build",
     "lint": "prettier --write .",
     "type-check": "tsc",
     "release": "release-it"

@@ -1,3 +1,4 @@
 node_modules
 *.swp
 graph-data-structure.js
+dist

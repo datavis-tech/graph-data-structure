@@ -15,7 +15,6 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.module.js",
   "unpkg": "./dist/index.umd.js",
-  "bin": "./dist/cli.module.js",
   "scripts": {
     "build": "rm -rf dist && microbundle src/index.ts",
     "test": "npm run build -f modern && mocha",

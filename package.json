@@ -10,7 +10,8 @@
   "type": "module",
   "exports": {
     "require": "./dist/index.cjs",
-    "default": "./dist/index.modern.js"
+    "default": "./dist/index.modern.js",
+    "types": "./dist/index.d.ts"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.module.js",

@@ -33,6 +33,7 @@ export function Graph(serialized?: Serialized) {
     lowestCommonAncestors,
     topologicalSort,
     shortestPath,
+    shortestPaths,
     serialize,
     deserialize,
   };
@@ -388,6 +389,30 @@ export function Graph(serialized?: Serialized) {
     dijkstra();
 
     return path();
+  }
+
+  function shortestPaths(source: NodeId, destination: NodeId) {
+    let path = shortestPath(source, destination);
+    const paths = [path],
+        removedEdges = [],
+        weight = path.weight;
+    while (weight) {
+      removeEdge(path[0], path[1]);
+      removeEdge(path[1], path[0]);
+      removedEdges.push([path[0], path[1]]);
+      try {
+        path = shortestPath(source, destination);
+        if (!path.weight || weight < path.weight) break;
+        paths.push(path);
+      } catch (e) {
+        break;
+      }
+    }
+    for (const [u, v] of removedEdges) {
+      addEdge(u, v);
+      addEdge(v, u);
+    }
+    return paths;
   }
 
   // Serializes the graph.

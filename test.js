@@ -426,6 +426,25 @@ describe("Graph", function () {
         withWeight(["a", "b", "c"], 2)
       );
     });
+
+    it("Should compute shortest paths on six edges.", function () {
+      var graph = Graph()
+          .addEdge("a", "b")
+          .addEdge("b", "c")
+          .addEdge("a", "d")
+          .addEdge("d", "c")
+          .addEdge("a", "e")
+          .addEdge("e", "f")
+          .addEdge("f", "c");
+      assert.deepEqual(graph.shortestPaths("a", "c"), [
+        withWeight(["a", "b", "c"], 2),
+        withWeight(["a", "d", "c"], 2),
+      ]);
+      // need to check nodes are still present because we remove them to get all shortest paths
+      const nodes = ["a", "b", "c", "d", "e", "f"];
+      assert.equal(graph.nodes().length, nodes.length);
+      nodes.forEach((node) => assert(contains(graph.nodes(), node)));
+    });
   });
 
   describe("hadEdge", function () {

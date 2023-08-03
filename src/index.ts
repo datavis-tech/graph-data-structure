@@ -394,8 +394,8 @@ export function Graph(serialized?: Serialized) {
   function shortestPaths(source: NodeId, destination: NodeId) {
     let path = shortestPath(source, destination);
     const paths = [path],
-        removedEdges = [],
-        weight = path.weight;
+      removedEdges = [],
+      weight = path.weight;
     while (weight) {
       removeEdge(path[0], path[1]);
       removeEdge(path[1], path[0]);

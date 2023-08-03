@@ -429,13 +429,13 @@ describe("Graph", function () {
 
     it("Should compute shortest paths on six edges.", function () {
       var graph = Graph()
-          .addEdge("a", "b")
-          .addEdge("b", "c")
-          .addEdge("a", "d")
-          .addEdge("d", "c")
-          .addEdge("a", "e")
-          .addEdge("e", "f")
-          .addEdge("f", "c");
+        .addEdge("a", "b")
+        .addEdge("b", "c")
+        .addEdge("a", "d")
+        .addEdge("d", "c")
+        .addEdge("a", "e")
+        .addEdge("e", "f")
+        .addEdge("f", "c");
       assert.deepEqual(graph.shortestPaths("a", "c"), [
         withWeight(["a", "b", "c"], 2),
         withWeight(["a", "d", "c"], 2),

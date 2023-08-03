@@ -378,7 +378,7 @@ describe("Graph", function () {
       var graph = Graph().addEdge("a", "b").addEdge("b", "c");
       assert.deepEqual(
         graph.shortestPath("a", "c"),
-        withWeight(["a", "b", "c"], 2)
+        withWeight(["a", "b", "c"], 2),
       );
     });
 
@@ -396,11 +396,11 @@ describe("Graph", function () {
 
       assert.deepEqual(
         graph.shortestPath("s", "z"),
-        withWeight(["s", "y", "z"], 5 + 2)
+        withWeight(["s", "y", "z"], 5 + 2),
       );
       assert.deepEqual(
         graph.shortestPath("s", "x"),
-        withWeight(["s", "y", "t", "x"], 5 + 3 + 1)
+        withWeight(["s", "y", "t", "x"], 5 + 3 + 1),
       );
     });
 
@@ -423,7 +423,7 @@ describe("Graph", function () {
       var graph = Graph().addEdge("a", "b").addEdge("b", "c").addEdge("d", "e");
       assert.deepEqual(
         graph.shortestPath("a", "c"),
-        withWeight(["a", "b", "c"], 2)
+        withWeight(["a", "b", "c"], 2),
       );
     });
 

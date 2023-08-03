@@ -436,17 +436,21 @@ describe("Graph", function () {
         .addEdge("a", "e")
         .addEdge("e", "f")
         .addEdge("f", "c");
+      const serializedGraph = graph.serialize();
       assert.deepEqual(graph.shortestPaths("a", "c"), [
         withWeight(["a", "b", "c"], 2),
         withWeight(["a", "d", "c"], 2),
       ]);
-      // need to check nodes are still present because we remove them to get all shortest paths
-      const nodes = ["a", "b", "c", "d", "e", "f"];
-      assert.equal(graph.nodes().length, nodes.length);
-      nodes.forEach((node) => assert(contains(graph.nodes(), node)));
-      // check edges are still there and no new have been added
-      assert.deepEqual(graph.hasEdge("a", "b"), true);
-      assert.deepEqual(graph.hasEdge("b", "a"), false);
+      // check graph has not changed
+      const postSerializedGraph = graph.serialize();
+      assert.equal(
+        postSerializedGraph.links.length,
+        serializedGraph.links.length,
+      );
+      assert.equal(
+        postSerializedGraph.nodes.length,
+        serializedGraph.nodes.length,
+      );
     });
   });
 

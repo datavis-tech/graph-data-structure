@@ -427,7 +427,7 @@ describe("Graph", function () {
       );
     });
 
-    it("Should compute shortest paths on six edges.", function () {
+    it("Should compute shortest paths.", function () {
       var graph = Graph()
         .addEdge("a", "b")
         .addEdge("b", "c")
@@ -444,6 +444,9 @@ describe("Graph", function () {
       const nodes = ["a", "b", "c", "d", "e", "f"];
       assert.equal(graph.nodes().length, nodes.length);
       nodes.forEach((node) => assert(contains(graph.nodes(), node)));
+      // check edges are still there and no new have been added
+      assert.deepEqual(graph.hasEdge("a", "b"), true);
+      assert.deepEqual(graph.hasEdge("b", "a"), false);
     });
   });
 
@@ -458,11 +461,7 @@ describe("Graph", function () {
 });
 
 function contains(arr, item) {
-  return (
-    arr.filter(function (d) {
-      return d === item;
-    }).length > 0
-  );
+  return arr.includes(item);
 }
 
 function comesBefore(arr, a, b) {

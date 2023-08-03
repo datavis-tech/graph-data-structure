@@ -397,9 +397,14 @@ export function Graph(serialized?: Serialized) {
       removedEdges = [],
       weight = path.weight;
     while (weight) {
-      removeEdge(path[0], path[1]);
-      removeEdge(path[1], path[0]);
-      removedEdges.push([path[0], path[1]]);
+      if (hasEdge(path[0], path[1])) {
+        removeEdge(path[0], path[1]);
+        removedEdges.push([path[0], path[1]]);
+      }
+      if (hasEdge(path[1], path[0])) {
+        removeEdge(path[1], path[0]);
+        removedEdges.push([path[1], path[0]]);
+      }
       try {
         path = shortestPath(source, destination);
         if (!path.weight || weight < path.weight) break;
@@ -408,10 +413,7 @@ export function Graph(serialized?: Serialized) {
         break;
       }
     }
-    for (const [u, v] of removedEdges) {
-      addEdge(u, v);
-      addEdge(v, u);
-    }
+    for (const [u, v] of removedEdges) addEdge(u, v);
     return paths;
   }
 

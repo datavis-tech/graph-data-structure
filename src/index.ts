@@ -394,18 +394,22 @@ export function Graph(serialized?: Serialized) {
   function shortestPaths(source: NodeId, destination: NodeId) {
     let path = shortestPath(source, destination);
     const paths = [path],
-      removedEdges: any = [],
+      removedEdges: { u: NodeId; v: NodeId; weight: EdgeWeight }[] = [],
       weight = path.weight;
     while (weight) {
-      [
-        [path[0], path[1]],
-        [path[1], path[0]],
-      ].forEach(([u, v]) => {
-        if (hasEdge(u, v)) {
-          removedEdges.push({ u, v, weight: getEdgeWeight(u, v) });
-          removeEdge(u, v);
-        }
-      });
+      const u = path[0];
+      const v = path[1];
+
+      if (hasEdge(u, v)) {
+        removedEdges.push({ u, v, weight: getEdgeWeight(u, v) });
+        removeEdge(u, v);
+      }
+
+      if (hasEdge(v, u)) {
+        removedEdges.push({ u: v, v: u, weight: getEdgeWeight(v, u) });
+        removeEdge(v, u);
+      }
+
       try {
         path = shortestPath(source, destination);
         if (!path.weight || weight < path.weight) break;

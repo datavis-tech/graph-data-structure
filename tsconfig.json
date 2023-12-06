@@ -3,7 +3,7 @@
     "allowJs": false,
     "declaration": true,
     "esModuleInterop": true,
-    "module": "ESNext",
+    "module": "NodeNext",
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -13,7 +13,8 @@
     "strictNullChecks": true,
     "downlevelIteration": true,
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    "moduleResolution": "nodenext"
   },
   "file": ["index.ts"],
   "exclude": ["node_modules", "*.d.ts"]

@@ -378,7 +378,7 @@ describe("Graph", function () {
       var graph = Graph().addEdge("a", "b").addEdge("b", "c");
       assert.deepEqual(
         graph.shortestPath("a", "c"),
-        withWeight(["a", "b", "c"], 2)
+        withWeight(["a", "b", "c"], 2),
       );
     });
 
@@ -396,11 +396,11 @@ describe("Graph", function () {
 
       assert.deepEqual(
         graph.shortestPath("s", "z"),
-        withWeight(["s", "y", "z"], 5 + 2)
+        withWeight(["s", "y", "z"], 5 + 2),
       );
       assert.deepEqual(
         graph.shortestPath("s", "x"),
-        withWeight(["s", "y", "t", "x"], 5 + 3 + 1)
+        withWeight(["s", "y", "t", "x"], 5 + 3 + 1),
       );
     });
 
@@ -423,11 +423,11 @@ describe("Graph", function () {
       var graph = Graph().addEdge("a", "b").addEdge("b", "c").addEdge("d", "e");
       assert.deepEqual(
         graph.shortestPath("a", "c"),
-        withWeight(["a", "b", "c"], 2)
+        withWeight(["a", "b", "c"], 2),
       );
     });
 
-    it("Should compute shortest paths on six edges.", function () {
+    it("Should compute shortest paths.", function () {
       var graph = Graph()
         .addEdge("a", "b")
         .addEdge("b", "c")
@@ -436,14 +436,21 @@ describe("Graph", function () {
         .addEdge("a", "e")
         .addEdge("e", "f")
         .addEdge("f", "c");
+      const serializedGraph = graph.serialize();
       assert.deepEqual(graph.shortestPaths("a", "c"), [
         withWeight(["a", "b", "c"], 2),
         withWeight(["a", "d", "c"], 2),
       ]);
-      // need to check nodes are still present because we remove them to get all shortest paths
-      const nodes = ["a", "b", "c", "d", "e", "f"];
-      assert.equal(graph.nodes().length, nodes.length);
-      nodes.forEach((node) => assert(contains(graph.nodes(), node)));
+      // check graph has not changed
+      const postSerializedGraph = graph.serialize();
+      assert.equal(
+        postSerializedGraph.links.length,
+        serializedGraph.links.length,
+      );
+      assert.equal(
+        postSerializedGraph.nodes.length,
+        serializedGraph.nodes.length,
+      );
     });
   });
 
@@ -458,11 +465,7 @@ describe("Graph", function () {
 });
 
 function contains(arr, item) {
-  return (
-    arr.filter(function (d) {
-      return d === item;
-    }).length > 0
-  );
+  return arr.includes(item);
 }
 
 function comesBefore(arr, a, b) {

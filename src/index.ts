@@ -178,7 +178,7 @@ export function Graph(serialized?: Serialized) {
   function depthFirstSearch(
     sourceNodes?: NodeId[],
     includeSourceNodes: boolean = true,
-    errorOnCycle: boolean = false
+    errorOnCycle: boolean = false,
   ) {
     if (!sourceNodes) {
       sourceNodes = nodes();
@@ -284,7 +284,7 @@ export function Graph(serialized?: Serialized) {
   // Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 613
   function topologicalSort(
     sourceNodes?: NodeId[],
-    includeSourceNodes: boolean = true
+    includeSourceNodes: boolean = true,
   ) {
     return depthFirstSearch(sourceNodes, includeSourceNodes, true).reverse();
   }
@@ -394,12 +394,22 @@ export function Graph(serialized?: Serialized) {
   function shortestPaths(source: NodeId, destination: NodeId) {
     let path = shortestPath(source, destination);
     const paths = [path],
-      removedEdges = [],
+      removedEdges: { u: NodeId; v: NodeId; weight: EdgeWeight }[] = [],
       weight = path.weight;
     while (weight) {
-      removeEdge(path[0], path[1]);
-      removeEdge(path[1], path[0]);
-      removedEdges.push([path[0], path[1]]);
+      const u = path[0];
+      const v = path[1];
+
+      if (hasEdge(u, v)) {
+        removedEdges.push({ u, v, weight: getEdgeWeight(u, v) });
+        removeEdge(u, v);
+      }
+
+      if (hasEdge(v, u)) {
+        removedEdges.push({ u: v, v: u, weight: getEdgeWeight(v, u) });
+        removeEdge(v, u);
+      }
+
       try {
         path = shortestPath(source, destination);
         if (!path.weight || weight < path.weight) break;
@@ -408,10 +418,7 @@ export function Graph(serialized?: Serialized) {
         break;
       }
     }
-    for (const [u, v] of removedEdges) {
-      addEdge(u, v);
-      addEdge(v, u);
-    }
+    for (const { u, v, weight } of removedEdges) addEdge(u, v, weight);
     return paths;
   }
 

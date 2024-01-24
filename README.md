@@ -23,7 +23,7 @@ This library is distributed only via [NPM](npmjs.com). Install by running
 Require it in your code like this.
 
 ```javascript
-var Graph = require("graph-data-structure");
+const { Graph } = require("graph-data-structure");
 ```
 
 ## Examples

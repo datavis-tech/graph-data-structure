@@ -2,7 +2,7 @@ import { CycleError } from "./CycleError.js";
 import { invariant } from "./invariant.js";
 import { Edge, EdgeWeight, Serialized, SerializedInput } from "./types.js";
 
-export class Graph<Node, LinkProps = unknown, Link extends Edge<Node, LinkProps> = Edge<Node, LinkProps>> {
+export class Graph<Node = string, LinkProps = unknown, Link extends Edge<Node, LinkProps> = Edge<Node, LinkProps>> {
 
   /**
    * The adjacency list of the graph.

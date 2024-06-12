@@ -2,7 +2,7 @@ import { CycleError } from "./CycleError.js";
 import { invariant } from "./invariant.js";
 import { Edge, EdgeWeight, Serialized, SerializedInput } from "./types.js";
 
-export class Graph<Node, Link extends Edge<Node, Props>, Props> {
+export class Graph<Node, LinkProps = unknown, Link extends Edge<Node, LinkProps> = Edge<Node, LinkProps>> {
 
   /**
    * The adjacency list of the graph.
@@ -20,20 +20,20 @@ export class Graph<Node, Link extends Edge<Node, Props>, Props> {
    * Arbitrary properties of edges.
    * Map<SourceNode, Map<TargetNode, EdgeProperties>>
    */
-  edgeProperties: Map<Node, Map<Node, Props>> = new Map();
+  edgeProperties: Map<Node, Map<Node, LinkProps>> = new Map();
 
-  constructor(serialized?: SerializedInput<Node, Link>) {
+  constructor(serialized?: SerializedInput<Node, LinkProps, Link>) {
     if (serialized) {
       this.deserialize(serialized);
     }
   }
 
-  public static deserialize<Node, Link extends Edge<Node, Props>, Props>(data: SerializedInput<Node, Link>): Graph<Node, Link, Props> {
-    const g = new Graph<Node, Link, Props>();
+  public static deserialize<Node, Link extends Edge<Node, Props>, Props>(data: SerializedInput<Node, Props, Link>): Graph<Node, Props, Link> {
+    const g = new Graph<Node, Props, Link>();
     return g.deserialize(data);
   };
 
-  public deserialize(data: SerializedInput<Node, Link>): Graph<Node, Link, Props> {
+  public deserialize(data: SerializedInput<Node, LinkProps, Link>): this {
     data.nodes.forEach((node) => {
       this.addNode(node);
     });
@@ -106,7 +106,6 @@ export class Graph<Node, Link extends Edge<Node, Props>, Props> {
     return this.edges.get(node);
   }
 
-
   /**
    * Sets the weight of the given edge.
    */
@@ -123,7 +122,6 @@ export class Graph<Node, Link extends Edge<Node, Props>, Props> {
     return this;
   }
 
-
   /**
    * Gets the weight of the given edge.
    * Returns 1 if no weight was previously set.
@@ -136,7 +134,7 @@ export class Graph<Node, Link extends Edge<Node, Props>, Props> {
   /**
    * Set the properties of the given edge.
    */
-  setEdgeProperties(source: Node, target: Node, props: Props): this {
+  setEdgeProperties(source: Node, target: Node, props: LinkProps): this {
     if (!this.edgeProperties.has(source)) {
       this.edgeProperties.set(source, new Map());
     }
@@ -152,11 +150,8 @@ export class Graph<Node, Link extends Edge<Node, Props>, Props> {
   /**
    * Get the properties of the given edge or undefined if none are set.
    */
-  getEdgeProperties(source: Node, target: Node): Props {
-    const propsHolder = this.edgeProperties.get(source);
-    invariant(propsHolder);
-
-    return propsHolder.get(target) as Props;
+  getEdgeProperties(source: Node, target: Node): LinkProps {
+    return this.edgeProperties.get(source)?.get(target) as LinkProps;
   }
 
   /**
@@ -460,8 +455,8 @@ export class Graph<Node, Link extends Edge<Node, Props>, Props> {
     const distanceSource = d.get(source);
     const distanceTarget = d.get(target);
 
-    invariant(distanceSource);
-    invariant(distanceTarget);
+    invariant(distanceSource, 'Missing source distance');
+    invariant(distanceTarget, 'Missing target distance');
 
     if (distanceTarget > (distanceSource + edgeWeight)) {
       d.set(target, distanceSource + edgeWeight);
@@ -503,8 +498,8 @@ export class Graph<Node, Link extends Edge<Node, Props>, Props> {
   /**
    * Serializes the graph.
    */
-  serialize(): Serialized<Node, Link> {
-    const serialized: Serialized<Node, Link> = {
+  serialize(): Serialized<Node, LinkProps, Link> {
+    const serialized: Serialized<Node, LinkProps, Link> = {
       nodes: this.nodes(),
       links: [],
     };
@@ -518,6 +513,7 @@ export class Graph<Node, Link extends Edge<Node, Props>, Props> {
           source: source,
           target: target,
           weight: edgeWeight,
+          props: this.getEdgeProperties(source, target),
         } as Link);
       });
     });

@@ -98,9 +98,7 @@ export class Graph<Node = string, LinkProps = unknown, Link extends Edge<Node, L
   }
 
   /**
-   * Gets the adjacent node list for the given node.
-   * @returns an empty set for unknown nodes.
-   * @param node
+   * Gets the adjacent node set for the given node.
    */
   adjacent(node: Node): Set<Node> | undefined {
     return this.edges.get(node);

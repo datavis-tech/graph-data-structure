@@ -21,7 +21,7 @@
   "unpkg": "./dist/index.umd.js",
   "scripts": {
     "build": "rm -rf dist && microbundle src/index.ts",
-    "test": "npm run build -f modern && vitest --run",
+    "test": "vitest --run",
     "prepublishOnly": "npm run build",
     "lint": "prettier --write .",
     "type-check": "tsc",

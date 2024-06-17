@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import { depthFirstSearch, Graph } from './src/index.js';
-import { indegree } from './src/utils/indegree.js';
-import { outdegree } from './src/utils/outdegree.js';
+import { depthFirstSearch, Graph } from './index.js';
+import { indegree } from './utils/indegree.js';
+import { outdegree } from './utils/outdegree.js';
 
 describe('Graph', function () {
   describe('Data structure', function () {

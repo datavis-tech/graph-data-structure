@@ -1,5 +1,5 @@
 import { describe, expectTypeOf, it } from 'vitest';
-import { Graph } from './src/index.js';
+import { Graph } from './index.js';
 
 /**
  * Those tests are not run. Their sole purpose is to test the types.

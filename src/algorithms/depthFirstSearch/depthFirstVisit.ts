@@ -1,6 +1,6 @@
 import { CycleError } from '../../CycleError.js';
 import { Graph } from '../../Graph.js';
-import { Edge, NoInfer } from '../../types.js';
+import { NoInfer } from '../../types.js';
 import { DepthFirstSearchOptions } from './types.js';
 
 export function depthFirstVisit<Node, LinkProps>(
@@ -9,9 +9,9 @@ export function depthFirstVisit<Node, LinkProps>(
   visited: Set<NoInfer<Node>>,
   visiting: Set<NoInfer<Node>>,
   node: NoInfer<Node>,
-  opts: Pick<DepthFirstSearchOptions<Node, LinkProps>, 'errorOnCycle' | 'visit'>,
+  opts: Pick<DepthFirstSearchOptions<Node, LinkProps>, 'errorOnCycle' | 'shouldFollow'>,
 ) {
-  const { errorOnCycle = false, visit } = opts;
+  const { errorOnCycle = false, shouldFollow } = opts;
 
   if (visiting.has(node) && errorOnCycle) {
     throw new CycleError('Cycle found');
@@ -22,9 +22,8 @@ export function depthFirstVisit<Node, LinkProps>(
     visiting.add(node);
 
     graph.adjacent(node)?.forEach((n) => {
-      // TODO
-      // const shouldVisit = visit === undefined || (visit && visit(node, n, graph));
-      // if (!shouldVisit) return;
+      const follow = shouldFollow === undefined || shouldFollow(node, n, graph);
+      if (!follow) return;
 
       depthFirstVisit(graph, nodeList, visited, visiting, n, opts);
     });

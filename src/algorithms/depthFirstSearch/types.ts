@@ -27,7 +27,7 @@ export type DepthFirstSearchOptions<Node, LinkProps> = {
    * @param graph the graph instance being explored
    * @returns boolean
    */
-  visit?: (
+  shouldFollow?: (
     source: NoInfer<Node>,
     target: NoInfer<Node>,
     graph: Graph<Node, LinkProps>,

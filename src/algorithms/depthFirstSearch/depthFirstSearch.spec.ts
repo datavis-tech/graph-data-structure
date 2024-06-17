@@ -3,23 +3,21 @@ import { Graph } from '../../Graph.js';
 import { depthFirstSearch } from './index.js';
 
 describe('depthFirstSearch', () => {
-  it.todo(
-    'Should return the nodes connected to the source node with the correct type of edge.',
-    function () {
-      const graph = new Graph<string, { type: 'follow' | 'stop' }>();
+  it('Should return the nodes connected to the source node with the correct type of edge.', function () {
+    const graph = new Graph<string, { type: 'foo' | 'bar' }>();
 
-      // Shoes depend on socks.
-      // Socks need to be put on before shoes.
-      graph.addEdge('a', 'b', undefined, { type: 'follow' });
+    graph.addEdge('a', 'b', undefined, { type: 'foo' });
+    graph.addEdge('b', 'c', undefined, { type: 'bar' });
+    graph.addEdge('b', 'd', undefined, { type: 'bar' });
+    graph.addEdge('b', 'e', undefined, { type: 'foo' });
 
-      const nodes = depthFirstSearch(graph, {
-        visit: (source, target, graph) =>
-          graph.getEdgeProperties(source, target).type === 'follow',
-      });
+    const nodes = depthFirstSearch(graph, {
+      shouldFollow: (source, target, graph) =>
+        graph.getEdgeProperties(source, target).type === 'foo',
+    });
 
-      // expect(sorted.length).toEqual(8);
-      expect(nodes).toContain('socks');
-      expect(nodes).toContain('shoes');
-    },
-  );
+    expect(nodes).toContain('a');
+    expect(nodes).toContain('b');
+    expect(nodes).toContain('e');
+  });
 });

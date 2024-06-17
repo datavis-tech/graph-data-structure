@@ -11,7 +11,7 @@ export function cloneGraph<Node, LinkProps>(
 
   for (let [source, targets] of graph.edges.entries()) {
     targets.forEach((target) => {
-      clone.addEdge(source, target);
+      clone.addEdge.apply(clone, [source, target] as never);
 
       const edgeWeight = graph.edgeWeights.get(source)?.get(target);
 

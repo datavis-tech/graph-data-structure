@@ -11,7 +11,7 @@ export function deserializeGraph<Node, LinkProps>(
   });
 
   data.links.forEach((link) => {
-    g.addEdge(link.source, link.target, link.weight);
+    g.addEdge.apply(g, [link.source, link.target, link.weight, link.props] as never);
   });
 
   return g;

@@ -2,7 +2,7 @@ import { invariant } from './invariant.js';
 import { EdgeWeight, SerializedInput } from './types.js';
 import { deserializeGraph } from './utils/deserializeGraph.js';
 
-export class Graph<Node = string, LinkProps = unknown> {
+export class Graph<Node = string, LinkProps = never> {
   /**
    * The adjacency list of the graph.
    */
@@ -135,7 +135,14 @@ export class Graph<Node = string, LinkProps = unknown> {
    * Adds an edge from the `source` node to `target` node.
    * This method will create the nodes if they were not already added.
    */
-  addEdge(source: Node, target: Node, weight?: EdgeWeight, linkProps?: LinkProps): this {
+  addEdge(
+    source: Node,
+    target: Node,
+    ...opts: [LinkProps] extends [never]
+      ? [weight?: EdgeWeight]
+      : [weight: EdgeWeight | undefined, linkProps: LinkProps]
+  ): this {
+    const [weight, linkProps] = opts;
     this.addNode(source);
     this.addNode(target);
     const adjacentNodes = this.adjacent(source);

@@ -8,19 +8,30 @@
     "url": "https://github.com/datavis-tech/graph-data-structure/issues"
   },
   "homepage": "https://github.com/datavis-tech/graph-data-structure#readme",
-  "source": "src/index.ts",
-  "types": "dist/index.d.ts",
   "type": "module",
-  "exports": {
-    "require": "./dist/index.cjs",
-    "types": "./dist/index.d.ts",
-    "default": "./dist/index.modern.js"
-  },
+  "source": "src/index.ts",
   "main": "./dist/index.cjs",
-  "module": "./dist/index.module.js",
+  "module": "./dist/index.mjs",
+  "types": "dist/index.d.ts",
   "unpkg": "./dist/index.umd.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "umd": {
+        "types": "./dist/index.umd.d.ts",
+        "default": "./dist/index.umd.js"
+      }
+    }
+  },
   "scripts": {
-    "build": "rm -rf dist && microbundle src/index.ts",
+    "build": "rm -rf dist && rollup -c",
     "test": "vitest --run",
     "prepublishOnly": "npm run build",
     "lint": "prettier --write .",
@@ -28,10 +39,14 @@
     "release": "release-it"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "15.2.3",
+    "@rollup/plugin-terser": "0.4.4",
     "@types/node": "20.10.3",
     "microbundle": "0.15.1",
     "prettier": "3.1.0",
     "release-it": "17.0.0",
+    "rollup": "4.18.0",
+    "rollup-plugin-ts": "3.4.5",
     "typescript": "5.3.2",
     "vitest": "1.6.0"
   },

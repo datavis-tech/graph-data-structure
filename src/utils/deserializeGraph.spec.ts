@@ -1,4 +1,4 @@
-import { describe, it } from 'vitest';
+import { describe, expectTypeOf, it } from 'vitest';
 import { Graph } from '../Graph.js';
 import { checkSerialized } from '../test-utils.js';
 import { deserializeGraph } from './deserializeGraph.js';
@@ -18,5 +18,17 @@ describe('serializeGraph', () => {
     const serialized = serializeGraph(g);
     const graph = new Graph(serialized);
     checkSerialized(serializeGraph(graph));
+  });
+
+  it.skip('should return a graph with type inferred from the input', function () {
+    const nodeA = { title: 'a' };
+    const nodeB = { title: 'b' };
+    const serialized = {
+      nodes: [nodeA, nodeB],
+      links: [{ source: nodeA, target: nodeB, props: { type: 'foo' } }],
+    };
+
+    const graph = deserializeGraph(serialized);
+    expectTypeOf(graph).toEqualTypeOf<Graph<{ title: string }, { type: string }>>();
   });
 });

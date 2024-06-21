@@ -32,4 +32,13 @@ describe('getNode', () => {
 
     expect(() => getNode(graph, (n) => n.type === 'foo')).toThrowError();
   });
+
+  it.skip('should not trigger a type error when the link props are set', ({ expect }) => {
+    const graph = new Graph<Node, { foo: string }>();
+    const node1 = { id: '1', type: 'foo' };
+
+    graph.addNode(node1);
+
+    expect(getNode(graph, (n) => n.id === '1')).toEqual(node1);
+  });
 });

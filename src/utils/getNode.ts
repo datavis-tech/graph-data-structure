@@ -5,7 +5,7 @@ import { NoInfer } from '../types.js';
  * Return the node matching your function. Throws if none is found or if more than one node if found.
  */
 export function getNode<Node>(
-  graph: Graph<Node>,
+  graph: Graph<Node, any>,
   fn: (node: NoInfer<Node>) => boolean,
 ): Node {
   const foundNodes: Node[] = [];

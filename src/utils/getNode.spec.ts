@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it } from 'vitest';
 import { Graph } from '../Graph.js';
 import { getNode } from './getNode.js';
 

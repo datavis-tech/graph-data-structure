@@ -8,7 +8,7 @@ import { Graph } from '../../Graph.js';
 import { NoInfer } from '../../types.js';
 import { depthFirstSearch } from '../depthFirstSearch/index.js';
 
-export type TopologicalSortOptions<Node> = {
+export type TopologicalSortOptions<Node, LinkProps> = {
   /**
    * Run the first on those nodes.
    * @default all the nodes of the graph.
@@ -20,11 +20,24 @@ export type TopologicalSortOptions<Node> = {
    * @default true
    */
   includeSourceNodes?: boolean;
+
+  /**
+   * A function that is executed to determine if the branch should be visited or not.
+   * @param source the current node
+   * @param target the next node to explore
+   * @param graph the graph instance being explored
+   * @returns boolean
+   */
+  shouldFollow?: (
+    source: NoInfer<Node>,
+    target: NoInfer<Node>,
+    graph: Graph<Node, LinkProps>,
+  ) => boolean;
 };
 
-export function topologicalSort<Node>(
-  graph: Graph<Node>,
-  opts: TopologicalSortOptions<NoInfer<Node>> = {},
+export function topologicalSort<Node, LinkProps>(
+  graph: Graph<Node, LinkProps>,
+  opts: TopologicalSortOptions<NoInfer<Node>, NoInfer<LinkProps>> = {},
 ) {
   return depthFirstSearch(graph, {
     ...opts,

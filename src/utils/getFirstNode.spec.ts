@@ -1,7 +1,6 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it } from 'vitest';
 import { Graph } from '../Graph.js';
 import { getFirstNode } from './getFirstNode.js';
-import { getNode } from './getNode.js';
 
 describe('getFirstNode', () => {
   type Node = { id: string; type: string };

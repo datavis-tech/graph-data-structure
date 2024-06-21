@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { depthFirstSearch, Graph } from './index.js';
+import { Graph } from './index.js';
 import { indegree } from './utils/indegree.js';
 import { outdegree } from './utils/outdegree.js';
 

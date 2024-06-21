@@ -72,14 +72,23 @@ describe('topologicalSort', () => {
   });
 
   it('Should exclude source nodes with a cycle.', function () {
-    const graph = new Graph().addEdge('a', 'b').addEdge('b', 'c').addEdge('c', 'a');
+    const graph = new Graph<string, { type: string }>();
+    graph
+      .addEdge('a', 'b', undefined, { type: 'foo' })
+      .addEdge('b', 'c', undefined, { type: 'foo' })
+      .addEdge('c', 'a', undefined, { type: 'bar' });
+
     const sorted = topologicalSort(graph, {
       sourceNodes: ['a'],
-      includeSourceNodes: false,
+      includeSourceNodes: true,
+      shouldFollow: (source, target) =>
+        graph.getEdgeProperties(source, target).type === 'foo',
     });
-    expect(sorted.length).toEqual(2);
-    expect(sorted[0]).toEqual('b');
-    expect(sorted[1]).toEqual('c');
+
+    expect(sorted.length).toEqual(3);
+    expect(sorted[0]).toEqual('a');
+    expect(sorted[1]).toEqual('b');
+    expect(sorted[2]).toEqual('c');
   });
 
   it('Should exclude source nodes with multiple cycles.', function () {

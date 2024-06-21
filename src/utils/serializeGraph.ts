@@ -27,7 +27,7 @@ export function serializeGraph<Node, LinkProps, IncludeDefaultWeight extends boo
   const { includeDefaultWeight = false } = opts;
 
   const serialized: Serialized<Node, LinkProps> = {
-    nodes: graph.nodes(),
+    nodes: Array.from(graph.nodes),
     links: [],
   };
 

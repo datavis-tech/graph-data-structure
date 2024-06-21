@@ -11,7 +11,7 @@ describe('Graph', function () {
       graph.addNode('a');
       graph.addNode('b');
 
-      const nodes = graph.nodes();
+      const nodes = graph.nodes;
 
       expect(nodes).toHaveLength(2);
       expect(nodes).toContain('a');
@@ -20,7 +20,7 @@ describe('Graph', function () {
 
     it('Should chain addNode.', function () {
       const graph = new Graph().addNode('a').addNode('b');
-      const nodes = graph.nodes();
+      const nodes = graph.nodes;
 
       expect(nodes).toHaveLength(2);
       expect(nodes).toContain('a');
@@ -34,14 +34,14 @@ describe('Graph', function () {
       graph.removeNode('a');
       graph.removeNode('b');
 
-      const nodes = graph.nodes();
+      const nodes = graph.nodes;
       expect(nodes).toHaveLength(0);
     });
 
     it('Should chain removeNode.', function () {
       const graph = new Graph().addNode('a').addNode('b').removeNode('a').removeNode('b');
 
-      const nodes = graph.nodes();
+      const nodes = graph.nodes;
       expect(nodes).toHaveLength(0);
     });
 
@@ -64,7 +64,7 @@ describe('Graph', function () {
       expect(adjacentNodes).toHaveLength(1);
       expect(adjacentNodes?.has('b')).toBe(true);
 
-      const nodes = graph.nodes();
+      const nodes = graph.nodes;
       expect(nodes).toHaveLength(2);
       expect(nodes).toContain('a');
       expect(nodes).toContain('b');
@@ -99,7 +99,7 @@ describe('Graph', function () {
       graph.addEdge('a', 'b');
       graph.removeEdge('a', 'b');
 
-      const nodes = graph.nodes();
+      const nodes = graph.nodes;
       expect(nodes).toHaveLength(2);
       expect(nodes).toContain('a');
       expect(nodes).toContain('b');
@@ -123,7 +123,7 @@ describe('Graph', function () {
     it('Should return undefined for unknown nodes.', function () {
       const graph = new Graph();
       expect(graph.adjacent('a')).toEqual(undefined);
-      expect(graph.nodes()).toHaveLength(0);
+      expect(graph.nodes).toHaveLength(0);
     });
 
     it('Should do nothing if removing an edge that does not exist.', function () {

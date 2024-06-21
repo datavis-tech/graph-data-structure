@@ -7,9 +7,9 @@ import { Graph } from './index.js';
 describe('graph types', () => {
   it('should return the given node type', () => {
     const g = new Graph<string, { type: 'foo' | 'bar' }>();
-    const props = g.nodes();
+    const props = g.nodes;
 
-    expectTypeOf(props).toEqualTypeOf<string[]>();
+    expectTypeOf(props).toEqualTypeOf<Set<string>>();
   });
 
   it('should return the given edge properties type', () => {

@@ -10,7 +10,7 @@ export function dijkstra<Node>(
   source: NoInfer<Node>,
   destination: NoInfer<Node>,
 ) {
-  const nodes = graph.nodes();
+  const nodes = graph.nodes;
   const { d, p, q } = tracks;
 
   initializeSingleSource(nodes, tracks, source, destination);
@@ -28,14 +28,14 @@ export function dijkstra<Node>(
 }
 
 function initializeSingleSource<Node>(
-  nodes: Node[],
+  nodes: Set<Node>,
   { d }: TraversingTracks<NoInfer<Node>>,
   source: NoInfer<Node>,
   destination: NoInfer<Node>,
 ) {
-  for (const node of nodes) {
+  nodes.forEach((node) => {
     d.set(node, Infinity);
-  }
+  });
 
   if (d.get(source) !== Infinity) {
     throw new Error('Source node is not in the graph');
@@ -49,10 +49,10 @@ function initializeSingleSource<Node>(
 }
 
 function initializePriorityQueue<Node>(
-  nodes: Node[],
+  nodes: Set<Node>,
   { q }: TraversingTracks<NoInfer<Node>>,
 ) {
-  for (let i = 0; i < nodes.length; i++) {
-    q.add(nodes[i]);
-  }
+  nodes.forEach((node) => {
+    q.add(node);
+  });
 }

@@ -12,7 +12,7 @@ export function depthFirstSearch<Node, LinkProps>(
   graph: Graph<Node, LinkProps>,
   opts: DepthFirstSearchOptions<NoInfer<Node>, NoInfer<LinkProps>> = {},
 ): Node[] {
-  const { sourceNodes = graph.nodes(), includeSourceNodes = true } = opts;
+  const { sourceNodes = Array.from(graph.nodes), includeSourceNodes = true } = opts;
 
   const visited: Set<Node> = new Set();
   const visiting: Set<Node> = new Set();

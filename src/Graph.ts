@@ -4,6 +4,11 @@ import { deserializeGraph } from './utils/deserializeGraph.js';
 
 export class Graph<Node = string, LinkProps = never> {
   /**
+   * Contains all the nodes added to the graph.
+   */
+  nodes: Set<Node> = new Set();
+
+  /**
    * The adjacency list of the graph.
    */
   edges: Map<Node, Set<Node>> = new Map();
@@ -33,6 +38,10 @@ export class Graph<Node = string, LinkProps = never> {
    * If node was not already added, this function sets up an empty adjacency list.
    */
   addNode(node: Node): this {
+    if (!this.nodes.has(node)) {
+      this.nodes.add(node);
+    }
+
     if (!this.edges.has(node)) {
       this.edges.set(node, new Set());
     }
@@ -47,6 +56,7 @@ export class Graph<Node = string, LinkProps = never> {
   removeNode(node: Node): this {
     // Remove outgoing edges (and signal that the node no longer exists).
     this.edges.delete(node);
+    this.nodes.delete(node);
 
     // Remove ingoing edges
     for (const adjacentNodes of this.edges.values()) {
@@ -54,28 +64,6 @@ export class Graph<Node = string, LinkProps = never> {
     }
 
     return this;
-  }
-
-  /**
-   * Gets the list of nodes that have been added to the graph.
-   */
-  nodes(): Node[] {
-    const nodes: Set<Node> = new Set();
-
-    for (const edgeKey of this.edges.keys()) {
-      nodes.add(edgeKey);
-
-      const adjacentNodes = this.edges.get(edgeKey)?.values();
-      if (!adjacentNodes) {
-        throw new Error(`Missing adjacent set for node ${edgeKey}`);
-      }
-
-      for (const adjacentNode of adjacentNodes) {
-        nodes.add(adjacentNode);
-      }
-    }
-
-    return Array.from(nodes);
   }
 
   /**

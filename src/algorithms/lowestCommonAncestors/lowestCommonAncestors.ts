@@ -7,8 +7,8 @@ import { NoInfer } from '../../types.js';
  * Inspired by https://github.com/relaxedws/lca/blob/master/src/LowestCommonAncestor.php code
  * but uses depth search instead of breadth. Also uses some optimizations.
  */
-export function lowestCommonAncestors<Node>(
-  graph: Graph<Node>,
+export function lowestCommonAncestors<Node, LinkProps>(
+  graph: Graph<Node, LinkProps>,
   node1: NoInfer<Node>,
   node2: NoInfer<Node>,
 ): Node[] {
@@ -22,8 +22,8 @@ export function lowestCommonAncestors<Node>(
   return lcas;
 }
 
-function CA1Visit<Node>(
-  graph: Graph<Node>,
+function CA1Visit<Node, LinkProps>(
+  graph: Graph<Node, LinkProps>,
   node1Ancestors: Node[],
   lcas: Node[],
   visited: Set<Node>,
@@ -45,8 +45,8 @@ function CA1Visit<Node>(
   }
 }
 
-function CA2Visit<Node>(
-  graph: Graph<Node>,
+function CA2Visit<Node, LinkProps>(
+  graph: Graph<Node, LinkProps>,
   node1Ancestors: Node[],
   lcas: Node[],
   visited: Set<Node>,

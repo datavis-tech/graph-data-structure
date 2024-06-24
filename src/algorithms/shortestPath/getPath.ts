@@ -7,8 +7,8 @@ import { Graph } from '../../Graph.js';
  * Assembles the shortest path by traversing the
  * predecessor subgraph from destination to source.
  */
-export function getPath<Node>(
-  graph: Graph<Node>,
+export function getPath<Node, LinkProps>(
+  graph: Graph<Node, LinkProps>,
   tracks: TraversingTracks<NoInfer<Node>>,
   source: NoInfer<Node>,
   destination: NoInfer<Node>,

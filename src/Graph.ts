@@ -157,6 +157,7 @@ export class Graph<Node = string, LinkProps = never> {
    */
   removeEdge(source: Node, target: Node): this {
     this.edges.get(source)?.delete(target);
+    this.edgeProperties.get(source)?.delete(target);
 
     return this;
   }

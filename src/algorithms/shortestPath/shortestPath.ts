@@ -9,8 +9,8 @@ import { TraversingTracks } from './types.js';
  * Cormen et al. "Introduction to Algorithms" 3rd Ed. p. 658
  * Variable and function names correspond to names in the book.
  */
-export function shortestPath<Node>(
-  graph: Graph<Node>,
+export function shortestPath<Node, LinkProps>(
+  graph: Graph<Node, LinkProps>,
   source: NoInfer<Node>,
   destination: NoInfer<Node>,
 ): {

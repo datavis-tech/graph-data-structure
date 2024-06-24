@@ -4,8 +4,8 @@ import { extractMin } from './extractMin.js';
 import { relax } from './relax.js';
 import { TraversingTracks } from './types.js';
 
-export function dijkstra<Node>(
-  graph: Graph<Node>,
+export function dijkstra<Node, LinkProps>(
+  graph: Graph<Node, LinkProps>,
   tracks: TraversingTracks<NoInfer<Node>>,
   source: NoInfer<Node>,
   destination: NoInfer<Node>,

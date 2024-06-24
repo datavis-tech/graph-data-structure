@@ -4,7 +4,7 @@ import { NoInfer } from '../../types.js';
 import { TraversingTracks } from './types.js';
 
 export function relax<Node>(
-  graph: Graph<Node>,
+  graph: Graph<Node, any>,
   tracks: TraversingTracks<NoInfer<Node>>,
   source: NoInfer<Node>,
   target: NoInfer<Node>,

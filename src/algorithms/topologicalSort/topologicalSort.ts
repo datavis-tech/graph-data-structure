@@ -28,11 +28,11 @@ export type TopologicalSortOptions<Node, LinkProps> = {
    * @param graph the graph instance being explored
    * @returns boolean
    */
-  shouldFollow?: (
-    source: NoInfer<Node>,
-    target: NoInfer<Node>,
-    graph: Graph<Node, LinkProps>,
-  ) => boolean;
+  shouldFollow?: (args: {
+    source: NoInfer<Node>;
+    target: NoInfer<Node>;
+    graph: Graph<Node, LinkProps>;
+  }) => boolean;
 };
 
 export function topologicalSort<Node, LinkProps>(

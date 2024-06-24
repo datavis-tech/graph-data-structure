@@ -81,7 +81,7 @@ describe('topologicalSort', () => {
     const sorted = topologicalSort(graph, {
       sourceNodes: ['a'],
       includeSourceNodes: true,
-      shouldFollow: (source, target) =>
+      shouldFollow: ({ source, target }) =>
         graph.getEdgeProperties(source, target).type === 'foo',
     });
 

@@ -52,7 +52,7 @@ describe('hasCycle', () => {
 
     expect(
       hasCycle(graph, {
-        shouldFollow: (source, target) =>
+        shouldFollow: ({ source, target }) =>
           graph.getEdgeProperties(source, target) === 'foo',
       }),
     ).toBe(false);

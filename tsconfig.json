@@ -9,6 +9,7 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
+    "noUncheckedIndexedAccess": true,
     "downlevelIteration": true,
     "isolatedModules": true,
     "noEmit": true,

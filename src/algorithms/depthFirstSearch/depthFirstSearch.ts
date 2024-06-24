@@ -1,3 +1,4 @@
+import { invariant } from '../../invariant.js';
 import type { NoInfer } from '../../types.js';
 import type { DepthFirstSearchOptions } from './types.js';
 
@@ -20,18 +21,25 @@ export function depthFirstSearch<Node, LinkProps>(
 
   if (includeSourceNodes) {
     for (let i = 0; i < sourceNodes.length; i++) {
-      depthFirstVisit(graph, nodeList, visited, visiting, sourceNodes[i], opts);
+      const sourceNode = sourceNodes[i];
+      if (!sourceNode) continue;
+      depthFirstVisit(graph, nodeList, visited, visiting, sourceNode, opts);
     }
     return nodeList;
   }
 
   for (let i = 0; i < sourceNodes.length; i++) {
-    visited.add(sourceNodes[i]);
+    const sourceNode = sourceNodes[i];
+    if (!sourceNode) continue;
+    visited.add(sourceNode);
   }
 
   for (let i = 0; i < sourceNodes.length; i++) {
+    const sourceNode = sourceNodes[i];
+    if (!sourceNode) continue;
+
     graph
-      .adjacent(sourceNodes[i])
+      .adjacent(sourceNode)
       ?.forEach((n) => depthFirstVisit(graph, nodeList, visited, visiting, n, opts));
   }
 

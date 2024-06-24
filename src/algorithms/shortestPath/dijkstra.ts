@@ -11,7 +11,7 @@ export function dijkstra<Node, LinkProps>(
   destination: NoInfer<Node>,
 ) {
   const nodes = graph.nodes;
-  const { d, p, q } = tracks;
+  const { q } = tracks;
 
   initializeSingleSource(nodes, tracks, source, destination);
   initializePriorityQueue(nodes, tracks);

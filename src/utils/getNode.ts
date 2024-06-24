@@ -24,5 +24,5 @@ export function getNode<Node>(
     throw new Error('More than one node found.');
   }
 
-  return foundNodes[0];
+  return foundNodes[0] as Node;
 }

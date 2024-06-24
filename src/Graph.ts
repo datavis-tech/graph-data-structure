@@ -67,7 +67,7 @@ export class Graph<Node = string, LinkProps = never> {
   }
 
   /**
-   * Gets the adjacent node set for the given node.
+   * Gets the adjacent nodes set for the given node.
    */
   adjacent(node: Node): Set<Node> | undefined {
     return this.edges.get(node);

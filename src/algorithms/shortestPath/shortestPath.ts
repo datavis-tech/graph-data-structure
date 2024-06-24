@@ -1,5 +1,5 @@
 import { Graph } from '../../Graph.js';
-import { EdgeWeight, NoInfer } from '../../types.js';
+import { NoInfer } from '../../types.js';
 import { dijkstra } from './dijkstra.js';
 import { getPath } from './getPath.js';
 import { TraversingTracks } from './types.js';

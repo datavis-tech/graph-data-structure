@@ -1,9 +1,12 @@
 import { Graph } from '../Graph.js';
-import { SerializedInput } from '../types.js';
+import { NoInfer, SerializedInput } from '../types.js';
 
 export function deserializeGraph<Node, LinkProps, NodeIdentity>(
   ...args: Node extends object
-    ? [data: SerializedInput<Node, LinkProps>, identityFn: (node: Node) => NodeIdentity]
+    ? [
+        data: SerializedInput<Node, LinkProps>,
+        identityFn: (node: NoInfer<Node>) => NodeIdentity,
+      ]
     : [data: SerializedInput<Node, LinkProps>]
 ): Graph<Node, LinkProps> {
   const [data, identityFn] = args;
@@ -27,7 +30,7 @@ export function deserializeGraph<Node, LinkProps, NodeIdentity>(
     }
 
     const source = nodeIdentityMap.get(identityFn(link.source)) ?? link.source;
-    const target = nodeIdentityMap.get(identityFn(link.source)) ?? link.target;
+    const target = nodeIdentityMap.get(identityFn(link.target)) ?? link.target;
 
     g.addEdge.apply(g, [source, target, link.weight, link.props] as never);
   });

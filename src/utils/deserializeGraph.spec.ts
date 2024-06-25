@@ -14,13 +14,6 @@ describe('serializeGraph', () => {
     checkSerialized(serializeGraph(graph));
   });
 
-  it('should deserialize a graph passed to constructor', () => {
-    const g = new Graph<string>().addEdge('a', 'b').addEdge('b', 'c');
-    const serialized = serializeGraph(g);
-    const graph = new Graph(serialized);
-    checkSerialized(serializeGraph(graph));
-  });
-
   it('should not duplicate nodes when they are objects', () => {
     const nodeA = { id: 1, title: 'a' };
     const nodeB = { id: 2, title: 'b' };
@@ -61,6 +54,6 @@ describe('serializeGraph', () => {
     };
 
     // @ts-expect-error Missing identity function
-    const graph = deserializeGraph(serialized);
+    deserializeGraph(serialized);
   });
 });

@@ -1,6 +1,5 @@
 import { invariant } from './invariant.js';
-import { EdgeWeight, SerializedInput } from './types.js';
-import { deserializeGraph } from './utils/deserializeGraph.js';
+import { EdgeWeight } from './types.js';
 
 export class Graph<Node = string, LinkProps = never> {
   /**
@@ -25,12 +24,6 @@ export class Graph<Node = string, LinkProps = never> {
    * Map<SourceNode, Map<TargetNode, EdgeProperties>>
    */
   edgeProperties: Map<Node, Map<Node, LinkProps>> = new Map();
-
-  constructor(serialized?: SerializedInput<Node, LinkProps>) {
-    if (serialized) {
-      return deserializeGraph(serialized);
-    }
-  }
 
   /**
    * Adds a node to the graph.

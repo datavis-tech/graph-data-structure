@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "strict": true,
-    "target": "es6",
+    "target": "es2023",
     "module": "Node16",
     "esModuleInterop": true,
     "declaration": true,
@@ -16,5 +16,5 @@
     "outDir": "./dist"
   },
   "file": ["src"],
-  "exclude": ["node_modules", "*.d.ts", "*.spec.ts", "*.spec-d.ts"]
+  "exclude": ["node_modules"]
 }

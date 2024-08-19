@@ -35,7 +35,7 @@
     "test": "vitest --run",
     "prepublishOnly": "npm run build",
     "prettier": "prettier --write .",
-    "tsc": "tsc",
+    "tsc": "tsc --noEmit",
     "release": "release-it"
   },
   "devDependencies": {

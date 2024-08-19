@@ -1,6 +1,6 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
-import ts from "rollup-plugin-ts";
+import ts from 'rollup-plugin-ts';
 
 export default [
   {
@@ -9,11 +9,7 @@ export default [
       file: 'dist/index.cjs',
       format: 'cjs',
     },
-    plugins: [
-      nodeResolve(),
-      ts({ tsconfig: 'tsconfig.json' }),
-      terser(),
-    ],
+    plugins: [nodeResolve(), ts({ tsconfig: 'tsconfig.json' }), terser()],
   },
   {
     input: 'src/index.ts',
@@ -21,11 +17,7 @@ export default [
       file: 'dist/index.mjs',
       format: 'esm',
     },
-    plugins: [
-      nodeResolve(),
-      ts({ tsconfig: 'tsconfig.json' }),
-      terser(),
-    ],
+    plugins: [nodeResolve(), ts({ tsconfig: 'tsconfig.json' }), terser()],
   },
   {
     input: 'src/index.ts',
@@ -34,10 +26,6 @@ export default [
       format: 'umd',
       name: 'graphDataStructure',
     },
-    plugins: [
-      nodeResolve(),
-      ts({ tsconfig: 'tsconfig.json' }),
-      terser(),
-    ],
+    plugins: [nodeResolve(), ts({ tsconfig: 'tsconfig.json' }), terser()],
   },
 ];

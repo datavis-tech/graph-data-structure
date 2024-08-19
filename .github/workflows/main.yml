@@ -23,7 +23,7 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Check types
-        run: npm run type-check
+        run: npm run tsc
 
       - name: Test
         run: npm run test

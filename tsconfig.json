@@ -1,21 +1,20 @@
 {
   "compilerOptions": {
-    "allowJs": false,
-    "declaration": true,
+    "strict": true,
+    "target": "es6",
+    "module": "Node16",
     "esModuleInterop": true,
-    "module": "NodeNext",
+    "declaration": true,
+    "sourceMap": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "strict": true,
-    "target": "ESNext",
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
     "downlevelIteration": true,
     "isolatedModules": true,
     "noEmit": true,
-    "moduleResolution": "nodenext"
+    "outDir": "./dist"
   },
-  "file": ["index.ts"],
-  "exclude": ["node_modules", "*.d.ts"]
+  "file": ["src"],
+  "exclude": ["node_modules", "*.d.ts", "*.spec.ts", "*.spec-d.ts"]
 }

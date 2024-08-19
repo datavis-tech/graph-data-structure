@@ -2,28 +2,67 @@
   "name": "graph-data-structure",
   "version": "3.5.0",
   "description": "A graph data structure with topological sort.",
-  "files": [
-    "./dist"
-  ],
-  "source": "src/index.ts",
-  "types": "dist/index.d.ts",
-  "type": "module",
-  "exports": {
-    "require": "./dist/index.cjs",
-    "types": "./dist/index.d.ts",
-    "default": "./dist/index.modern.js"
+  "author": "Curran Kelleher",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/datavis-tech/graph-data-structure/issues"
   },
+  "homepage": "https://github.com/datavis-tech/graph-data-structure#readme",
+  "type": "module",
+  "source": "src/index.ts",
   "main": "./dist/index.cjs",
-  "module": "./dist/index.module.js",
+  "module": "./dist/index.mjs",
+  "types": "dist/index.d.ts",
   "unpkg": "./dist/index.umd.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "umd": {
+        "types": "./dist/index.umd.d.ts",
+        "default": "./dist/index.umd.js"
+      }
+    }
+  },
   "scripts": {
-    "build": "rm -rf dist && microbundle src/index.ts",
-    "test": "npm run build -f modern && mocha",
+    "build": "rm -rf dist && rollup -c",
+    "test": "vitest --run",
     "prepublishOnly": "npm run build",
     "lint": "prettier --write .",
     "type-check": "tsc",
     "release": "release-it"
   },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "15.2.3",
+    "@rollup/plugin-terser": "0.4.4",
+    "@types/node": "20.10.3",
+    "microbundle": "0.15.1",
+    "prettier": "3.1.0",
+    "release-it": "17.0.0",
+    "rollup": "4.18.0",
+    "rollup-plugin-ts": "3.4.5",
+    "typescript": "5.3.2",
+    "vitest": "1.6.0"
+  },
+  "files": [
+    "./dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/datavis-tech/graph-data-structure.git"
+  },
+  "keywords": [
+    "graph",
+    "data",
+    "structures",
+    "algorithms"
+  ],
   "release-it": {
     "git": {
       "commitMessage": "${version}"
@@ -35,29 +74,14 @@
       "publish": false
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/datavis-tech/graph-data-structure.git"
-  },
-  "keywords": [
-    "graph",
-    "data",
-    "structures",
-    "algorithms"
-  ],
-  "author": "Curran Kelleher",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/datavis-tech/graph-data-structure/issues"
-  },
-  "homepage": "https://github.com/datavis-tech/graph-data-structure#readme",
-  "devDependencies": {
-    "@types/node": "20.10.3",
-    "graph-diagrams": "0.5.0",
-    "microbundle": "0.15.1",
-    "mocha": "10.2.0",
-    "prettier": "3.1.0",
-    "release-it": "17.0.0",
-    "typescript": "5.3.2"
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSameLine": false,
+    "bracketSpacing": true,
+    "printWidth": 90,
+    "quoteProps": "consistent",
+    "singleAttributePerLine": false,
+    "singleQuote": true,
+    "tabWidth": 2
   }
 }

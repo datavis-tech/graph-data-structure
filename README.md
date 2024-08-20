@@ -23,7 +23,7 @@ This library is distributed only via [NPM](npmjs.com). Install by running
 Require it in your code like this.
 
 ```javascript
-const { Graph } = require("graph-data-structure");
+const { Graph } = require('graph-data-structure');
 ```
 
 ## Examples
@@ -39,15 +39,15 @@ var graph = Graph();
 Add some nodes and edges with **[addNode](#add-node)** and **[addEdge](#add-edge)**.
 
 ```javascript
-graph.addNode("a");
-graph.addNode("b");
-graph.addEdge("a", "b");
+graph.addNode('a');
+graph.addNode('b');
+graph.addEdge('a', 'b');
 ```
 
 Nodes are added implicitly when edges are added.
 
 ```javascript
-graph.addEdge("b", "c");
+graph.addEdge('b', 'c');
 ```
 
 Now we have the following graph. <img src="https://cloud.githubusercontent.com/assets/68416/15385597/44a10522-1dc0-11e6-9054-2150f851db46.png">
@@ -68,14 +68,14 @@ Here's an example of topological sort with getting dressed (from Cormen et al. "
 
 ```javascript
 var graph = Graph()
-  .addEdge("socks", "shoes")
-  .addEdge("shirt", "belt")
-  .addEdge("shirt", "tie")
-  .addEdge("tie", "jacket")
-  .addEdge("belt", "jacket")
-  .addEdge("pants", "shoes")
-  .addEdge("underpants", "pants")
-  .addEdge("pants", "belt");
+  .addEdge('socks', 'shoes')
+  .addEdge('shirt', 'belt')
+  .addEdge('shirt', 'tie')
+  .addEdge('tie', 'jacket')
+  .addEdge('belt', 'jacket')
+  .addEdge('pants', 'shoes')
+  .addEdge('underpants', 'pants')
+  .addEdge('pants', 'belt');
 
 // prints [ "underpants", "pants", "shirt", "tie", "belt", "jacket", "socks", "shoes" ]
 console.log(graph.topologicalSort());
@@ -172,8 +172,8 @@ Here's example code for serializing a graph.
 
 ```javascript
 var graph = Graph();
-graph.addEdge("a", "b");
-graph.addEdge("b", "c");
+graph.addEdge('a', 'b');
+graph.addEdge('b', 'c');
 var serialized = graph.serialize();
 ```
 

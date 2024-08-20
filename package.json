@@ -39,8 +39,8 @@
     "build": "rm -rf dist && rollup -c",
     "test": "vitest --run",
     "prepublishOnly": "npm run build",
-    "lint": "prettier --write .",
-    "type-check": "tsc --noEmit --noEmitOnError",
+    "prettier": "prettier --write .",
+    "tsc --noEmit --noEmitOnError": "tsc --noEmit",
     "release": "release-it"
   },
   "devDependencies": {

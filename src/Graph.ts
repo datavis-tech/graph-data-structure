@@ -116,14 +116,25 @@ export class Graph<Node = string, LinkProps = never> {
    * Adds an edge from the `source` node to `target` node.
    * This method will create the nodes if they were not already added.
    */
-  addEdge(
-    source: Node,
-    target: Node,
-    ...opts: [LinkProps] extends [never]
-      ? [weight?: EdgeWeight]
-      : [weight: EdgeWeight | undefined, linkProps: LinkProps]
-  ): this {
-    const [weight, linkProps] = opts;
+  addEdge(source: Node, target: Node, ...args: AddEdgeArgs<LinkProps>): this {
+    let weight: number | undefined;
+    let linkProps: LinkProps | undefined;
+
+    const firstArg = args[0];
+
+    if (typeof firstArg === 'number') {
+      weight = firstArg;
+    }
+
+    if (typeof firstArg === 'object') {
+      weight = firstArg.weight;
+
+      if (firstArg)
+        linkProps = Object.prototype.hasOwnProperty.call(firstArg, 'props')
+          ? (firstArg as { props: LinkProps }).props
+          : undefined;
+    }
+
     this.addNode(source);
     this.addNode(target);
     const adjacentNodes = this.adjacent(source);
@@ -162,3 +173,7 @@ export class Graph<Node = string, LinkProps = never> {
     return this.edges.get(source)?.has(target) ?? false;
   }
 }
+
+type AddEdgeArgs<LinkProps> = [LinkProps] extends [never]
+  ? [weight?: EdgeWeight] | [opts?: { weight?: EdgeWeight }]
+  : [opts: { weight?: EdgeWeight; props: LinkProps }];

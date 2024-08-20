@@ -45,10 +45,10 @@ describe('hasCycle', () => {
 
   it('should not detect the cycle when the traversing is stopped by the shouldFollow option.', function () {
     const graph = new Graph<string, string>();
-    graph.addEdge('a', 'b', undefined, 'foo');
-    graph.addEdge('b', 'c', undefined, 'foo');
-    graph.addEdge('c', 'd', undefined, 'foo');
-    graph.addEdge('d', 'a', undefined, 'bar');
+    graph.addEdge('a', 'b', { props: 'foo' });
+    graph.addEdge('b', 'c', { props: 'foo' });
+    graph.addEdge('c', 'd', { props: 'foo' });
+    graph.addEdge('d', 'a', { props: 'bar' });
 
     expect(
       hasCycle(graph, {

@@ -3,6 +3,11 @@
   "version": "3.5.0",
   "description": "A graph data structure with topological sort.",
   "author": "Curran Kelleher",
+  "contributors": [{
+    "name": "Jonathan MASSUCHETTI",
+    "email": "jonathan.massuchetti@dappit.fr",
+    "url": "https://github.com/JesusTheHun"
+  }],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/datavis-tech/graph-data-structure/issues"

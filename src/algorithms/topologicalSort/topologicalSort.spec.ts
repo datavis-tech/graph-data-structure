@@ -46,13 +46,21 @@ describe('topologicalSort', () => {
   });
 
   it('Should compute topological sort tricky case.', function () {
-    const graph = new Graph(); //      a
-    //     / \
-    graph.addEdge('a', 'b'); //    b   |
-    graph.addEdge('a', 'd'); //    |   d
-    graph.addEdge('b', 'c'); //    c   |
-    graph.addEdge('d', 'e'); //     \ /
-    graph.addEdge('c', 'e'); //      e
+    //     a
+    //    / \
+    //   b   |
+    //   |   d
+    //   c   |
+    //    \ /
+    //     e
+
+    const graph = new Graph();
+
+    graph.addEdge('a', 'b');
+    graph.addEdge('a', 'd');
+    graph.addEdge('b', 'c');
+    graph.addEdge('d', 'e');
+    graph.addEdge('c', 'e');
 
     const sorted = topologicalSort(graph, {
       sourceNodes: ['a'],
@@ -74,9 +82,9 @@ describe('topologicalSort', () => {
   it('Should exclude source nodes with a cycle.', function () {
     const graph = new Graph<string, { type: string }>();
     graph
-      .addEdge('a', 'b', undefined, { type: 'foo' })
-      .addEdge('b', 'c', undefined, { type: 'foo' })
-      .addEdge('c', 'a', undefined, { type: 'bar' });
+      .addEdge('a', 'b', { props: { type: 'foo' } })
+      .addEdge('b', 'c', { props: { type: 'foo' } })
+      .addEdge('c', 'a', { props: { type: 'bar' } });
 
     const sorted = topologicalSort(graph, {
       sourceNodes: ['a'],

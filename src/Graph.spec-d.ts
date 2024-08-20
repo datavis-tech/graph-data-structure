@@ -38,11 +38,14 @@ describe('graph types', () => {
   it('should require edge properties if LinkProps is defined', () => {
     const g = new Graph<string, { type: string }>();
 
-    g.addEdge('a', 'b', undefined, { type: 'foo' });
-    g.addEdge('a', 'b', 1, { type: 'foo' });
+    g.addEdge('a', 'b', { props: { type: 'foo' } });
+    g.addEdge('a', 'b', { weight: 1, props: { type: 'foo' } });
 
     // @ts-expect-error
     g.addEdge('a', 'b', 1);
+
+    // @ts-expect-error
+    g.addEdge('a', 'b', { weight: 1 });
   });
 
   it('should not allow edge properties if LinkProps is never', () => {

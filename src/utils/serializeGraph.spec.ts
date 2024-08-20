@@ -18,7 +18,7 @@ describe('serializeGraph', () => {
     const nodeB = { title: 'b' };
 
     const graph = new Graph<{ title: string }, { type: string }>();
-    graph.addEdge(nodeA, nodeB, undefined, { type: 'foo' });
+    graph.addEdge(nodeA, nodeB, { props: { type: 'foo' } });
 
     const serialized = serializeGraph(graph);
 

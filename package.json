@@ -40,7 +40,7 @@
     "test": "vitest --run",
     "prepublishOnly": "npm run build",
     "prettier": "prettier --write .",
-    "tsc --noEmit --noEmitOnError": "tsc --noEmit",
+    "tsc": "tsc --noEmit --noEmitOnError",
     "release": "release-it"
   },
   "devDependencies": {

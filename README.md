@@ -30,7 +30,7 @@ const { Graph, serializeGraph, deserializeGraph, topologicalSort, shortestPath }
 
 ### ABC
 
-To create a graph instance, instantiate **[Graph](#graph)** as a class.
+Start by creating a new  **[Graph](#graph)** object.
 
 ```javascript
 var graph = new Graph();

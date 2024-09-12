@@ -67,7 +67,7 @@ Here's an example of topological sort with getting dressed (from Cormen et al. "
 </p>
 
 ```javascript
-var graph = new Graph();
+const graph = new Graph();
 graph.addEdge('socks', 'shoes')
   .addEdge('shirt', 'belt')
   .addEdge('shirt', 'tie')

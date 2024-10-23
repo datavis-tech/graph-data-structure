@@ -24,7 +24,7 @@ export function shortestPaths<Node, LinkProps>(
         u,
         v,
         weight: graph.getEdgeWeight(u, v),
-        props: graph.getEdgeProperties(u, v),
+        props: graph.getEdgeProperties(u, v)!,
       });
       graph.removeEdge(u, v);
     }
@@ -34,7 +34,7 @@ export function shortestPaths<Node, LinkProps>(
         u: v,
         v: u,
         weight: graph.getEdgeWeight(v, u),
-        props: graph.getEdgeProperties(u, v),
+        props: graph.getEdgeProperties(v, u)!,
       });
       graph.removeEdge(v, u);
     }

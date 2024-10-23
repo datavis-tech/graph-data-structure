@@ -16,7 +16,7 @@ describe('graph types', () => {
     const g = new Graph<string, { type: 'foo' | 'bar' }>();
     const props = g.getEdgeProperties('a', 'b');
 
-    expectTypeOf(props).toEqualTypeOf<{ type: 'foo' | 'bar' }>();
+    expectTypeOf(props).toEqualTypeOf<{ type: 'foo' | 'bar' } | undefined>();
   });
 
   it('should only accept nodes of the given type', () => {

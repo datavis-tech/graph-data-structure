@@ -106,10 +106,10 @@ export class Graph<Node = string, LinkProps = never> {
   }
 
   /**
-   * Get the properties of the given edge or undefined if none are set.
+   * Get the properties of the given edge or undefined if the edge doesn't exist .
    */
-  getEdgeProperties(source: Node, target: Node): LinkProps {
-    return this.edgeProperties.get(source)?.get(target) as LinkProps;
+  getEdgeProperties(source: Node, target: Node): LinkProps | undefined {
+    return this.edgeProperties.get(source)?.get(target);
   }
 
   /**

@@ -29,8 +29,9 @@ export type TopologicalSortOptions<Node, LinkProps> = {
    * @returns boolean
    */
   shouldFollow?: (args: {
-    source: NoInfer<Node>;
-    target: NoInfer<Node>;
+    source: Node;
+    target: Node;
+    props: LinkProps;
     graph: Graph<Node, LinkProps>;
   }) => boolean;
 };

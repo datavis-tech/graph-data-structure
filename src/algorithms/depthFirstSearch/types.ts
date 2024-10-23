@@ -1,5 +1,4 @@
 import type { Graph } from '../../Graph.js';
-import type { NoInfer } from '../../types.js';
 
 export type DepthFirstSearchOptions<Node, LinkProps> = {
   /**
@@ -28,8 +27,9 @@ export type DepthFirstSearchOptions<Node, LinkProps> = {
    * @returns boolean
    */
   shouldFollow?: (args: {
-    source: NoInfer<Node>;
-    target: NoInfer<Node>;
+    source: Node;
+    target: Node;
+    props: LinkProps;
     graph: Graph<Node, LinkProps>;
   }) => boolean;
 };

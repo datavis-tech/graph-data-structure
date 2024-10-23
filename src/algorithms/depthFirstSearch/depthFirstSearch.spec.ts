@@ -12,8 +12,7 @@ describe('depthFirstSearch', () => {
     graph.addEdge('b', 'e', { props: { type: 'foo' } });
 
     const nodes = depthFirstSearch(graph, {
-      shouldFollow: ({ source, target, graph }) =>
-        graph.getEdgeProperties(source, target).type === 'foo',
+      shouldFollow: ({ props }) => props.type === 'foo',
     });
 
     expect(nodes).toContain('a');

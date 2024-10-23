@@ -23,7 +23,13 @@ export function depthFirstVisit<Node, LinkProps>(
 
     graph.adjacent(node)?.forEach((n) => {
       const follow =
-        shouldFollow === undefined || shouldFollow({ source: node, target: n, graph });
+        shouldFollow === undefined ||
+        shouldFollow({
+          source: node,
+          target: n,
+          graph,
+          props: graph.getEdgeProperties(node, n)!,
+        });
       if (!follow) return;
 
       depthFirstVisit(graph, nodeList, visited, visiting, n, opts);

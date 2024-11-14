@@ -1,6 +1,6 @@
 {
   "name": "graph-data-structure",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "A graph data structure with topological sort.",
   "author": "Curran Kelleher",
   "contributors": [

@@ -19,7 +19,7 @@
   "source": "src/index.ts",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "types": "dist/index.d.cts",
   "unpkg": "./dist/index.umd.js",
   "exports": {
     ".": {

@@ -1,15 +1,15 @@
 export type EdgeWeight = number;
 
-export type Edge<Node = unknown, Props = unknown> = {
-  source: Node;
-  target: Node;
+export type Edge<NodeIdentity = unknown, Props = unknown> = {
+  source: NodeIdentity;
+  target: NodeIdentity;
   weight?: EdgeWeight;
   props: Props;
 };
 
-export type Serialized<Node = unknown, LinkProps = unknown> = {
+export type Serialized<Node = unknown, LinkProps = unknown, NodeIdentity = Node> = {
   nodes: Node[];
-  links: Edge<Node, LinkProps>[];
+  links: Edge<NodeIdentity, LinkProps>[];
 };
 
 export type SerializedInput<Node = unknown, LinkProps = unknown> = {

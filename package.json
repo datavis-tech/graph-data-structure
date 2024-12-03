@@ -59,7 +59,15 @@
     "vitest": "2.1.5"
   },
   "files": [
-    "./dist/index.*"
+    "./dist/index.cjs",
+    "./dist/index.cjs.map",
+    "./dist/index.mjs",
+    "./dist/index.mjs.map",
+    "./dist/index.umd.js",
+    "./dist/index.umd.js.map",
+    "./dist/index.umd.d.ts",
+    "./dist/index.d.cts",
+    "./dist/index.d.mts"
   ],
   "repository": {
     "type": "git",

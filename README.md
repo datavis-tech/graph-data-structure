@@ -23,14 +23,20 @@ This library is distributed only via [NPM](npmjs.com). Install by running
 Require it in your code like this.
 
 ```javascript
-import { Graph, serializeGraph, deserializeGraph, topologicalSort, shortestPath } from 'graph-data-structure';
+import {
+  Graph,
+  serializeGraph,
+  deserializeGraph,
+  topologicalSort,
+  shortestPath,
+} from 'graph-data-structure';
 ```
 
 ## Examples
 
 ### ABC
 
-Start by creating a new  **[Graph](#graph)** object.
+Start by creating a new **[Graph](#graph)** object.
 
 ```javascript
 var graph = new Graph();
@@ -68,7 +74,8 @@ Here's an example of topological sort with getting dressed (from Cormen et al. "
 
 ```javascript
 const graph = new Graph();
-graph.addEdge('socks', 'shoes')
+graph
+  .addEdge('socks', 'shoes')
   .addEdge('shirt', 'belt')
   .addEdge('shirt', 'tie')
   .addEdge('tie', 'jacket')

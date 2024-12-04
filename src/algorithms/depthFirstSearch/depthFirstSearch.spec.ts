@@ -19,4 +19,21 @@ describe('depthFirstSearch', () => {
     expect(nodes).toContain('b');
     expect(nodes).toContain('e');
   });
+
+  it('should pass all the expected args to the shouldFollow function', function () {
+    expect.hasAssertions();
+
+    const graph = new Graph<string, { type: string }>();
+
+    graph.addEdge('a', 'b', { props: { type: 'foo' } });
+
+    depthFirstSearch(graph, {
+      shouldFollow: ({ source, target, props }) => {
+        expect(source).toEqual(expect.any(String));
+        expect(target).toEqual(expect.any(String));
+        expect(props).toEqual({ type: 'foo' });
+        return true;
+      },
+    });
+  });
 });

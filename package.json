@@ -48,17 +48,26 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "15.3.0",
     "@rollup/plugin-terser": "0.4.4",
+    "@rollup/plugin-typescript": "12.1.1",
     "@types/node": "22.9.0",
     "microbundle": "0.15.1",
     "prettier": "3.3.3",
     "release-it": "17.10.0",
     "rollup": "4.26.0",
-    "rollup-plugin-ts": "3.4.5",
+    "rollup-plugin-dts": "6.1.1",
     "typescript": "5.6.3",
     "vitest": "2.1.5"
   },
   "files": [
-    "./dist"
+    "./dist/index.cjs",
+    "./dist/index.cjs.map",
+    "./dist/index.mjs",
+    "./dist/index.mjs.map",
+    "./dist/index.umd.js",
+    "./dist/index.umd.js.map",
+    "./dist/index.umd.d.ts",
+    "./dist/index.d.cts",
+    "./dist/index.d.mts"
   ],
   "repository": {
     "type": "git",

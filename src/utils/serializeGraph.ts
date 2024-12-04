@@ -2,7 +2,7 @@
  * Serializes the graph.
  */
 import { Graph } from '../Graph.js';
-import { Edge, Serialized } from '../types.js';
+import { NoInfer, Edge, Serialized } from '../types.js';
 
 type SerializeGraphOptions<IncludeDefaultWeight extends boolean = false> = {
   /**
@@ -17,19 +17,35 @@ type SerializeGraphOptions<IncludeDefaultWeight extends boolean = false> = {
 
 /**
  * Serialize the graph data set : nodes, edges, edges weight & properties.
- * @param graph
- * @param opts
+ *
+ * Optionally, you can pass a function that returns a unique value for a given node.
+ * When provided, the function will be used to avoid data duplication in the serialized object.
  */
-export function serializeGraph<Node, LinkProps, IncludeDefaultWeight extends boolean>(
+export function serializeGraph<
+  Node,
+  LinkProps,
+  IncludeDefaultWeight extends boolean,
+  NodeIdentity = Node,
+>(
   graph: Graph<Node, LinkProps>,
-  opts: SerializeGraphOptions<IncludeDefaultWeight> = {},
-): Serialized<Node, LinkProps> {
-  const { includeDefaultWeight = false } = opts;
+  ...args:
+    | [
+        identityFn: (node: NoInfer<Node>) => NodeIdentity,
+        SerializeGraphOptions<IncludeDefaultWeight>?,
+      ]
+    | [SerializeGraphOptions<IncludeDefaultWeight>?]
+): Serialized<Node, LinkProps, NodeIdentity> {
+  const identityFn = typeof args[0] === 'function' ? args[0] : undefined;
+  const opts = typeof args[0] === 'function' ? args[1] : args[0];
 
-  const serialized: Serialized<Node, LinkProps> = {
+  const { includeDefaultWeight = false } = opts ?? {};
+
+  const serialized: Serialized<Node, LinkProps, NodeIdentity> = {
     nodes: Array.from(graph.nodes),
     links: [],
   };
+
+  const nodeIdentityMap = new Map<Node, NodeIdentity>();
 
   serialized.nodes.forEach((node) => {
     const source = node;
@@ -37,10 +53,21 @@ export function serializeGraph<Node, LinkProps, IncludeDefaultWeight extends boo
       const edgeWeight = graph.getEdgeWeight(source, target);
       const edgeProps = graph.getEdgeProperties(source, target);
 
+      if (identityFn && !nodeIdentityMap.has(source)) {
+        nodeIdentityMap.set(source, identityFn(source));
+      }
+
+      if (identityFn && !nodeIdentityMap.has(target)) {
+        nodeIdentityMap.set(target, identityFn(target));
+      }
+
+      const sourceIdentity = nodeIdentityMap.get(source) ?? source;
+      const targetIdentity = nodeIdentityMap.get(target) ?? target;
+
       const link = {
-        source: source,
-        target: target,
-      } as Edge<Node, LinkProps>;
+        source: sourceIdentity,
+        target: targetIdentity,
+      } as Edge<NodeIdentity, LinkProps>;
 
       if (edgeWeight != 1 || includeDefaultWeight) {
         link.weight = edgeWeight;

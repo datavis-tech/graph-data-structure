@@ -3,3 +3,5 @@ node_modules
 graph-data-structure.js
 dist
 .idea
+.aider*
+.env

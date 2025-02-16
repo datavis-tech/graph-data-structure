@@ -1,7 +1,7 @@
 import { Graph } from '../../Graph.js';
 import { NoInfer } from '../../types.js';
 import { dijkstra } from './dijkstra.js';
-import { getPath } from './getPath.js';
+import { getPath, addWeightFunction } from './getPath.js';
 import { TraversingTracks } from './types.js';
 
 /**
@@ -13,6 +13,7 @@ export function shortestPath<Node, LinkProps>(
   graph: Graph<Node, LinkProps>,
   source: NoInfer<Node>,
   destination: NoInfer<Node>,
+  weightFunction: (edgeWeight: number, currentPathWeight: number, hop: number) => number = addWeightFunction
 ): {
   nodes: [Node, Node, ...Node[]];
   weight: number;
@@ -25,5 +26,5 @@ export function shortestPath<Node, LinkProps>(
 
   dijkstra(graph, tracks, source, destination);
 
-  return getPath(graph, tracks, source, destination);
+  return getPath(graph, tracks, source, destination, weightFunction);
 }

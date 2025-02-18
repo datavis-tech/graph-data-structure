@@ -1,4 +1,4 @@
-export type { Edge, Serialized, SerializedInput, EdgeWeight } from './types.js';
+export type { Edge, Serialized, SerializedInput, EdgeWeight, WeightParams } from './types.js';
 
 export { Graph } from './Graph.js';
 export { CycleError } from './CycleError.js';

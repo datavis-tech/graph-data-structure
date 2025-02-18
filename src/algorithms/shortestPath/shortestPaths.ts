@@ -41,7 +41,7 @@ export function shortestPaths<Node, LinkProps>(
 
     try {
       path = shortestPath(graph, source, destination);
-      if (!path.weight || pathWeight < path.weight) break;
+      if (!path.weight || !pathWeight || pathWeight < path.weight) break;
       paths.push(path);
     } catch (e) {
       break;

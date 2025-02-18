@@ -196,6 +196,23 @@ console.log(result.nodes); // Prints the array of nodes in the shortest path
 console.log(result.weight); // Prints the total weight of the path
 ```
 
+<a name="shortest-path" href="#shortest-path">#</a> <b>shortestPath</b>(<i>graph</i>, <i>sourceNode</i>, <i>destinationNode</i>, <i>nextWeightFn</i>)
+
+Calculates the weight based on the custom function.
+
+```javascript
+import type { WeightParams } from '../../types.js';
+function multiplyWeightFunction(wp: WeightParams): number {
+    if (wp.currentPathWeight === undefined) {
+        return wp.edgeWeight;
+    }
+    return wp.edgeWeight * wp.currentPathWeight;
+}
+var result = shortestPath(graph, 'a', 'c', multiplyWeightFunction);
+console.log(result.nodes); // Prints the array of nodes in the shortest path
+console.log(result.weight); // Prints the total weight of the path
+```
+
 <p align="center">
   <a href="https://datavis.tech/">
     <img src="https://cloud.githubusercontent.com/assets/68416/15298394/a7a0a66a-1bbc-11e6-9636-367bed9165fc.png">

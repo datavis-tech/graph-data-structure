@@ -1,13 +1,13 @@
 import type { EdgeWeight, NoInfer } from '../../types.js';
 import type { TraversingTracks } from './types.js';
-import type { WeightParams } from '../../types.js';
+import type { NextWeightFnParams } from '../../types.js';
 
 import { Graph } from '../../Graph.js';
 
 /**
  * Computes edge weight as the sum of all the edges in the path.
  */
-export function addWeightFunction( wp: WeightParams): number {
+export function addWeightFunction( wp: NextWeightFnParams): number {
   if (wp.currentPathWeight === undefined) {
       return wp.edgeWeight;
   }
@@ -23,7 +23,7 @@ export function getPath<Node, LinkProps>(
   tracks: TraversingTracks<NoInfer<Node>>,
   source: NoInfer<Node>,
   destination: NoInfer<Node>,
-  nextWeightFn: (params: WeightParams) => number = addWeightFunction
+  nextWeightFn: (params: NextWeightFnParams) => number = addWeightFunction
 ): {
   nodes: [Node, Node, ...Node[]];
   weight: number | undefined;
@@ -39,7 +39,8 @@ export function getPath<Node, LinkProps>(
     const currentNode = p.get(node)!;
 
     nodeList.push(node);
-    totalWeight = nextWeightFn({ edgeWeight: graph.getEdgeWeight(currentNode, node), currentPathWeight: totalWeight, hop });
+    const edgeWeight = graph.getEdgeWeight(currentNode, node)
+    totalWeight = nextWeightFn({edgeWeight, currentPathWeight: totalWeight, hop });
     node = currentNode;
     hop++;
   }

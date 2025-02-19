@@ -1,8 +1,10 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { Graph } from '../../Graph.js';
 import { serializeGraph } from '../../utils/serializeGraph.js';
 import { shortestPath } from './shortestPath.js';
 import { shortestPaths } from './shortestPaths.js';
+import { addWeightFunction } from './getPath.js';
+import { NextWeightFnParams } from '../../types.js';
 
 describe("Dijkstra's Shortest Path Algorithm", function () {
   it('Should compute shortest path on a single edge.', function () {
@@ -102,5 +104,77 @@ describe("Dijkstra's Shortest Path Algorithm", function () {
     expect(postSerializedGraph.links).toContainEqual({ source: 'a', target: 'e' });
     expect(postSerializedGraph.links).toContainEqual({ source: 'e', target: 'f' });
     expect(postSerializedGraph.links).toContainEqual({ source: 'f', target: 'c' });
+  });
+});
+
+describe('addWeightFunction', () => {
+  it('should return edgeWeight if currentPathWeight is undefined', () => {
+    const params = { edgeWeight: 5, currentPathWeight: undefined, hop: 1 };
+    expect(addWeightFunction(params)).toBe(5);
+  });
+
+  it('should return the sum of edgeWeight and currentPathWeight', () => {
+    const params = { edgeWeight: 5, currentPathWeight: 10, hop: 1 };
+    expect(addWeightFunction(params)).toBe(15);
+  });
+});
+
+describe('shortestPath with custom weight functions', () => {
+  it('should compute shortest path with default weight function (sum of weights)', () => {
+    const graph = new Graph().addEdge('a', 'b', 1).addEdge('b', 'c', 2);
+    expect(shortestPath(graph, 'a', 'c')).toEqual({
+      nodes: ['a', 'b', 'c'],
+      weight: 3,
+    });
+  });
+
+  it('should compute shortest path with a custom weight function', () => {
+    const customWeightFn = ({ edgeWeight, currentPathWeight, hop }: NextWeightFnParams) => {
+      if (currentPathWeight === undefined) {
+        return edgeWeight;
+      }
+      return currentPathWeight + edgeWeight ** hop;
+    };
+
+    const graph = new Graph().addEdge('a', 'b', 2).addEdge('b', 'c', 3);
+    expect(shortestPath(graph, 'a', 'c', customWeightFn)).toEqual({
+      nodes: ['a', 'b', 'c'],
+      weight: 7,
+    });
+  });
+
+  it('should pass correct parameters to custom weight function for a path with 3 nodes', () => {
+    const customWeightFn = vi.fn(({ edgeWeight, currentPathWeight, hop }: NextWeightFnParams) => {
+      if (currentPathWeight === undefined) {
+        return edgeWeight;
+      }
+      return currentPathWeight + edgeWeight ** hop;
+    });
+
+    const graph = new Graph().addEdge('a', 'b', 1).addEdge('b', 'c', 2);
+    shortestPath(graph, 'a', 'c', customWeightFn);
+
+    expect(customWeightFn).toHaveBeenCalledWith({ edgeWeight: 2, currentPathWeight: undefined, hop: 1 });
+    expect(customWeightFn).toHaveBeenCalledWith({ edgeWeight: 1, currentPathWeight: 2, hop: 2 });
+  });
+
+  it('should compute shortest path with a custom weight function in a graph with multiple paths', () => {
+    const customWeightFn = ({ edgeWeight, currentPathWeight }: NextWeightFnParams) => {
+      if (currentPathWeight === undefined) {
+        return edgeWeight;
+      }
+      return edgeWeight + currentPathWeight;
+    };
+
+    const graph = new Graph()
+      .addEdge('a', 'b', 1)
+      .addEdge('b', 'c', 2)
+      .addEdge('a', 'd', 1)
+      .addEdge('d', 'c', 1);
+
+    expect(shortestPath(graph, 'a', 'c', customWeightFn)).toEqual({
+      nodes: ['a', 'd', 'c'],
+      weight: 2,
+    });
   });
 });

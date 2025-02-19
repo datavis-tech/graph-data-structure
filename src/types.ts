@@ -19,7 +19,7 @@ export type SerializedInput<Node = unknown, LinkProps = unknown> = {
 
 export type NoInfer<T> = [T][T extends any ? 0 : never];
 
-export type WeightParams = {
+export type NextWeightFnParams = {
   edgeWeight: EdgeWeight;
   currentPathWeight: EdgeWeight | undefined;
   hop: number;

@@ -3,7 +3,7 @@ import { NoInfer } from '../../types.js';
 import { dijkstra } from './dijkstra.js';
 import { getPath, addWeightFunction } from './getPath.js';
 import { TraversingTracks } from './types.js';
-import type { WeightParams } from '../../types.js';
+import type { NextWeightFnParams } from '../../types.js';
 
 /**
  * Dijkstra's Shortest Path Algorithm.
@@ -14,7 +14,7 @@ export function shortestPath<Node, LinkProps>(
   graph: Graph<Node, LinkProps>,
   source: NoInfer<Node>,
   destination: NoInfer<Node>,
-  nextWeightFn: (params: WeightParams) => number = addWeightFunction
+  nextWeightFn: (params: NextWeightFnParams) => number = addWeightFunction
 ): {
   nodes: [Node, Node, ...Node[]];
   weight: number | undefined;

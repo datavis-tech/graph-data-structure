@@ -40,7 +40,7 @@ export function getPath<Node, LinkProps>(
 
     nodeList.push(node);
     const edgeWeight = graph.getEdgeWeight(currentNode, node)
-    totalWeight = nextWeightFn({edgeWeight, currentPathWeight: totalWeight, hop });
+    totalWeight = nextWeightFn({edgeWeight, currentPathWeight: totalWeight, hop: hop,  sourceGraph: graph});
     node = currentNode;
     hop++;
   }

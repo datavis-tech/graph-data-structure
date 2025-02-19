@@ -201,8 +201,8 @@ console.log(result.weight); // Prints the total weight of the path
 Calculates the weight based on the custom function.
 
 ```javascript
-import type { WeightParams } from '../../types.js';
-function multiplyWeightFunction(wp: WeightParams): number {
+import type { NextWeightFnParams } from '../../types.js';
+function multiplyWeightFunction(wp: NextWeightFnParams): number {
     if (wp.currentPathWeight === undefined) {
         return wp.edgeWeight;
     }

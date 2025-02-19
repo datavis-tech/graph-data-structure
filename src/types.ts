@@ -1,3 +1,5 @@
+import { Graph } from './Graph.js';
+
 export type EdgeWeight = number;
 
 export type Edge<NodeIdentity = unknown, Props = unknown> = {
@@ -19,8 +21,9 @@ export type SerializedInput<Node = unknown, LinkProps = unknown> = {
 
 export type NoInfer<T> = [T][T extends any ? 0 : never];
 
-export type NextWeightFnParams = {
+export type NextWeightFnParams<Node = unknown, LinkProps = unknown> = {
   edgeWeight: EdgeWeight;
   currentPathWeight: EdgeWeight | undefined;
   hop: number;
+  sourceGraph: Graph<Node, LinkProps>;
 };

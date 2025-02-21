@@ -46,17 +46,17 @@
     "release": "release-it"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "15.3.0",
+    "@rollup/plugin-node-resolve": "16.0.0",
     "@rollup/plugin-terser": "0.4.4",
-    "@rollup/plugin-typescript": "12.1.1",
-    "@types/node": "22.10.1",
+    "@rollup/plugin-typescript": "12.1.2",
+    "@types/node": "22.13.4",
     "microbundle": "0.15.1",
-    "prettier": "3.4.2",
-    "release-it": "17.10.0",
-    "rollup": "4.28.0",
+    "prettier": "3.5.1",
+    "release-it": "18.1.2",
+    "rollup": "4.34.8",
     "rollup-plugin-dts": "6.1.1",
-    "typescript": "5.7.2",
-    "vitest": "2.1.8"
+    "typescript": "5.7.3",
+    "vitest": "3.0.6"
   },
   "files": [
     "./dist/index.cjs",

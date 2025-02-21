@@ -110,13 +110,20 @@ describe("Dijkstra's Shortest Path Algorithm", function () {
 describe('addWeightFunction', () => {
   it('should return edgeWeight if currentPathWeight is undefined', () => {
     const graph = new Graph();
-    const params = { edgeWeight: 5, currentPathWeight: undefined, hop: 1, sourceGraph: graph };
+    const params = { 
+      edgeWeight: 5, currentPathWeight: undefined, hop: 1, 
+      graph: graph, path: { d: new Map(), p: new Map(), q: new Set() }, 
+      previousNode: 'a', currentNode: 'b'
+     };
     expect(addWeightFunction(params)).toBe(5);
   });
 
   it('should return the sum of edgeWeight and currentPathWeight', () => {
     const graph = new Graph()
-    const params = { edgeWeight: 5, currentPathWeight: 10, hop: 1, sourceGraph: graph };
+    const params = { edgeWeight: 5, currentPathWeight: 10, hop: 1, 
+      graph: graph, path: { d: new Map(), p: new Map(), q: new Set() }, 
+      previousNode: 'a', currentNode: 'b'
+    };
     expect(addWeightFunction(params)).toBe(15);
   });
 });
@@ -156,8 +163,22 @@ describe('shortestPath with custom weight functions', () => {
     const graph = new Graph().addEdge('a', 'b', 1).addEdge('b', 'c', 2);
     shortestPath(graph, 'a', 'c', customWeightFn);
 
-    expect(customWeightFn).toHaveBeenCalledWith({ edgeWeight: 2, currentPathWeight: undefined, hop: 1, sourceGraph: graph });
-    expect(customWeightFn).toHaveBeenCalledWith({ edgeWeight: 1, currentPathWeight: 2, hop: 2, sourceGraph: graph });
+    expect(customWeightFn).toHaveBeenCalledWith({ edgeWeight: 2, currentPathWeight: undefined, hop: 1, 
+      graph: graph, currentNode: 'b', previousNode: 'c', 
+      path: {
+        d: new Map([['a', 0], ['b', 1], ['c', 3]]),
+        p: new Map([['b', 'a'], ['c', 'b']]),
+        q: new Set(),
+      },
+     });
+    expect(customWeightFn).toHaveBeenCalledWith({ edgeWeight: 1, currentPathWeight: 2, hop: 2, 
+      graph: graph, currentNode: 'a', previousNode: 'b', 
+      path: {
+        d: new Map([['a', 0], ['b', 1], ['c', 3]]),
+        p: new Map([['b', 'a'], ['c', 'b']]),
+        q: new Set(),
+      }
+    });
   });
 
   it('should compute shortest path with a custom weight function in a graph with multiple paths', () => {

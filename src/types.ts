@@ -1,3 +1,6 @@
+import { TraversingTracks } from './algorithms/shortestPath/types.js';
+import { Graph } from './Graph.js';
+
 export type EdgeWeight = number;
 
 export type Edge<NodeIdentity = unknown, Props = unknown> = {
@@ -18,3 +21,13 @@ export type SerializedInput<Node = unknown, LinkProps = unknown> = {
 };
 
 export type NoInfer<T> = [T][T extends any ? 0 : never];
+
+export type NextWeightFnParams<Node = unknown, LinkProps = unknown> = {
+  edgeWeight: EdgeWeight;
+  currentPathWeight: EdgeWeight | undefined;
+  hop: number;
+  graph: Graph<Node, LinkProps>;
+  path: TraversingTracks<NoInfer<Node>>;
+  previousNode: NoInfer<Node>;
+  currentNode: NoInfer<Node>;
+};

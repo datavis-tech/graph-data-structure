@@ -14,7 +14,7 @@ export function shortestPath<Node, LinkProps>(
   graph: Graph<Node, LinkProps>,
   source: NoInfer<Node>,
   destination: NoInfer<Node>,
-  nextWeightFn: (params: NextWeightFnParams) => number = addWeightFunction
+  nextWeightFn: (params: NextWeightFnParams) => number = addWeightFunction,
 ): {
   nodes: [Node, Node, ...Node[]];
   weight: number | undefined;

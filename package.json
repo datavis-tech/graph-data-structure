@@ -49,14 +49,14 @@
     "@rollup/plugin-node-resolve": "16.0.0",
     "@rollup/plugin-terser": "0.4.4",
     "@rollup/plugin-typescript": "12.1.2",
-    "@types/node": "22.13.4",
+    "@types/node": "22.13.9",
     "microbundle": "0.15.1",
-    "prettier": "3.5.1",
+    "prettier": "3.5.3",
     "release-it": "18.1.2",
-    "rollup": "4.34.8",
+    "rollup": "4.34.9",
     "rollup-plugin-dts": "6.1.1",
-    "typescript": "5.7.3",
-    "vitest": "3.0.6"
+    "typescript": "5.8.2",
+    "vitest": "3.0.7"
   },
   "files": [
     "./dist/index.cjs",

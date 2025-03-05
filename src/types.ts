@@ -1,4 +1,3 @@
-import { TraversingTracks } from './algorithms/shortestPath/types.js';
 import { Graph } from './Graph.js';
 
 export type EdgeWeight = number;
@@ -27,7 +26,8 @@ export type NextWeightFnParams<Node = unknown, LinkProps = unknown> = {
   currentPathWeight: EdgeWeight | undefined;
   hop: number;
   graph: Graph<Node, LinkProps>;
-  path: TraversingTracks<NoInfer<Node>>;
-  previousNode: NoInfer<Node>;
+  path: readonly [NoInfer<Node>, NoInfer<Node>, ...NoInfer<Node>[]];
+  previousNode: NoInfer<Node> | undefined;
   currentNode: NoInfer<Node>;
+  props: LinkProps;
 };

@@ -79,8 +79,6 @@ describe("Dijkstra's Shortest Path Algorithm", function () {
       .addEdge('e', 'f')
       .addEdge('f', 'c');
 
-    const serializedGraph = serializeGraph(graph);
-
     expect(shortestPaths(graph, 'a', 'c')).toEqual([
       { nodes: ['a', 'b', 'c'], weight: 2 },
       { nodes: ['a', 'd', 'c'], weight: 2 },
@@ -115,9 +113,10 @@ describe('addWeightFunction', () => {
       currentPathWeight: undefined,
       hop: 1,
       graph: graph,
-      path: { d: new Map(), p: new Map(), q: new Set() },
+      path: ['a', 'b'] as const,
       previousNode: 'a',
       currentNode: 'b',
+      props: undefined,
     };
     expect(addWeightFunction(params)).toBe(5);
   });
@@ -129,9 +128,10 @@ describe('addWeightFunction', () => {
       currentPathWeight: 10,
       hop: 1,
       graph: graph,
-      path: { d: new Map(), p: new Map(), q: new Set() },
+      path: ['a', 'b'] as const,
       previousNode: 'a',
       currentNode: 'b',
+      props: undefined,
     };
     expect(addWeightFunction(params)).toBe(15);
   });
@@ -161,7 +161,7 @@ describe('shortestPath with custom weight functions', () => {
     const graph = new Graph().addEdge('a', 'b', 2).addEdge('b', 'c', 3);
     expect(shortestPath(graph, 'a', 'c', customWeightFn)).toEqual({
       nodes: ['a', 'b', 'c'],
-      weight: 7,
+      weight: 11,
     });
   });
 
@@ -179,44 +179,25 @@ describe('shortestPath with custom weight functions', () => {
     shortestPath(graph, 'a', 'c', customWeightFn);
 
     expect(customWeightFn).toHaveBeenCalledWith({
-      edgeWeight: 2,
+      edgeWeight: 1,
       currentPathWeight: undefined,
       hop: 1,
       graph: graph,
+      previousNode: 'a',
       currentNode: 'b',
-      previousNode: 'c',
-      path: {
-        d: new Map([
-          ['a', 0],
-          ['b', 1],
-          ['c', 3],
-        ]),
-        p: new Map([
-          ['b', 'a'],
-          ['c', 'b'],
-        ]),
-        q: new Set(),
-      },
+      path: ['a', 'b', 'c'],
+      props: undefined,
     });
+
     expect(customWeightFn).toHaveBeenCalledWith({
-      edgeWeight: 1,
-      currentPathWeight: 2,
+      edgeWeight: 2,
+      currentPathWeight: 1,
       hop: 2,
       graph: graph,
-      currentNode: 'a',
       previousNode: 'b',
-      path: {
-        d: new Map([
-          ['a', 0],
-          ['b', 1],
-          ['c', 3],
-        ]),
-        p: new Map([
-          ['b', 'a'],
-          ['c', 'b'],
-        ]),
-        q: new Set(),
-      },
+      currentNode: 'c',
+      path: ['a', 'b', 'c'],
+      props: undefined,
     });
   });
 
